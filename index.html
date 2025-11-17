@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EyASur.Ok - Lujo Metalizado</title>
+    
+    <!-- Script de Tailwind CSS para el diseño -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fuente Inter de Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Iconos de Lucide -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    
+    <style>
+        /* Definición de la Paleta Metalizada */
+        :root {
+            --color-black-deep: #0A0A0A;    /* Fondo casi puro */
+            --color-silver: #D4D4D4;        /* Texto principal */
+            --color-gold: #FFD700;          /* Acento principal (Botones) */
+            --color-rosegold: #B76E79;      /* Acento secundario (Subtítulos/bordes) */
+        }
+
+        /* Aplicamos la fuente Inter y el fondo Negro Profundo */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--color-black-deep);
+            color: var(--color-silver); 
+        }
+
+        /* ===== EFECTO DEGRADADO METÁLICO PARA EL TEXTO ===== */
+        .text-metallic-gradient {
+            /* El degradado de Oro, Rose Gold y Plata */
+            background-image: linear-gradient(45deg, #FFD700, #B76E79, #D4D4D4);
+            /* Recorta el fondo solo al área del texto */
+            -webkit-background-clip: text;
+            background-clip: text;
+            /* Hace el texto transparente para que el fondo se muestre a través */
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        /* Clases de utilidad personalizadas para Tailwind */
+        .bg-deep-black { background-color: var(--color-black-deep); }
+        .text-silver { color: var(--color-silver); }
+        .border-rosegold { border-color: var(--color-rosegold); }
+        
+        /* Efecto de elevación suave para tarjetas (Silver/Gris 900 base) */
+        .card-soft-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(255, 215, 0, 0.1), 0 2px 4px -2px rgba(255, 215, 0, 0.05);
+            background-color: #1a1a1a; /* Gris muy oscuro, casi negro */
+        }
+        .card-soft-hover:hover {
+            transform: translateY(-5px); 
+            /* Sombra dorada intensa al pasar el mouse */
+            box-shadow: 0 15px 25px rgba(255, 215, 0, 0.2); 
+            background-color: #262626; /* Ligero cambio de tono al pasar el mouse */
+        }
+
+        /* Estilo para la imagen de fondo del encabezado */
+        .hero-background {
+            background-image: url(https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Estilo para el botón de Instagram con borde degradado */
+        .instagram-btn-wrapper {
+            padding: 2px;
+            border-radius: 9999px; /* rounded-full */
+            background: linear-gradient(45deg, #FFD700, #B76E79, #D4D4D4);
+            display: inline-flex;
+            transition: transform 0.3s ease;
+        }
+        .instagram-btn-wrapper:hover {
+            transform: scale(1.15);
+        }
+
+        /* ===== ESTILOS PARA IMAGEN DE FONDO DE PRODUCTOS ===== */
+        .product-visual {
+            position: relative;
+            height: 288px; /* Altura de la imagen original (h-72) */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-bottom: 1px solid #1f2937; /* Separador */
+        }
+        .product-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Capa oscura para mejor contraste */
+        }
+
+        /* Imágenes de Producto (Placeholders de Unsplash) - CÁMBIALAS AQUÍ */
+        .product-1-bg {
+            /* Fragancia */
+            background-image: url(https://img.freepik.com/premium-photo/luxurious-perfume-bottle-with-golden-details-dark-background_7023-421979.jpg?w=360);
+        }
+        .product-2-bg {
+            /* Vaper */
+            background-image: url(https://scontent-eze1-2.xx.fbcdn.net/v/t39.30808-6/491949787_1185299673605784_8229986934607711890_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=1s-8NSaXdrAQ7kNvwFvB29D&_nc_oc=Adnveb58J4FYyOy1xYEHCZFQPyoszmDlKHhITpMCjWTDqDKYi6suwwBH6dlQGIuPZAw&_nc_zt=23&_nc_ht=scontent-eze1-2.xx&_nc_gid=iigdqveUOJl6YiFWEvzhKg&oh=00_Afi0_e4lL1g43T2SpzGpEvYvqM1e_KWn3PbFgT24eeD4rA&oe=69206976); 
+        }
+        .product-3-bg {
+            /* Set de Regalo/Caja */
+            background-image: url(https://media.istockphoto.com/id/1366568938/photo/three-black-gift-boxes.jpg?s=612x612&w=0&k=20&c=0fIIMIIpdmw3b3cFSo3yC_wRPYp67J4ZLQ0RhA31MdQ=);
+        }
+    </style>
+</head>
+<body class="bg-deep-black text-silver">
+
+    <!-- ===== NAVEGACIÓN (Negro) ===== -->
+    <nav class="bg-black/90 shadow-xl sticky top-0 z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- Título: Aplicamos el degradado -->
+            <h1 class="text-2xl font-extrabold tracking-widest text-metallic-gradient">EyASur.Ok</h1>
+            
+            <!-- Menú para computadoras (Texto Plata/Oro para mantener legibilidad) -->
+            <div class="hidden md:flex space-x-6">
+                <a href="#inicio" class="text-silver hover:text-gold transition-colors font-medium">Inicio</a>
+                <a href="#productos" class="text-silver hover:text-gold transition-colors font-medium">Productos</a>
+                <a href="#contacto" class="text-silver hover:text-gold transition-colors font-medium">Contacto</a>
+            </div>
+            
+            <!-- Botón de Menú Móvil -->
+            <button id="mobile-menu-button" class="text-silver hover:text-gold md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+        
+        <!-- Menú Móvil (Gris muy oscuro) -->
+        <div id="mobile-menu" class="md:hidden bg-[#1a1a1a] shadow-xl hidden">
+            <a href="#inicio" class="block px-6 py-3 text-silver hover:text-gold hover:bg-[#262626]">Inicio</a>
+            <a href="#productos" class="block px-6 py-3 text-silver hover:text-gold hover:bg-[#262626]">Productos</a>
+            <a href="#contacto" class="block px-6 py-3 text-silver hover:text-gold hover:bg-[#262626]">Contacto</a>
+        </div>
+    </nav>
+
+    <!-- ===== SECCIÓN DE INICIO (HERO) - CON IMAGEN DE FONDO ===== -->
+    <header id="inicio" class="hero-background text-white min-h-[70vh] flex items-center relative z-10 shadow-inner">
+        <div class="absolute inset-0 bg-black opacity-70"></div> 
+        
+        <div class="container mx-auto px-6 py-12 text-center relative z-10">
+            <!-- Título principal: Aplicamos el degradado -->
+            <h2 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight text-metallic-gradient">Fragancias y Vapers Exclusivos</h2>
+            <!-- Subtítulo en Oro Rosa sutil -->
+            <p class="text-xl md:text-2xl mb-10 text-rosegold font-light">Descubre la calidad premium que te mereces. Envío a todo el país.</p>
+            
+            <!-- Botón Principal en ORO -->
+            <a href="#productos" class="bg-gold text-black font-semibold py-3 px-10 rounded-full shadow-lg hover:bg-[#E5C100] transition duration-300 transform hover:scale-105">
+                Explorar Colección
+            </a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-20">
+
+        <!-- ===== SECCIÓN SOBRE NOSOTROS (Panel Oscuro con borde Cobre) ===== -->
+        <section id="sobre" class="mb-24 text-center max-w-4xl mx-auto p-8 rounded-xl bg-gray-900 text-silver card-soft-hover border border-rosegold/50">
+            <!-- Título: Aplicamos el degradado -->
+            <h3 class="text-4xl font-bold mb-6 text-metallic-gradient">Nuestra Pasión</h3>
+            <p class="leading-relaxed text-lg text-gray-400">
+                En EyASur.Ok, nos especializamos en la comercialización de <strong class="text-metallic-gradient font-bold">Exquisitas Fragancias Importadas</strong> y los <strong class="text-metallic-gradient font-bold">Mejores Vapers Desechables</strong> del mercado. Nuestro compromiso es ofrecer productos de máxima calidad, autenticidad garantizada y una experiencia de compra sencilla y segura.
+            </p>
+        </section>
+
+        <!-- ===== SECCIÓN DE PRODUCTOS ===== -->
+        <section id="productos">
+            <!-- Título: Aplicamos el degradado -->
+            <h3 class="text-4xl font-bold mb-12 text-center text-metallic-gradient">Catálogo Destacado</h3>
+            
+            <!-- Grilla de productos -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+
+                <!-- Producto 1: Fragancia Importada (Tarjeta Gris Oscuro/Negro) -->
+                <div class="card-soft-hover rounded-xl shadow-2xl overflow-hidden flex flex-col border border-rosegold/30">
+                    <!-- Contenedor Visual con Imagen de Fondo (product-1-bg) -->
+                    <div class="product-visual product-1-bg flex items-center justify-center">
+                        <div class="product-overlay"></div>
+                        <!-- Texto de descripción sobre la imagen (opcional) -->
+                        <h4 class="text-3xl font-extrabold text-white z-10 relative">Fragancias</h4>
+                    </div>
+                    
+                    <div class="p-6 flex-grow">
+                        <!-- Nombre: Aplicamos el degradado -->
+                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Perfume Élite Noir</h4>
+                        <p class="text-gray-400 mb-4 text-sm">
+                            Fragancia amaderada y especiada con notas de sándalo y pachulí. Importada, 100ml. Perfecta para la noche.
+                        </p>
+                    </div>
+                    
+                    <div class="p-6 pt-0 flex justify-between items-center border-t border-gray-800">
+                        <!-- PRECIO en Oro -->
+                        <span class="text-3xl font-extrabold text-gold">$8.000 ARS</span>
+                        
+                        <!-- Botón WhatsApp en ORO - CTA Fuerte -->
+                        <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20consultar%20por%20el%20Perfume%20Elite%20Noir." 
+                           target="_blank" 
+                           class="bg-gold text-black py-2.5 px-6 rounded-lg font-bold hover:bg-[#E5C100] transition-colors flex items-center space-x-2 shadow-lg">
+                           <i data-lucide="zap" class="w-5 h-5"></i>
+                           <span>Pedir Ahora</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Producto 2: Vaper Desechable -->
+                <div class="card-soft-hover rounded-xl shadow-2xl overflow-hidden flex flex-col border border-rosegold/30">
+                    <!-- Contenedor Visual con Imagen de Fondo (product-2-bg) -->
+                    <div class="product-visual product-2-bg flex items-center justify-center">
+                        <div class="product-overlay"></div>
+                        <h4 class="text-3xl font-extrabold text-white z-10 relative">Vapers</h4>
+                    </div>
+
+                    <div class="p-6 flex-grow">
+                        <!-- Nombre: Aplicamos el degradado -->
+                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Vapers de 30k y 40k (Sabor Frutos Rojos)</h4>
+                        <p class="text-gray-400 mb-4 text-sm">
+                            Vaper desechable de larga duración (5000 puffs). Nicotina 5%. Sabores únicos, refrescantes y dulces de los sabores que más prefieras.
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0 flex justify-between items-center border-t border-gray-800">
+                        <span class="text-3xl font-extrabold text-gold">$40.000 ARS</span>
+                        <!-- Botón WhatsApp en ORO - CTA Fuerte -->
+                        <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20consultar%20por%20el%20Vaper%20Max%20Puff." 
+                           target="_blank" 
+                           class="bg-gold text-black py-2.5 px-6 rounded-lg font-bold hover:bg-[#E5C100] transition-colors flex items-center space-x-2 shadow-lg">
+                           <i data-lucide="zap" class="w-5 h-5"></i>
+                           <span>Pedir Ahora</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Producto 3: Set de Regalo -->
+                <div class="card-soft-hover rounded-xl shadow-2xl overflow-hidden flex flex-col border border-rosegold/30">
+                    <!-- Contenedor Visual con Imagen de Fondo (product-3-bg) -->
+                    <div class="product-visual product-3-bg flex items-center justify-center">
+                        <div class="product-overlay"></div>
+                        <h4 class="text-3xl font-extrabold text-white z-10 relative">Set de Lujo</h4>
+                    </div>
+
+                    <div class="p-6 flex-grow">
+                        <!-- Nombre: Aplicamos el degradado -->
+                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Set Regalo Black Collection</h4>
+                        <p class="text-gray-400 mb-4 text-sm">
+                            Incluye dos Mini-Fragancias exclusivas y un Vaper recargable. Presentación de lujo, ideal para obsequiar.
+                        </p>
+                    </div>
+                    <div class="p-6 pt-0 flex justify-between items-center border-t border-gray-800">
+                        <span class="text-3xl font-extrabold text-gold">$50.000 ARS</span>
+                        <!-- Botón WhatsApp en ORO - CTA Fuerte -->
+                        <a href="https://wa.me/5491112345678?text=Hola!%20Quiero%20consultar%20por%20el%20Set%20Regalo%20Black%20Collection." 
+                           target="_blank" 
+                           class="bg-gold text-black py-2.5 px-6 rounded-lg font-bold hover:bg-[#E5C100] transition-colors flex items-center space-x-2 shadow-lg">
+                           <i data-lucide="zap" class="w-5 h-5"></i>
+                           <span>Pedir Ahora</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- ===== SECCIÓN DE CONTACTO (Panel Oscuro) ===== -->
+        <section id="contacto" class="mt-28 bg-gray-900 p-10 md:p-16 rounded-xl shadow-2xl max-w-5xl mx-auto border border-rosegold/50">
+            <!-- Título: Aplicamos el degradado -->
+            <h3 class="text-4xl font-bold mb-8 text-center text-metallic-gradient">¡Hablemos!</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                
+                <!-- Información de Contacto -->
+                <div class="space-y-6">
+                    <p class="text-gray-400 leading-relaxed text-lg">
+                        Contactanos directamente a través de Instagram para realizar tu pedido o resolver cualquier duda sobre nuestros productos y envíos.
+                    </p>
+                    <!-- Íconos y texto en Plata, hover en Oro -->
+                    <div class="flex items-center space-x-4">
+                        <i data-lucide="mail" class="w-6 h-6 text-rosegold"></i>
+                        <span class="text-silver hover:text-gold transition-colors">tuemail@ejemplo.com</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <i data-lucide="phone" class="w-6 h-6 text-rosegold"></i>
+                        <span class="text-silver hover:text-gold transition-colors">+54 9 11 1234-5678</span>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <i data-lucide="map-pin" class="w-6 h-6 text-rosegold"></i>
+                        <span class="text-silver">Retiro y Envíos a todo Argentina</span>
+                    </div>
+                    
+                    <!-- Botón WhatsApp: Aplicamos estilo oscuro con texto metalizado y borde sutil -->
+                    <a href="https://wa.me/5491112345678" 
+                       target="_blank" 
+                       class="block mt-6 bg-black/80 text-center py-3 rounded-lg font-bold transition-all border border-rosegold/50 hover:bg-[#1a1a1a] transform hover:scale-[1.01] shadow-xl">
+                        <!-- El texto y el icono reciben el degradado -->
+                        <span class="text-metallic-gradient flex items-center justify-center">
+                            <i data-lucide="message-circle" class="w-5 h-5 inline-block mr-2"></i>
+                            Escríbenos por WhatsApp
+                        </span>
+                    </a>
+                </div>
+                
+                <!-- Formulario de Contacto (Dark Style) -->
+                <form class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-rosegold">Nombre</label>
+                        <input type="text" id="name" class="mt-1 block w-full px-4 py-2 bg-black border border-gray-800 rounded-lg text-silver focus:outline-none focus:ring-rosegold focus:border-rosegold shadow-inner">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-rosegold">Email</label>
+                        <input type="email" id="email" class="mt-1 block w-full px-4 py-2 bg-black border border-gray-800 rounded-lg text-silver focus:outline-none focus:ring-rosegold focus:border-rosegold shadow-inner">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-rosegold">Mensaje</label>
+                        <textarea id="message" rows="4" class="mt-1 block w-full px-4 py-2 bg-black border border-gray-800 rounded-lg text-silver focus:outline-none focus:ring-rosegold focus:border-rosegold shadow-inner"></textarea>
+                    </div>
+                    <!-- Botón de Formulario: Aplicamos estilo oscuro con texto metalizado y borde sutil -->
+                    <button type="submit" 
+                            class="w-full bg-black/80 py-3 px-6 rounded-lg font-semibold transition-all border border-rosegold/50 hover:bg-[#1a1a1a] shadow-xl">
+                        <!-- El texto recibe el degradado -->
+                        <span class="text-metallic-gradient">
+                            Enviar Mensaje
+                        </span>
+                    </button>
+                    <p class="text-xs text-gray-600 text-center">Este formulario es un ejemplo visual. Los pedidos se gestionan por WhatsApp.</p>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===== SECCIÓN SOCIAL MEDIA (Instagram con acento Oro/Rosegold) ===== -->
+    <section class="text-center pt-10 pb-16 bg-gray-900/50">
+        <!-- Tarjeta de tinte más oscuro y borde Rose Gold sutil -->
+        <div class="max-w-xs mx-auto p-6 rounded-xl bg-gray-900 border border-rosegold/50 card-soft-hover">
+            <!-- Título: Aplicamos el degradado -->
+            <h4 class="text-xl font-semibold mb-4 text-metallic-gradient">Síguenos en Instagram</h4>
+            <!-- Botón con el borde degradado Oro/Plata/Rose Gold -->
+            <div class="instagram-btn-wrapper">
+                <a href="https://www.instagram.com/eyasur.ok?utm_source=qr&igsh=cG1uNjZkajFtN2k3" target="_blank" class="inline-flex items-center justify-center p-3 rounded-full bg-gray-900">
+                    <i data-lucide="instagram" class="w-8 h-8 text-rosegold"></i>
+                </a>
+            </div>
+            <p class="text-xs text-gray-500 mt-4">@EyASur.Ok</p>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER (PIE DE PÁGINA) ===== -->
+    <footer class="bg-black border-t border-rosegold/50 text-gray-500">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025-2026 EyASur.Ok. Todos los derechos reservados.</p>
+            <p class="text-sm mt-2">Diseño Gold por EDM</p>
+            <p class="text-sm mt-2">Creado con Amor ❤️ por EyASur.OK.</p>
+        </div>
+    </footer>
+
+    <!-- Script para los iconos y el menú móvil -->
+    <script>
+        // Lógica para el menú móvil
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                const icon = menuButton.querySelector('i');
+                const isHidden = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                
+                // Cambiar el icono (menu a x)
+                if (isHidden) {
+                    icon.setAttribute('data-lucide', 'x');
+                } else {
+                    icon.setAttribute('data-lucide', 'menu');
+                }
+                
+                // Volver a renderizar los iconos de Lucide
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            });
+        }
+
+        // Reemplaza todos los iconos de Lucide una vez que el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.error('El script de Lucide (iconos) no se cargó correctamente.');
+            }
+        });
+    </script>
+
+</body>
+</html>
