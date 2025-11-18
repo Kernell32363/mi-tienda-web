@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyASur.Ok - Lujo Metalizado</title>
+    <title>EyASur.Ok - Vapers & Fragancias Gold</title>
     
-    <!-- Script de Tailwind CSS para el diseño -->
+    <!-- Script de Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Fuente Inter de Google -->
@@ -33,37 +33,30 @@
             color: var(--color-silver); 
         }
 
-        /* ===== EFECTO DEGRADADO METÁLICO PARA EL TEXTO ===== */
         .text-metallic-gradient {
-            /* El degradado de Oro, Rose Gold y Plata */
-            background-image: linear-gradient(45deg, #FFD700, #B76E79, #D4D4D4);
-            /* Recorta el fondo solo al área del texto */
+            background-image: linear-gradient(45deg, #B8860B, #C3894B, #D4D4D4);
             -webkit-background-clip: text;
             background-clip: text;
-            /* Hace el texto transparente para que el fondo se muestre a través */
             -webkit-text-fill-color: transparent;
             color: transparent;
         }
 
-        /* Clases de utilidad personalizadas para Tailwind */
         .bg-deep-black { background-color: var(--color-black-deep); }
-        .text-silver { color: var(--color-silver); }
+        .text-gold { color: var(--color-gold); }
+        .text-rosegold { color: var(--color-rosegold); }
         .border-rosegold { border-color: var(--color-rosegold); }
         
-        /* Efecto de elevación suave para tarjetas (Silver/Gris 900 base) */
         .card-soft-hover {
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
             box-shadow: 0 4px 6px -1px rgba(255, 215, 0, 0.1), 0 2px 4px -2px rgba(255, 215, 0, 0.05);
-            background-color: #1a1a1a; /* Gris muy oscuro, casi negro */
+            background-color: #1a1a1a;
         }
         .card-soft-hover:hover {
             transform: translateY(-5px); 
-            /* Sombra dorada intensa al pasar el mouse */
             box-shadow: 0 15px 25px rgba(255, 215, 0, 0.2); 
-            background-color: #262626; /* Ligero cambio de tono al pasar el mouse */
+            background-color: #262626;
         }
 
-        /* Estilo para la imagen de fondo del encabezado */
         .hero-background {
             background-image: url('https://images.unsplash.com/photo-1542316711-e403487c093a?fit=crop&w=1920&q=80'); 
             background-size: cover;
@@ -71,11 +64,10 @@
             background-repeat: no-repeat;
         }
 
-        /* Estilo para el botón de Instagram con borde degradado */
         .instagram-btn-wrapper {
             padding: 2px;
-            border-radius: 9999px; /* rounded-full */
-            background: linear-gradient(45deg, #FFD700, #B76E79, #D4D4D4);
+            border-radius: 9999px;
+            background: linear-gradient(45deg, var(--color-gold), var(--color-rosegold), var(--color-silver));
             display: inline-flex;
             transition: transform 0.3s ease;
         }
@@ -83,80 +75,72 @@
             transform: scale(1.15);
         }
 
-        /* ===== ESTILOS PARA IMAGEN DE FONDO DE PRODUCTOS (Mantenidos) ===== */
-        .product-visual {
-            position: relative;
-            height: 288px; /* Altura de la imagen original (h-72) */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-bottom: 1px solid #1f2937; /* Separador */
+        /* Offcanvas */
+        #cart-offcanvas {
+            transition: transform 0.3s ease-out;
+            transform: translateX(100%);
         }
-        .product-overlay {
-            position: absolute;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5); /* Capa oscura para mejor contraste */
+        #cart-offcanvas.open {
+            transform: translateX(0);
         }
-
-        /* Imágenes de Producto (Placeholders de Unsplash) - CÁMBIALAS AQUÍ */
-        .product-1-bg {
-            /* Fragancia */
-            background-image: url('https://images.unsplash.com/photo-1596462502847-798888796841?fit=crop&w=600&q=80');
+        #backdrop {
+            transition: opacity 0.3s ease-out;
         }
-        .product-2-bg {
-            /* Vaper */
-            background-image: url('https://images.unsplash.com/photo-1541641349885-84724563cc9b?fit=crop&w=600&q=80'); 
+        
+        /* Input styles */
+        input, textarea {
+            background-color: #000000 !important;
+            border-color: #333 !important;
+            color: #D4D4D4 !important;
         }
-        .product-3-bg {
-            /* Set de Regalo/Caja */
-            background-image: url('https://images.unsplash.com/photo-1599422003881-229d4702b804?fit=crop&w=600&q=80');
+        input:focus, textarea:focus {
+            border-color: var(--color-rosegold) !important;
+            ring-color: var(--color-rosegold) !important;
         }
     </style>
 </head>
 <body class="bg-deep-black text-silver">
 
-    <!-- ===== MODAL DE CARRITO DE COMPRAS ===== -->
-    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-80 z-[100] hidden flex items-center justify-center p-4" onclick="toggleCartModal(false)">
-        <div class="bg-gray-900 w-full max-w-lg rounded-xl shadow-2xl border border-rosegold/50 overflow-hidden relative" onclick="event.stopPropagation()">
-            
-            <!-- Encabezado del Modal -->
-            <div class="p-6 border-b border-gray-800 flex justify-between items-center">
-                <h3 class="text-2xl font-bold text-metallic-gradient">Tu Carrito de Compras</h3>
-                <button onclick="toggleCartModal(false)" class="text-silver hover:text-gold transition-colors">
-                    <i data-lucide="x" class="w-6 h-6"></i>
-                </button>
-            </div>
+    <!-- ===== MODAL CARRITO (SIDEBAR) ===== -->
+    <div id="backdrop" class="fixed inset-0 bg-black bg-opacity-80 z-40 hidden" onclick="closeCart()"></div>
 
-            <!-- Contenido del Carrito -->
-            <div id="cart-items-container" class="p-6 max-h-96 overflow-y-auto space-y-4">
-                <!-- Los productos del carrito se insertarán aquí por JS -->
-                <p id="empty-cart-message" class="text-center text-gray-500 hidden">El carrito está vacío.</p>
-            </div>
-
-            <!-- Pie de Modal (Total y Botón de Pago) -->
-            <div class="p-6 border-t border-gray-800">
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-xl font-medium text-silver">Total:</span>
-                    <span id="cart-total-price" class="text-3xl font-extrabold text-gold">$0 ARS</span>
-                </div>
-                <!-- Botón de finalizar compra que dirige a WhatsApp -->
-                <button onclick="checkoutToWhatsApp()" 
-                        id="checkout-button"
-                        class="w-full bg-gold text-black py-3 rounded-lg font-bold hover:bg-[#E5C100] transition-colors flex items-center justify-center space-x-2 opacity-50 cursor-not-allowed"
-                        disabled>
-                    <i data-lucide="zap" class="w-5 h-5"></i>
-                    <span>Finalizar Compra y Pagar (WhatsApp)</span>
-                </button>
-            </div>
-
-            <!-- ID de Usuario para depuración -->
-            <div class="p-2 text-xs text-gray-600 border-t border-gray-800">
-                 ID de Usuario (Firebase): <span id="current-user-id" class="font-mono">Cargando...</span>
-            </div>
+    <div id="cart-offcanvas" class="fixed top-0 right-0 w-full md:w-96 h-full bg-[#111] shadow-2xl z-50 flex flex-col border-l border-gray-800">
+        <div class="flex justify-between items-center p-6 border-b border-gray-800">
+            <h2 class="text-2xl font-bold text-metallic-gradient">Tu Carrito</h2>
+            <button onclick="closeCart()" class="text-gray-400 hover:text-gold transition">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
         </div>
-    </div>
-    <!-- FIN MODAL DE CARRITO DE COMPRAS -->
+        
+        <div id="user-info" class="px-6 py-2 text-xs font-mono text-gray-500 truncate border-b border-gray-900">
+            ID: Cargando...
+        </div>
 
+        <!-- Lista de Productos -->
+        <div id="cart-items-container" class="flex-grow overflow-y-auto p-6 space-y-4">
+            <p id="empty-cart-message" class="text-gray-500 text-center italic mt-10">Tu carrito está vacío.</p>
+        </div>
+
+        <!-- Footer del Carrito -->
+        <div class="p-6 border-t border-gray-800 bg-[#0A0A0A]">
+            <div class="flex justify-between font-medium text-lg text-silver mb-2">
+                <span>Cantidad:</span>
+                <span id="modal-total-quantity">0</span>
+            </div>
+            <div class="flex justify-between font-bold text-2xl text-gold mb-6">
+                <span>Total:</span>
+                <span id="cart-total-price">$0 ARS</span>
+            </div>
+
+            <button id="checkout-button" onclick="checkoutToWhatsApp()" 
+                    class="w-full py-4 bg-gold text-black font-bold rounded-lg hover:bg-yellow-500 transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                <i data-lucide="message-circle" class="w-5 h-5"></i>
+                Finalizar en WhatsApp
+            </button>
+        </div>
+        
+        <div id="status-message" class="p-2 text-center text-xs hidden"></div>
+    </div>
 
     <!-- ===== NAVEGACIÓN (Negro) ===== -->
     <nav class="bg-black/90 shadow-xl sticky top-0 z-50 border-b border-gray-800">
@@ -164,29 +148,25 @@
             <!-- Título: Aplicamos el degradado -->
             <h1 class="text-2xl font-extrabold tracking-widest text-metallic-gradient">EyASur.Ok</h1>
             
-            <!-- Menú y Carrito -->
-            <div class="flex items-center space-x-6">
-                <!-- Menú para computadoras (Texto Plata/Oro para mantener legibilidad) -->
-                <div class="hidden md:flex space-x-6">
-                    <a href="#inicio" class="text-silver hover:text-gold transition-colors font-medium">Inicio</a>
-                    <a href="#productos" class="text-silver hover:text-gold transition-colors font-medium">Productos</a>
-                    <a href="#contacto" class="text-silver hover:text-gold transition-colors font-medium">Contacto</a>
-                </div>
+            <!-- Menú para computadoras (Texto Plata/Oro para mantener legibilidad) -->
+            <div class="hidden md:flex space-x-6">
+                <a href="#inicio" class="text-silver hover:text-gold transition-colors font-medium">Inicio</a>
+                <a href="#productos" class="text-silver hover:text-gold transition-colors font-medium">Productos</a>
+                <a href="#contacto" class="text-silver hover:text-gold transition-colors font-medium">Contacto</a>
+            </div>
 
-                <!-- Botón del Carrito -->
-                <button onclick="toggleCartModal(true)" class="relative text-silver hover:text-gold transition-colors p-2 rounded-full hover:bg-gray-800">
+                <!-- Botón Carrito (Navbar) -->
+                <button onclick="openCart()" class="relative p-2 text-silver hover:text-gold transition-colors">
                     <i data-lucide="shopping-cart" class="w-6 h-6"></i>
-                    <!-- Contador de Artículos en el Carrito -->
-                    <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-black transform translate-x-1/2 -translate-y-1/2 bg-gold rounded-full ring-2 ring-gray-900">
+                    <span id="navbar-cart-count" class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-black bg-gold rounded-full hidden">
                         0
                     </span>
                 </button>
                 
-                <!-- Botón de Menú Móvil -->
-                <button id="mobile-menu-button" class="text-silver hover:text-gold md:hidden">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
-            </div>
+            <!-- Botón de Menú Móvil -->
+            <button id="mobile-menu-button" class="text-silver hover:text-gold md:hidden">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
         </div>
         
         <!-- Menú Móvil (Gris muy oscuro) -->
@@ -225,94 +205,74 @@
             </p>
         </section>
 
-        <!-- ===== SECCIÓN DE PRODUCTOS ===== -->
+
+        <!-- ===== PRODUCTOS ===== -->
         <section id="productos">
-            <!-- Título: Aplicamos el degradado -->
             <h3 class="text-4xl font-bold mb-12 text-center text-metallic-gradient">Catálogo Destacado</h3>
-            
-            <!-- Grilla de productos -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
 
-                <!-- Producto 1: Fragancia Importada (Tarjeta Gris Oscuro/Negro) -->
+                <!-- Producto 1 -->
                 <div class="card-soft-hover rounded-xl shadow-2xl overflow-hidden flex flex-col border border-rosegold/30">
-                    <!-- Contenedor Visual con Imagen de Fondo (product-1-bg) -->
-                    <div class="product-visual product-1-bg flex items-center justify-center">
-                        <div class="product-overlay"></div>
-                        <!-- Texto de descripción sobre la imagen (opcional) -->
-                        <h4 class="text-3xl font-extrabold text-white z-10 relative">Fragancia</h4>
+                    <div class="relative h-72 border-b border-gray-800">
+                        <img src="https://placehold.co/600x400/0A0A0A/FFD700?text=FRAGANCIA" class="absolute inset-0 w-full h-full object-cover" alt="Fragancia">
+                        <div class="absolute inset-0 bg-black/40"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <h4 class="text-3xl font-extrabold text-white relative z-10">Fragancia</h4>
+                        </div>
                     </div>
-                    
                     <div class="p-6 flex-grow">
-                        <!-- Nombre: Aplicamos el degradado -->
                         <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Perfume Élite Noir</h4>
-                        <p class="text-gray-400 mb-4 text-sm">
-                            Fragancia amaderada y especiada con notas de sándalo y pachulí. Importada, 100ml. Perfecta para la noche.
-                        </p>
+                        <p class="text-gray-400 mb-4 text-sm">Fragancia amaderada y especiada. Importada, 100ml.</p>
                     </div>
-                    
                     <div class="p-6 pt-0 flex justify-between items-center border-t border-gray-800">
-                        <!-- PRECIO en Oro -->
-                        <span class="text-3xl font-extrabold text-gold" data-price="65000">
-                            $65.000 ARS
-                        </span>
-                        
-                        <!-- Botón AGREGAR AL CARRITO (Con función JS) -->
-                        <button onclick="addToCart({ id: 'P001', name: 'Perfume Élite Noir', price: 65000 })" 
-                           class="bg-gold text-black py-2.5 px-6 rounded-lg font-bold hover:bg-[#E5C100] transition-colors flex items-center space-x-2 shadow-lg">
-                           <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-                           <span>Agregar al Carrito</span>
+                        <span class="text-3xl font-extrabold text-gold">$65.000 ARS</span>
+                        <button onclick="addToCart({ id: 'P001', name: 'Perfume Élite Noir', price: 65000, qty: 1 })" 
+                           class="bg-gold text-black py-2 px-6 rounded-lg font-bold hover:bg-yellow-400 transition-colors flex items-center gap-2">
+                           <i data-lucide="plus" class="w-4 h-4"></i> Agregar
                         </button>
                     </div>
                 </div>
 
-                <!-- Producto 2: Vaper Desechable -->
+                <!-- Producto 2 -->
                 <div class="card-soft-hover rounded-xl shadow-2xl overflow-hidden flex flex-col border border-rosegold/30">
-                    <!-- Contenedor Visual con Imagen de Fondo (product-2-bg) -->
-                    <div class="product-visual product-2-bg flex items-center justify-center">
-                        <div class="product-overlay"></div>
-                        <h4 class="text-3xl font-extrabold text-white z-10 relative">Vaper</h4>
+                    <div class="relative h-72 border-b border-gray-800">
+                        <img src="https://placehold.co/600x400/0A0A0A/D4D4D4?text=VAPER" class="absolute inset-0 w-full h-full object-cover" alt="Vaper">
+                        <div class="absolute inset-0 bg-black/40"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <h4 class="text-3xl font-extrabold text-white relative z-10">Vaper</h4>
+                        </div>
                     </div>
-
                     <div class="p-6 flex-grow">
-                        <!-- Nombre: Aplicamos el degradado -->
-                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Vaper Max Puff (Sabor Frutos Rojos)</h4>
-                        <p class="text-gray-400 mb-4 text-sm">
-                            Vaper desechable de larga duración (5000 puffs). Nicotina 5%. Sabor intenso y dulce de frutos rojos.
-                        </p>
+                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Vaper Max Puff</h4>
+                        <p class="text-gray-400 mb-4 text-sm">5000 Puffs. Sabor Frutos Rojos. Nicotina 5%.</p>
                     </div>
                     <div class="p-6 pt-0 flex justify-between items-center border-t border-gray-800">
-                        <span class="text-3xl font-extrabold text-gold" data-price="8500">$8.500 ARS</span>
-                        <!-- Botón AGREGAR AL CARRITO (Con función JS) -->
-                        <button onclick="addToCart({ id: 'P002', name: 'Vaper Max Puff (Frutos Rojos)', price: 8500 })" 
-                           class="bg-gold text-black py-2.5 px-6 rounded-lg font-bold hover:bg-[#E5C100] transition-colors flex items-center space-x-2 shadow-lg">
-                           <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-                           <span>Agregar al Carrito</span>
+                        <span class="text-3xl font-extrabold text-gold">$8.500 ARS</span>
+                        <button onclick="addToCart({ id: 'P002', name: 'Vaper Max Puff', price: 8500, qty: 1 })" 
+                           class="bg-gold text-black py-2 px-6 rounded-lg font-bold hover:bg-yellow-400 transition-colors flex items-center gap-2">
+                           <i data-lucide="plus" class="w-4 h-4"></i> Agregar
                         </button>
                     </div>
                 </div>
 
-                <!-- Producto 3: Set de Regalo -->
+                <!-- Producto 3 -->
                 <div class="card-soft-hover rounded-xl shadow-2xl overflow-hidden flex flex-col border border-rosegold/30">
-                    <!-- Contenedor Visual con Imagen de Fondo (product-3-bg) -->
-                    <div class="product-visual product-3-bg flex items-center justify-center">
-                        <div class="product-overlay"></div>
-                        <h4 class="text-3xl font-extrabold text-white z-10 relative">Set de Lujo</h4>
+                    <div class="relative h-72 border-b border-gray-800">
+                        <img src="https://placehold.co/600x400/0A0A0A/B76E79?text=SET+LUJO" class="absolute inset-0 w-full h-full object-cover" alt="Set">
+                        <div class="absolute inset-0 bg-black/40"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <h4 class="text-3xl font-extrabold text-white relative z-10">Set de Lujo</h4>
+                        </div>
                     </div>
-
                     <div class="p-6 flex-grow">
-                        <!-- Nombre: Aplicamos el degradado -->
-                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Set Regalo Black Collection</h4>
-                        <p class="text-gray-400 mb-4 text-sm">
-                            Incluye mini-perfume exclusivo y accesorio vaper recargable. Presentación de lujo, ideal para obsequiar.
-                        </p>
+                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Set Black Collection</h4>
+                        <p class="text-gray-400 mb-4 text-sm">Incluye mini-perfume exclusivo y accesorio vaper.</p>
                     </div>
                     <div class="p-6 pt-0 flex justify-between items-center border-t border-gray-800">
-                        <span class="text-3xl font-extrabold text-gold" data-price="95000">$95.000 ARS</span>
-                        <!-- Botón AGREGAR AL CARRITO (Con función JS) -->
-                        <button onclick="addToCart({ id: 'P003', name: 'Set Regalo Black Collection', price: 95000 })" 
-                           class="bg-gold text-black py-2.5 px-6 rounded-lg font-bold hover:bg-[#E5C100] transition-colors flex items-center space-x-2 shadow-lg">
-                           <i data-lucide="shopping-cart" class="w-5 h-5"></i>
-                           <span>Agregar al Carrito</span>
+                        <span class="text-3xl font-extrabold text-gold">$95.000 ARS</span>
+                        <button onclick="addToCart({ id: 'P003', name: 'Set Black Collection', price: 95000, qty: 1 })" 
+                           class="bg-gold text-black py-2 px-6 rounded-lg font-bold hover:bg-yellow-400 transition-colors flex items-center gap-2">
+                           <i data-lucide="plus" class="w-4 h-4"></i> Agregar
                         </button>
                     </div>
                 </div>
@@ -320,83 +280,47 @@
             </div>
         </section>
         
-        <!-- ===== SECCIÓN DE CONTACTO (Panel Oscuro) ===== -->
-        <section id="contacto" class="mt-28 bg-gray-900 p-10 md:p-16 rounded-xl shadow-2xl max-w-5xl mx-auto border border-rosegold/50">
-            <!-- Título: Aplicamos el degradado -->
+        <!-- ===== CONTACTO ===== -->
+        <section id="contacto" class="mt-28 bg-white p-10 md:p-16 rounded-xl shadow-2xl max-w-4xl mx-auto border-t-4 border-primary-gold">
             <h3 class="text-4xl font-bold mb-8 text-center text-metallic-gradient">¡Hablemos!</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 
-                <!-- Información de Contacto -->
                 <div class="space-y-6">
-                    <p class="text-gray-400 leading-relaxed text-lg">
-                        Contactanos directamente a través de Instagram para realizar tu pedido o resolver cualquier duda sobre nuestros productos y envíos.
-                    </p>
-                    <!-- Íconos y texto en Plata, hover en Oro -->
+                    <p class="text-gray-600 text-lg">Contáctanos directamente para pedidos y envíos.</p>
                     <div class="flex items-center space-x-4">
                         <i data-lucide="mail" class="w-6 h-6 text-rosegold"></i>
-                        <span class="text-silver hover:text-gold transition-colors">tuemail@ejemplo.com</span>
+                        <span class="text-silver">tuemail@ejemplo.com</span>
                     </div>
                     <div class="flex items-center space-x-4">
                         <i data-lucide="phone" class="w-6 h-6 text-rosegold"></i>
-                        <span class="text-silver hover:text-gold transition-colors">+54 9 11 1234-5678</span>
+                        <span class="text-silver">+54 9 11 1234-5678</span>
                     </div>
                     <div class="flex items-center space-x-4">
                         <i data-lucide="map-pin" class="w-6 h-6 text-rosegold"></i>
                         <span class="text-silver">Retiro y Envíos a todo Argentina</span>
                     </div>
-                    
-                    <!-- Botón WhatsApp: Aplicamos estilo oscuro con texto metalizado y borde sutil -->
-                    <a href="https://wa.me/5491112345678" 
-                       target="_blank" 
-                       class="block mt-6 bg-black/80 text-center py-3 rounded-lg font-bold transition-all border border-rosegold/50 hover:bg-[#1a1a1a] transform hover:scale-[1.01] shadow-xl">
-                        <!-- El texto y el icono reciben el degradado -->
-                        <span class="text-metallic-gradient flex items-center justify-center">
-                            <i data-lucide="message-circle" class="w-5 h-5 inline-block mr-2"></i>
-                            Escríbenos por WhatsApp
+                    <a href="https://wa.me/5491112345678" target="_blank" class="block mt-6 bg-black/80 text-center py-3 rounded-lg font-bold border border-rosegold/50 hover:bg-[#1a1a1a] transform hover:scale-[1.01] shadow-xl">
+                        <span class="text-metallic-gradient flex items-center justify-center gap-2">
+                            <i data-lucide="message-circle" class="w-5 h-5"></i> Escríbenos por WhatsApp
                         </span>
                     </a>
                 </div>
                 
-                <!-- Formulario de Contacto (AHORA FUNCIONAL CON FORMSUBMIT) -->
-                <!-- ¡RECUERDA CAMBIAR TU CORREO AQUÍ! -->
-                <form action="https://formsubmit.co/TU_CORREO_AQUI@ejemplo.com" method="POST" class="space-y-4">
-                    
-                    <!-- Campo oculto para redirigir al usuario después del envío -->
-                    <input type="hidden" name="_next" value="URL_DE_TU_PAGINA_DE_GRACIAS_O_ESTA_MISMA_URL">
-                    <!-- Campo oculto para deshabilitar el captcha (opcional, pero recomendable para sitios de bajo volumen) -->
+                <form action="https://formsubmit.co/ericdavidmorgan.dc@gmail.com" method="POST" class="space-y-4">
                     <input type="hidden" name="_captcha" value="false">
-
-                    <div>
-                        <label for="name" class="block text-sm font-medium text-rosegold">Nombre</label>
-                        <!-- Se agregó el atributo 'name="name"' -->
-                        <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 bg-black border border-gray-800 rounded-lg text-silver focus:outline-none focus:ring-rosegold focus:border-rosegold shadow-inner">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-rosegold">Email</label>
-                        <!-- Se agregó el atributo 'name="email"' -->
-                        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 bg-black border border-gray-800 rounded-lg text-silver focus:outline-none focus:ring-rosegold focus:border-rosegold shadow-inner">
-                    </div>
-                    <div>
-                        <label for="message" class="block text-sm font-medium text-rosegold">Mensaje</label>
-                        <!-- Se agregó el atributo 'name="message"' -->
-                        <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 bg-black border border-gray-800 rounded-lg text-silver focus:outline-none focus:ring-rosegold focus:border-rosegold shadow-inner"></textarea>
-                    </div>
-                    <!-- Botón de Formulario: Aplicamos estilo oscuro con texto metalizado y borde sutil -->
-                    <button type="submit" 
-                            class="w-full bg-black/80 py-3 px-6 rounded-lg font-semibold transition-all border border-rosegold/50 hover:bg-[#1a1a1a] shadow-xl">
-                        <!-- El texto recibe el degradado -->
-                        <span class="text-metallic-gradient">
-                            Enviar Mensaje
-                        </span>
+                    <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-3 rounded-lg focus:outline-none">
+                    <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-3 rounded-lg focus:outline-none">
+                    <textarea name="message" rows="4" placeholder="Mensaje" required class="w-full px-4 py-3 rounded-lg focus:outline-none"></textarea>
+                    <button type="submit" class="w-full bg-gold text-black py-3 rounded-lg font-bold hover:bg-yellow-500 transition-colors shadow-lg">
+                        Enviar Mensaje
                     </button>
-                    <p class="text-xs text-gray-600 text-center">Este formulario ahora es funcional mediante un servicio de terceros.</p>
                 </form>
             </div>
         </section>
 
     </main>
 
-    <!-- ===== SECCIÓN SOCIAL MEDIA (Instagram con acento Oro/Rosegold) ===== -->
+      <!-- ===== SECCIÓN SOCIAL MEDIA (Instagram con acento Oro/Rosegold) ===== -->
     <section class="text-center pt-10 pb-16 bg-gray-900/50">
         <!-- Tarjeta de tinte más oscuro y borde Rose Gold sutil -->
         <div class="max-w-xs mx-auto p-6 rounded-xl bg-gray-900 border border-rosegold/50 card-soft-hover">
@@ -404,447 +328,298 @@
             <h4 class="text-xl font-semibold mb-4 text-metallic-gradient">Síguenos en Instagram</h4>
             <!-- Botón con el borde degradado Oro/Plata/Rose Gold -->
             <div class="instagram-btn-wrapper">
-                <a href="https://www.instagram.com/tu_perfil/" target="_blank" class="inline-flex items-center justify-center p-3 rounded-full bg-gray-900">
+                <a href="https://www.instagram.com/eyasur.ok?utm_source=qr&igsh=cG1uNjZkajFtN2k3" target="_blank" class="inline-flex items-center justify-center p-3 rounded-full bg-gray-900">
                     <i data-lucide="instagram" class="w-8 h-8 text-rosegold"></i>
                 </a>
             </div>
-            <p class="text-xs text-gray-500 mt-4">@tu_perfil</p>
+            <p class="text-xs text-gray-500 mt-4">@EyASur.Ok</p>
         </div>
     </section>
 
     <!-- ===== FOOTER (PIE DE PÁGINA) ===== -->
     <footer class="bg-black border-t border-rosegold/50 text-gray-500">
         <div class="container mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025 EyASur.Ok. Todos los derechos reservados.</p>
-            <p class="text-sm mt-2">Diseño de lujo en Negro y Metálicos.</p>
-            <p class="text-sm mt-2">ID de App: <span id="app-id-display">Cargando...</span></p>
+            <p>&copy; 2025-2026 EyASur.Ok. Todos los derechos reservados.</p>
+            <p class="text-sm mt-2">Diseño Gold por EDM</p>
+            <p class="text-sm mt-2">Creado con Amor ❤️ por EyASur.OK</p>
         </div>
     </footer>
 
-    <!-- Contenedor de Mensajes (No usar alert()) -->
+    <!-- Script para los iconos y el menú móvil -->
+    <script>
+        // Lógica para el menú móvil
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (menuButton && mobileMenu) {
+            menuButton.addEventListener('click', () => {
+                const icon = menuButton.querySelector('i');
+                const isHidden = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                
+                // Cambiar el icono (menu a x)
+                if (isHidden) {
+                    icon.setAttribute('data-lucide', 'x');
+                } else {
+                    icon.setAttribute('data-lucide', 'menu');
+                }
+                
+                // Volver a renderizar los iconos de Lucide
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            });
+        }
+
+        // Reemplaza todos los iconos de Lucide una vez que el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.error('El script de Lucide (iconos) no se cargó correctamente.');
+            }
+        });
+
+    </script>
+
     <div id="message-container" class="fixed bottom-4 right-4 z-[200] space-y-2"></div>
 
-
-    <!-- SCRIPT DE FIREBASE -->
+    <!-- LÓGICA JS -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, onSnapshot, collection, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // Habilitar logs de debug (opcional)
-        setLogLevel('debug');
+        import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Variables Globales del Canvas (MANDATORIAS)
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfigStr = typeof __firebase_config !== 'undefined' ? __firebase_config : null;
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        // --- CONFIGURACIÓN FIREBASE ---
+        // 1. Intentamos leer variables del entorno (Canvas)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app';
+        const canvasConfigStr = typeof __firebase_config !== 'undefined' ? __firebase_config : null;
+        const initialToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-        // ==============================================================================
-        // CONFIGURACIÓN DE RESPALDO (FALLBACK) PARA PRODUCCIÓN (GitHub Pages, Vercel, etc.)
-        // !!! DEBES REEMPLAZAR TODOS ESTOS VALORES CON LOS DE TU PROYECTO FIREBASE !!!
-        // ==============================================================================
-        const firebaseConfig = {
-  apiKey: "AIzaSyBI51rUSOhyJFzhchADiEEMGQBM6eumD5A",
-  authDomain: "eyasur-ab07f.firebaseapp.com",
-  projectId: "eyasur-ab07f",
-  storageBucket: "eyasur-ab07f.firebasestorage.app",
-  messagingSenderId: "394656799972",
-  appId: "1:394656799972:web:dae4f4943f3975abe360f1"
-};
-        
-        // Determinar qué configuración usar: Canvas (parsenado) o Fallback
-        let firebaseConfig;
-        let isFallbackConfig = false;
+        // 2. Definimos tus claves manuales (FALLBACK)
+        const MANUAL_CONFIG = {
+          apiKey: "AIzaSyBI51rUSOhyJFzhchADiEEMGQBM6eumD5A",
+          authDomain: "eyasur-ab07f.firebaseapp.com",
+          projectId: "eyasur-ab07f",
+          storageBucket: "eyasur-ab07f.firebasestorage.app",
+          messagingSenderId: "394656799972",
+          appId: "1:394656799972:web:dae4f4943f3975abe360f1"
+        };
 
-        if (firebaseConfigStr) {
+        // 3. Lógica de selección de configuración
+        let firebaseConfig = MANUAL_CONFIG; // Por defecto usamos las tuyas
+
+        if (canvasConfigStr) {
             try {
-                firebaseConfig = JSON.parse(firebaseConfigStr);
+                const parsedConfig = JSON.parse(canvasConfigStr);
+                // Si la config del entorno tiene apiKey, la usamos. Si no, nos quedamos con MANUAL_CONFIG.
+                if (parsedConfig && parsedConfig.apiKey) {
+                    firebaseConfig = parsedConfig;
+                }
             } catch (e) {
-                console.error("Error al parsear __firebase_config. Usando fallback.", e);
-                firebaseConfig = FALLBACK_FIREBASE_CONFIG;
-                isFallbackConfig = true;
+                console.error("Error parseando config canvas, usando manual", e);
             }
-        } else {
-            firebaseConfig = FALLBACK_FIREBASE_CONFIG;
-            isFallbackConfig = true;
         }
-        // ==============================================================================
-        
-        // Inicialización de Firebase
-        let app;
-        let db;
-        let auth;
-        let userId = null;
-        let cartRef = null;
 
-        // Función de inicialización
-        async function initializeFirebase() {
-            if (!firebaseConfig || !firebaseConfig.apiKey) {
-                console.error("Configuración de Firebase no válida.");
-                showMessage("Error: Configuración de Firebase no válida.", "red");
-                return;
-            }
+        let app, db, auth, userId = null, cartRef = null;
+        window.cartItems = []; 
 
-            // Advertir al usuario si está usando la configuración de respaldo sin modificar
-            if (isFallbackConfig && firebaseConfig.apiKey.includes("REEMPLAZAR")) {
-                 console.warn("ADVERTENCIA DE PRODUCCIÓN: La configuración de Firebase es placeholder. ¡Reemplaza los valores en el código para que el carrito funcione en producción!");
-                 // ESTA ES LA ADVERTENCIA QUE ESTÁS VIENDO EN PANTALLA:
-                 showMessage("Error de Prod: Reemplaza las claves de Firebase.", "red"); 
-            }
+        async function initApp() {
+            if (typeof lucide !== 'undefined') lucide.createIcons();
             
             app = initializeApp(firebaseConfig);
             db = getFirestore(app);
             auth = getAuth(app);
-            
-            const appIdDisplay = document.getElementById('app-id-display');
-            if(appIdDisplay) {
-                appIdDisplay.textContent = appId;
-            }
 
+            const idDisplay = document.getElementById('app-id-display');
+            if(idDisplay) idDisplay.textContent = appId;
+
+            // --- AUTENTICACIÓN ROBUSTA ---
             try {
-                // 1. Autenticación (usando token si está disponible, sino anónima)
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
+                // Intentamos usar el token del entorno si existe
+                if (initialToken) {
+                     await signInWithCustomToken(auth, initialToken);
                 } else {
-                    await signInAnonymously(auth);
+                     // Si no hay token, inicio anónimo directo
+                     await signInAnonymously(auth);
                 }
-                
-                // 2. Esperar el estado de autenticación y configurar el carrito
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        const currentUserId = document.getElementById('current-user-id');
-                        if(currentUserId) {
-                             currentUserId.textContent = userId;
-                        }
-                        
-                        // Definir la referencia del carrito después de la autenticación
-                        // path: /artifacts/{appId}/users/{userId}/cart/current
-                        cartRef = doc(db, 'artifacts', appId, 'users', userId, 'cart', 'current');
-                        
-                        // 3. Iniciar el listener de Carrito en tiempo real
-                        setupCartListener();
-                        showMessage("Conectado al Carrito de Compras.", "rosegold");
-                    } else {
-                        console.error("No se pudo obtener el ID de usuario.");
-                        const currentUserId = document.getElementById('current-user-id');
-                        if(currentUserId) {
-                            currentUserId.textContent = 'No autenticado';
-                        }
-                    }
-                });
-
-            } catch (error) {
-                console.error("Error durante la autenticación de Firebase:", error);
-                showMessage("Error de autenticación.", "red");
+            } catch(e) { 
+                console.warn("Fallo auth inicial, reintentando anónimo...", e);
+                try {
+                   await signInAnonymously(auth);
+                } catch(e2) {
+                    console.error("Error fatal auth anónimo. Verifica tus claves en MANUAL_CONFIG.", e2);
+                    showMessage("Error de Autenticación. Revisa la consola.", "red");
+                }
             }
+
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    userId = user.uid;
+                    const idEl = document.getElementById('current-user-id');
+                    if(idEl) idEl.textContent = userId;
+                    
+                    // Ruta del carrito: Por usuario
+                    cartRef = doc(db, 'artifacts', appId, 'users', userId, 'cart', 'current');
+                    setupCartListener();
+                    showMessage("Conectado al Carrito", "gold");
+                }
+            });
         }
 
-        // Variable para almacenar el estado del carrito
-        window.cartItems = [];
-
-        // Función para actualizar el UI del carrito
-        function updateCartUI(newItems) {
-            // Se actualiza el estado global (window.cartItems)
-            window.cartItems = newItems || [];
+        // --- FUNCIONES UI ---
+        function updateCartUI(items) {
+            window.cartItems = items || [];
             
             const container = document.getElementById('cart-items-container');
-            const countDisplay = document.getElementById('cart-count');
-            const totalDisplay = document.getElementById('cart-total-price');
-            const emptyMessage = document.getElementById('empty-cart-message');
-            const checkoutButton = document.getElementById('checkout-button');
-            
-            if (!container || !countDisplay || !totalDisplay || !emptyMessage || !checkoutButton) {
-                console.warn("Advertencia: Elementos del carrito no encontrados en el DOM. Saltando actualización de UI.");
-                return;
-            }
+            const navbarBadge = document.getElementById('navbar-cart-count');
+            const totalPriceEl = document.getElementById('cart-total-price');
+            const totalQtyEl = document.getElementById('modal-total-quantity');
+            const emptyMsg = document.getElementById('empty-cart-message');
+            const btnCheckout = document.getElementById('checkout-button');
+
+            if (!container) return;
 
             container.innerHTML = '';
-            
-            if (window.cartItems.length === 0) {
-                emptyMessage.classList.remove('hidden');
-                countDisplay.textContent = '0';
-                totalDisplay.textContent = '$0 ARS';
-                checkoutButton.disabled = true;
-                checkoutButton.classList.add('opacity-50', 'cursor-not-allowed');
-                // Re-renderizar iconos por si el modal está visible
-                if (typeof lucide !== 'undefined') { lucide.createIcons(); } 
-                return;
-            }
-            
-            emptyMessage.classList.add('hidden');
-            
             let total = 0;
-            let totalQuantity = 0;
+            let qty = 0;
 
-            window.cartItems.forEach(item => {
-                // CORRECCIÓN CLAVE: Aseguramos que price y quantity sean números enteros
-                const itemPrice = parseInt(item.price); 
-                const itemQuantity = parseInt(item.quantity);
-                
-                if (isNaN(itemPrice) || isNaN(itemQuantity)) {
-                    console.error("Datos de carrito corruptos: Precio o cantidad no son números.", item);
-                    return;
-                }
-
-                total += itemPrice * itemQuantity;
-                totalQuantity += itemQuantity; 
-                
-                // Formato de precio
-                const priceFormatted = itemPrice.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
-                const subtotalFormatted = (itemPrice * itemQuantity).toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
-
-                // Elemento del producto en el modal
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'flex items-center justify-between p-3 bg-gray-800 rounded-lg border-l-4 border-gold shadow-md';
-                itemDiv.innerHTML = `
-                    <div class="flex-grow">
-                        <p class="font-semibold text-silver">${item.name}</p>
-                        <p class="text-sm text-gray-400">${priceFormatted} c/u</p>
-                    </div>
-                    <div class="flex items-center space-x-3">
-                        <!-- Botón Quitar -->
-                        <button onclick="updateCartQuantity('${item.id}', -1)" class="text-rosegold hover:text-red-500 transition-colors p-1">
-                            <i data-lucide="minus-circle" class="w-5 h-5"></i>
-                        </button>
-                        <span class="font-bold text-silver w-5 text-center">${item.quantity}</span>
-                        <!-- Botón Añadir (Simular) -->
-                        <button onclick="updateCartQuantity('${item.id}', 1)" class="text-gold hover:text-yellow-400 transition-colors p-1">
-                            <i data-lucide="plus-circle" class="w-5 h-5"></i>
-                        </button>
-                    </div>
-                    <span class="font-bold text-gold ml-4 w-24 text-right">${subtotalFormatted}</span>
-                `;
-                container.appendChild(itemDiv);
-            });
-            
-            // LOG de depuración para verificar el cálculo:
-            console.log("DEBUG: Total de productos calculado:", totalQuantity);
-
-            // Actualizar contadores
-            countDisplay.textContent = totalQuantity;
-            totalDisplay.textContent = total.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
-            checkoutButton.disabled = false;
-            checkoutButton.classList.remove('opacity-50', 'cursor-not-allowed');
-
-            // Re-renderizar iconos de Lucide en el modal
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-        }
-
-        // Función para escuchar cambios en el carrito
-        function setupCartListener() {
-            if (!cartRef) {
-                console.error("No se puede configurar el listener: cartRef no está definido.");
-                return;
-            }
-            
-            onSnapshot(cartRef, (docSnap) => {
-                if (docSnap.exists() && docSnap.data().items) {
-                    updateCartUI(docSnap.data().items);
-                } else {
-                    updateCartUI([]);
-                }
-            }, (error) => {
-                console.error("Error al escuchar el carrito:", error);
-                showMessage("Error al cargar el carrito en tiempo real.", "red");
-            });
-        }
-        
-        // Función principal para guardar el carrito en Firestore
-        async function saveCart(items) {
-            // VERIFICACIÓN MEJORADA
-            if (!cartRef) {
-                console.warn("Intento de guardar el carrito antes de la inicialización (cartRef es null).");
-                return;
-            }
-            try {
-                // Guardamos el array de ítems en el campo 'items' del documento 'current'
-                await setDoc(cartRef, { items: items, lastUpdated: new Date().toISOString() });
-            } catch (error) {
-                console.error("Error al guardar el carrito:", error);
-                showMessage("Error al guardar el carrito. Intenta de nuevo.", "red");
-            }
-        }
-
-        // Función para agregar un producto al carrito
-        window.addToCart = async function(product) {
-            // VERIFICACIÓN MEJORADA Y MENSAJE INSTRUCTIVO
-            if (!cartRef || !userId) {
-                console.warn(`Click prematuro. cartRef: ${cartRef}, userId: ${userId}`);
-                showMessage("El carrito aún se está cargando (Conexión). Espera un momento y haz clic de nuevo.", "rosegold");
-                return;
-            }
-            
-            let items = [...window.cartItems]; // Copia del estado actual
-            const existingItemIndex = items.findIndex(item => item.id === product.id);
-
-            if (existingItemIndex > -1) {
-                // CORRECCIÓN CLAVE: Forzar a parseInt antes de sumar para evitar concatenación de strings.
-                const currentQuantity = parseInt(items[existingItemIndex].quantity || 0);
-                items[existingItemIndex].quantity = currentQuantity + 1;
-            } else {
-                items.push({ ...product, quantity: 1 });
-            }
-
-            // === ACTUALIZACIÓN OPTIMISTA EN EL BOTÓN "AÑADIR" ===
-            updateCartUI(items); 
-            // ======================================================
-            
-            await saveCart(items);
-            showMessage(`Se agregó "${product.name}" al carrito.`, "gold");
-        };
-
-        // Función para actualizar la cantidad de un producto
-        window.updateCartQuantity = async function(productId, delta) {
-            if (!cartRef || !userId) {
-                 showMessage("Conexión al carrito no lista.", "red");
-                 return;
-            }
-
-            let items = [...window.cartItems];
-            const itemIndex = items.findIndex(item => item.id === productId);
-
-            if (itemIndex > -1) {
-                // CORRECCIÓN CLAVE: Forzar a parseInt antes de operar
-                const currentQuantity = parseInt(items[itemIndex].quantity || 0);
-                items[itemIndex].quantity = currentQuantity + delta;
-                
-                if (items[itemIndex].quantity <= 0) {
-                    items = items.filter(item => item.id !== productId);
-                    showMessage("Producto eliminado del carrito.", "red");
-                } else {
-                     showMessage("Cantidad actualizada.", "rosegold");
-                }
-                
-                // === ACTUALIZACIÓN OPTIMISTA DE LA UI (Mantenido) ===
-                updateCartUI(items); 
-                
-                // Persistir el cambio en Firebase
-                await saveCart(items);
-            }
-        };
-
-
-        // Función para generar el mensaje de WhatsApp y redirigir
-        window.checkoutToWhatsApp = function() {
             if (window.cartItems.length === 0) {
-                showMessage("El carrito está vacío. Agrega productos para ordenar.", "red");
-                return;
-            }
-
-            // Aseguramos la conversión a entero para el cálculo final
-            const total = window.cartItems.reduce((sum, item) => sum + parseInt(item.price) * parseInt(item.quantity), 0);
-            const totalFormatted = total.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
-
-            // Construir el mensaje
-            let message = "¡Hola! Me gustaría hacer el siguiente pedido de EyASur.Ok:\n\n";
-            window.cartItems.forEach(item => {
-                const itemTotal = (parseInt(item.price) * parseInt(item.quantity)).toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 0 });
-                message += `* ${item.name} x${item.quantity} (${itemTotal})\n`;
-            });
-            message += `\n*TOTAL ESTIMADO: ${totalFormatted}*`;
-            message += "\n\nPor favor, confírmenme el stock y los detalles de envío/pago.";
-            
-            // Cerrar modal
-            toggleCartModal(false);
-            
-            // Codificar el mensaje para la URL
-            const whatsappNumber = '5491112345678'; // Reemplaza con tu número de WhatsApp
-            const encodedMessage = encodeURIComponent(message);
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-
-            // Redirigir
-            window.open(whatsappUrl, '_blank');
-        };
-
-        // Función para abrir/cerrar el modal
-        window.toggleCartModal = function(show) {
-            const modal = document.getElementById('cart-modal');
-            if (!modal) return;
-            
-            if (show) {
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                
-                // Forzamos la actualización de la interfaz de usuario con los datos actuales
-                updateCartUI(window.cartItems);
+                if(emptyMsg) emptyMsg.classList.remove('hidden');
+                if(btnCheckout) {
+                    btnCheckout.disabled = true;
+                    btnCheckout.classList.add('opacity-50', 'cursor-not-allowed');
+                }
             } else {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-            }
-        };
+                if(emptyMsg) emptyMsg.classList.add('hidden');
+                if(btnCheckout) {
+                    btnCheckout.disabled = false;
+                    btnCheckout.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
 
-        // Función para mostrar mensajes de usuario (reemplaza alert())
-        window.showMessage = function(text, color) {
-            const container = document.getElementById('message-container');
-             if (!container) return; 
-             
-            const message = document.createElement('div');
-            
-            let bgColor = 'bg-gray-800';
-            let borderColor = 'border-gray-700';
-            
-            if (color === 'gold') {
-                bgColor = 'bg-gold/10';
-                borderColor = 'border-gold';
-            } else if (color === 'rosegold') {
-                bgColor = 'bg-rosegold/10';
-                borderColor = 'border-rosegold';
-            } else if (color === 'red') {
-                bgColor = 'bg-red-900/50';
-                borderColor = 'border-red-600';
-            }
+                window.cartItems.forEach(item => {
+                    const p = parseInt(item.price);
+                    const q = parseInt(item.qty);
+                    total += p * q;
+                    qty += q;
 
-            message.className = `p-3 rounded-lg text-sm shadow-xl border ${borderColor} ${bgColor} max-w-xs transition-opacity duration-300`;
-            message.textContent = text;
-
-            container.prepend(message); // Agregar al principio
-
-            // Desaparecer después de 4 segundos
-            setTimeout(() => {
-                message.style.opacity = '0';
-                message.style.transform = 'translateY(10px)';
-                message.addEventListener('transitionend', () => message.remove());
-            }, 4000);
-        };
-
-        // Lógica de UI (Menú Móvil, Iconos)
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeFirebase(); // Inicia Firebase y el listener del carrito
-            
-            // Lógica para el menú móvil
-            const menuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener('click', () => {
-                    const icon = menuButton.querySelector('i');
-                    const isHidden = mobileMenu.classList.contains('hidden');
-                    mobileMenu.classList.toggle('hidden');
-                    
-                    if (isHidden) {
-                        // Asegurarse de que el ícono exista antes de cambiar el atributo
-                        if (icon) icon.setAttribute('data-lucide', 'x');
-                    } else {
-                        if (icon) icon.setAttribute('data-lucide', 'menu');
-                    }
-                    
-                    if (typeof lucide !== 'undefined') {
-                        lucide.createIcons();
-                    }
+                    const div = document.createElement('div');
+                    div.className = 'flex items-center justify-between p-3 bg-[#111] rounded-lg border border-gray-800 shadow-sm';
+                    div.innerHTML = `
+                        <div class="flex flex-col">
+                            <span class="font-medium text-silver">${item.name}</span>
+                            <span class="text-xs text-gray-500">$${p.toLocaleString()} x ${q}</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button onclick="updateQuantity('${item.id}', -1)" class="text-gray-500 hover:text-rosegold"><i data-lucide="minus-circle" class="w-5 h-5"></i></button>
+                            <span class="text-gold font-bold">${q}</span>
+                            <button onclick="updateQuantity('${item.id}', 1)" class="text-gray-500 hover:text-gold"><i data-lucide="plus-circle" class="w-5 h-5"></i></button>
+                            <button onclick="removeFromCart('${item.id}')" class="text-red-500 ml-2"><i data-lucide="trash-2" class="w-5 h-5"></i></button>
+                        </div>
+                    `;
+                    container.appendChild(div);
                 });
             }
 
-            // Renderizar iconos iniciales
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
+            if (navbarBadge) {
+                navbarBadge.innerText = qty;
+                if(qty === 0) navbarBadge.classList.add('hidden');
+                else navbarBadge.classList.remove('hidden');
             }
-        });
-        
-    </script>
 
+            if (totalPriceEl) totalPriceEl.innerText = `$${total.toLocaleString()} ARS`;
+            if (totalQtyEl) totalQtyEl.innerText = qty;
+            
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        function setupCartListener() {
+            if (!cartRef) return;
+            onSnapshot(cartRef, (snap) => {
+                if (snap.exists()) updateCartUI(snap.data().items);
+                else updateCartUI([]);
+            });
+        }
+
+        async function saveCart(items) {
+            if (!cartRef) return;
+            await setDoc(cartRef, { items: items, updatedAt: new Date().toISOString() }, { merge: true });
+        }
+
+        // --- FUNCIONES GLOBALES ---
+        window.addToCart = function(product) {
+            if (!userId) { showMessage("Cargando...", "red"); return; }
+            let items = [...window.cartItems];
+            const idx = items.findIndex(i => i.id === product.id);
+            
+            if (idx > -1) {
+                const current = parseInt(items[idx].qty || 0);
+                items[idx].qty = current + 1;
+            } else {
+                items.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI(items); 
+            saveCart(items);
+            showMessage("Agregado al carrito", "gold");
+            window.openCart();
+        };
+
+        window.updateQuantity = function(id, delta) {
+            let items = [...window.cartItems];
+            const idx = items.findIndex(i => i.id === id);
+            if (idx > -1) {
+                const current = parseInt(items[idx].qty || 0);
+                items[idx].qty = current + delta;
+                if (items[idx].qty <= 0) items.splice(idx, 1);
+                updateCartUI(items);
+                if(cartRef) saveCart(items);
+            }
+        };
+
+        window.removeFromCart = function(id) {
+            const items = window.cartItems.filter(i => i.id !== id);
+            updateCartUI(items);
+            if(cartRef) saveCart(items);
+        };
+
+        window.checkoutToWhatsApp = function() {
+            if (window.cartItems.length === 0) return;
+            let msg = "Hola EyASur! Pedido:\n";
+            let total = 0;
+            window.cartItems.forEach(i => {
+                msg += `- ${i.name} (${i.qty}): $${(i.price*i.qty).toLocaleString()}\n`;
+                total += i.price * i.qty;
+            });
+            msg += `Total: $${total.toLocaleString()}`;
+            window.open(`https://wa.me/5491112345678?text=${encodeURIComponent(msg)}`, '_blank');
+        };
+
+        window.openCart = () => {
+            document.getElementById('cart-offcanvas').classList.add('open');
+            document.getElementById('backdrop').classList.remove('hidden');
+        };
+        window.closeCart = () => {
+            document.getElementById('cart-offcanvas').classList.remove('open');
+            document.getElementById('backdrop').classList.add('hidden');
+        };
+
+        window.showMessage = (msg, color) => {
+            const box = document.getElementById('message-container');
+            if(!box) return;
+            const d = document.createElement('div');
+            const c = color === 'gold' ? 'bg-gold/20 text-gold border-gold' : 'bg-red-900/80 text-white border-red-500';
+            d.className = `p-3 rounded border ${c} mb-2 backdrop-blur`;
+            d.innerText = msg;
+            box.appendChild(d);
+            setTimeout(() => d.remove(), 3000);
+        };
+
+        const menuBtn = document.getElementById('mobile-menu-button');
+        const menu = document.getElementById('mobile-menu');
+        if(menuBtn) menuBtn.onclick = () => menu.classList.toggle('hidden');
+
+        initApp();
+    </script>
 </body>
 </html>
