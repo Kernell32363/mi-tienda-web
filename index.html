@@ -358,8 +358,8 @@
                 </div>
                 
                 <!-- Formulario de Contacto (AHORA FUNCIONAL CON FORMSUBMIT) -->
-                <form action="https://formsubmit.co/ericdavidmorgan.dc@gmail.com" method="POST" class="space-y-4">
-                    <!-- IMPORTANTE: Reemplaza TU_CORREO_AQUI@ejemplo.com por tu email real -->
+                <!-- ¡RECUERDA CAMBIAR TU CORREO AQUÍ! -->
+                <form action="https://formsubmit.co/TU_CORREO_AQUI@ejemplo.com" method="POST" class="space-y-4">
                     
                     <!-- Campo oculto para redirigir al usuario después del envío -->
                     <input type="hidden" name="_next" value="URL_DE_TU_PAGINA_DE_GRACIAS_O_ESTA_MISMA_URL">
@@ -442,17 +442,16 @@
 
         // ==============================================================================
         // CONFIGURACIÓN DE RESPALDO (FALLBACK) PARA PRODUCCIÓN (GitHub Pages, Vercel, etc.)
-        // Si no estás en Canvas, esta configuración se usará.
-        // !!! DEBES REEMPLAZAR ESTOS VALORES CON LOS DE TU PROYECTO FIREBASE !!!
+        // !!! DEBES REEMPLAZAR TODOS ESTOS VALORES CON LOS DE TU PROYECTO FIREBASE !!!
         // ==============================================================================
-        const FALLBACK_FIREBASE_CONFIG = {
-            apiKey: "REEMPLAZAR_CON_TU_API_KEY",
-            authDomain: "REEMPLAZAR_CON_TU_PROJECT_ID.firebaseapp.com",
-            projectId: "REEMPLAZAR_CON_TU_PROJECT_ID",
-            storageBucket: "REEMPLAZAR_CON_TU_PROJECT_ID.appspot.com",
-            messagingSenderId: "REEMPLAZAR_CON_TU_MESSAGING_SENDER_ID",
-            appId: "REEMPLAZAR_CON_TU_APP_ID"
-        };
+        const firebaseConfig = {
+  apiKey: "AIzaSyBI51rUSOhyJFzhchADiEEMGQBM6eumD5A",
+  authDomain: "eyasur-ab07f.firebaseapp.com",
+  projectId: "eyasur-ab07f",
+  storageBucket: "eyasur-ab07f.firebasestorage.app",
+  messagingSenderId: "394656799972",
+  appId: "1:394656799972:web:dae4f4943f3975abe360f1"
+};
         
         // Determinar qué configuración usar: Canvas (parsenado) o Fallback
         let firebaseConfig;
@@ -490,7 +489,8 @@
             // Advertir al usuario si está usando la configuración de respaldo sin modificar
             if (isFallbackConfig && firebaseConfig.apiKey.includes("REEMPLAZAR")) {
                  console.warn("ADVERTENCIA DE PRODUCCIÓN: La configuración de Firebase es placeholder. ¡Reemplaza los valores en el código para que el carrito funcione en producción!");
-                 showMessage("Error de Prod: Reemplaza las claves de Firebase.", "red");
+                 // ESTA ES LA ADVERTENCIA QUE ESTÁS VIENDO EN PANTALLA:
+                 showMessage("Error de Prod: Reemplaza las claves de Firebase.", "red"); 
             }
             
             app = initializeApp(firebaseConfig);
