@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyASur.Ok - Vapers & Fragancias Gold</title>
+    <title>EyASur.Ok - Lujo Metalizado</title>
     
-    <!-- Script de Tailwind CSS -->
+    <!-- Script de Tailwind CSS para el diseño -->
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Fuente Inter de Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
     
     <!-- Iconos de Lucide -->
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
         /* Definición de la Paleta Metalizada */
@@ -22,604 +22,759 @@
             --color-black-deep: #0A0A0A;    /* Fondo casi puro */
             --color-silver: #D4D4D4;        /* Texto principal */
             --color-gold: #FFD700;          /* Acento principal (Botones) */
-            --color-rosegold: #B76E79;      /* Acento secundario (Subtítulos/bordes) */
+            --color-rosegold: #B76E79;      /* Acento secundario (Subtítulos, bordes) */
+            --color-white-ghost: #FAFAFA;   /* Texto secundario y fondo claro */
         }
 
-        /* Aplicamos la fuente Inter y el fondo Negro Profundo */
+        /* Configuración de Tailwind */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'black-deep': 'var(--color-black-deep)',
+                        'silver': 'var(--color-silver)',
+                        'gold': 'var(--color-gold)',
+                        'rosegold': 'var(--color-rosegold)',
+                        'white-ghost': 'var(--color-white-ghost)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+
+        /* Estilos generales */
         body {
             font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
             background-color: var(--color-black-deep);
-            color: var(--color-silver); 
+            color: var(--color-silver);
         }
 
-        .text-metallic-gradient {
-            background-image: linear-gradient(45deg, #B8860B, #C3894B, #D4D4D4);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
+        /* Estilo para el botón de acento con gradiente */
+        .btn-gold {
+            background-image: linear-gradient(to right, #FFD700, #F0C419);
+            color: var(--color-black-deep);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
         }
 
-        .bg-deep-black { background-color: var(--color-black-deep); }
-        .text-gold { color: var(--color-gold); }
-        .text-rosegold { color: var(--color-rosegold); }
-        .border-rosegold { border-color: var(--color-rosegold); }
-        
-        .card-soft-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(255, 215, 0, 0.1), 0 2px 4px -2px rgba(255, 215, 0, 0.05);
-            background-color: #1a1a1a;
-        }
-        .card-soft-hover:hover {
-            transform: translateY(-5px); 
-            box-shadow: 0 15px 25px rgba(255, 215, 0, 0.2); 
-            background-color: #262626;
+        .btn-gold:hover {
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+            transform: translateY(-2px);
         }
 
-        .hero-background {
-            background-image: url('https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        /* Estilo para la tarjeta de producto con brillo sutil */
+        .product-card {
+            box-shadow: 0 0 10px rgba(183, 110, 121, 0.1);
+        }
+        .product-card:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), 0 0 40px rgba(183, 110, 121, 0.1);
         }
 
-        .instagram-btn-wrapper {
-            padding: 2px;
-            border-radius: 9999px;
-            background: linear-gradient(45deg, var(--color-gold), var(--color-rosegold), var(--color-silver));
-            display: inline-flex;
-            transition: transform 0.3s ease;
-        }
-        .instagram-btn-wrapper:hover {
-            transform: scale(1.15);
-        }
-
-        /* Offcanvas */
-        #cart-offcanvas {
-            transition: transform 0.3s ease-out;
-            transform: translateX(100%);
-        }
-        #cart-offcanvas.open {
-            transform: translateX(0);
-        }
-        #backdrop {
-            transition: opacity 0.3s ease-out;
+        /* Contenedor de mensajes */
+        #message-container {
+            pointer-events: none;
         }
         
-        /* Input styles */
-        input, textarea {
-            background-color: #000000 !important;
-            border-color: #333 !important;
-            color: #D4D4D4 !important;
+        .interactive-message {
+            pointer-events: auto;
+            cursor: pointer;
+            /* Se ha eliminado el backdrop-blur-md para evitar el difuminado */
         }
-        input:focus, textarea:focus {
-            border-color: var(--color-rosegold) !important;
-            ring-color: var(--color-rosegold) !important;
+
+        /* Estilos para el scrollbar del modal de carrito */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
         }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #171717;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: var(--color-rosegold);
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: var(--color-gold);
+        }
+
     </style>
 </head>
-<body class="bg-deep-black text-silver">
+<body class="min-h-screen antialiased">
 
-    <!-- ===== MODAL CARRITO (SIDEBAR) ===== -->
-    <div id="backdrop" class="fixed inset-0 bg-black bg-opacity-80 z-40 hidden" onclick="closeCart()"></div>
-
-    <div id="cart-offcanvas" class="fixed top-0 right-0 w-full md:w-96 h-full bg-[#111] shadow-2xl z-50 flex flex-col border-l border-gray-800">
-        <div class="flex justify-between items-center p-6 border-b border-gray-800">
-            <h2 class="text-2xl font-bold text-metallic-gradient">Tu Carrito</h2>
-            <button onclick="closeCart()" class="text-gray-400 hover:text-gold transition">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-        </div>
+    <!-- Script de Firebase (Lógica operativa - CORREGIDA) -->
+    <script type="module">
+        // --- Imports de Firebase (Completos) ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, runTransaction, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         
-        <div id="user-info" class="px-6 py-2 text-xs font-mono text-gray-500 truncate border-b border-gray-900">
-            ID: Cargando...
-        </div>
+        // setLogLevel('debug'); // Descomentar para ver logs de Firestore
 
-        <!-- Lista de Productos -->
-        <div id="cart-items-container" class="flex-grow overflow-y-auto p-6 space-y-4">
-            <p id="empty-cart-message" class="text-gray-500 text-center italic mt-10">Tu carrito está vacío.</p>
-        </div>
-
-        <!-- Footer del Carrito -->
-        <div class="p-6 border-t border-gray-800 bg-[#0A0A0A]">
-            <div class="flex justify-between font-medium text-lg text-silver mb-2">
-                <span>Cantidad:</span>
-                <span id="modal-total-quantity">0</span>
-            </div>
-            <div class="flex justify-between font-bold text-2xl text-gold mb-6">
-                <span>Total:</span>
-                <span id="cart-total-price">$0 ARS</span>
-            </div>
-
-            <button id="checkout-button" onclick="checkoutToWhatsApp()" 
-                    class="w-full py-4 bg-gold text-black font-bold rounded-lg hover:bg-yellow-500 transition-all shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-                <i data-lucide="message-circle" class="w-5 h-5"></i>
-                Finalizar en WhatsApp
-            </button>
-        </div>
-        
-        <div id="status-message" class="p-2 text-center text-xs hidden"></div>
-    </div>
-
-    <!-- ===== NAVEGACIÓN (Negro) ===== -->
-    <nav class="bg-black/90 shadow-xl sticky top-0 z-50 border-b border-gray-800">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Título: Aplicamos el degradado -->
-            <h1 class="text-2xl font-extrabold tracking-widest text-metallic-gradient">EyASur.Ok</h1>
-            
-            <!-- Menú para computadoras (Texto Plata/Oro para mantener legibilidad) -->
-            <div class="hidden md:flex space-x-6">
-                <a href="#inicio" class="text-silver hover:text-gold transition-colors font-medium">Inicio</a>
-                <a href="#productos" class="text-silver hover:text-gold transition-colors font-medium">Productos</a>
-                <a href="#contacto" class="text-silver hover:text-gold transition-colors font-medium">Contacto</a>
-            </div>
-
-                <!-- Botón Carrito (Navbar) -->
-                <button onclick="openCart()" class="relative p-2 text-silver hover:text-gold transition-colors">
-                    <i data-lucide="shopping-cart" class="w-6 h-6"></i>
-                    <span id="navbar-cart-count" class="absolute -top-1 -right-1 inline-flex items-center justify-center px-1.5 py-0.5 text-xs font-bold leading-none text-black bg-gold rounded-full hidden">
-                        0
-                    </span>
-                </button>
-                
-            <!-- Botón de Menú Móvil -->
-            <button id="mobile-menu-button" class="text-silver hover:text-gold md:hidden">
-                <i data-lucide="menu" class="w-6 h-6"></i>
-            </button>
-        </div>
-        
-        <!-- Menú Móvil (Gris muy oscuro) -->
-        <div id="mobile-menu" class="md:hidden bg-[#1a1a1a] shadow-xl hidden">
-            <a href="#inicio" class="block px-6 py-3 text-silver hover:text-gold hover:bg-[#262626]">Inicio</a>
-            <a href="#productos" class="block px-6 py-3 text-silver hover:text-gold hover:bg-[#262626]">Productos</a>
-            <a href="#contacto" class="block px-6 py-3 text-silver hover:text-gold hover:bg-[#262626]">Contacto</a>
-        </div>
-    </nav>
-
-    <!-- ===== SECCIÓN DE INICIO (HERO) - CON IMAGEN DE FONDO ===== -->
-    <header id="inicio" class="hero-background text-white min-h-[70vh] flex items-center relative z-10 shadow-inner">
-        <div class="absolute inset-0 bg-black opacity-70"></div> 
-        
-        <div class="container mx-auto px-6 py-12 text-center relative z-10">
-            <!-- Título principal: Aplicamos el degradado -->
-            <h2 class="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight text-metallic-gradient">Fragancias y Vapers Exclusivos</h2>
-            <!-- Subtítulo en Oro Rosa sutil -->
-            <p class="text-xl md:text-2xl mb-10 text-rosegold font-light">Descubre la calidad premium que te mereces. Envío a todo el país.</p>
-            
-            <!-- Botón Principal en ORO -->
-            <a href="#productos" class="bg-gold text-black font-semibold py-3 px-10 rounded-full shadow-lg hover:bg-[#E5C100] transition duration-300 transform hover:scale-105">
-                Explorar Colección
-            </a>
-        </div>
-    </header>
-
-    <main class="container mx-auto px-6 py-20">
-
-        <!-- ===== SECCIÓN SOBRE NOSOTROS (Panel Oscuro con borde Cobre) ===== -->
-        <section id="sobre" class="mb-24 text-center max-w-4xl mx-auto p-8 rounded-xl bg-gray-900 text-silver card-soft-hover border border-rosegold/50">
-            <!-- Título: Aplicamos el degradado -->
-            <h3 class="text-4xl font-bold mb-6 text-metallic-gradient">Nuestra Pasión</h3>
-            <p class="leading-relaxed text-lg text-gray-400">
-                En EyASur.Ok, nos especializamos en la comercialización de <strong class="text-metallic-gradient font-bold">Exquisitas Fragancias Importadas</strong> y los <strong class="text-metallic-gradient font-bold">Mejores Vapers Desechables</strong> del mercado. Nuestro compromiso es ofrecer productos de máxima calidad, autenticidad garantizada y una experiencia de compra sencilla y segura.
-            </p>
-        </section>
+        let app, db, auth, userId;
+        const products = [
+            // Definición de productos alinea con los data-id de la UI
+            { id: '1', name: 'Éxtasis Dorado', price: 4500.00, image: 'https://placehold.co/600x400/111827/FFD700?text=Éxtasis+Dorado' },
+            { id: '2', name: 'Esencia Nocturna', price: 2800.00, image: 'https://placehold.co/600x400/111827/B76E79?text=Esencia+Nocturna' },
+            { id: '4', name: 'Fénix de Plata', price: 6200.00, image: 'https://placehold.co/600x400/111827/D4D4D4?text=Fénix+de+Plata' },
+        ];
 
 
-        <!-- ===== PRODUCTOS ===== -->
-        <section id="productos">
-            <h3 class="text-4xl font-bold mb-12 text-center text-metallic-gradient">Catálogo Destacado</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        // --- INICIALIZACIÓN Y AUTENTICACIÓN ---
 
-                <!-- Producto 1 -->
-                <div class="card-soft-hover rounded-xl shadow-2xl overflow-hidden flex flex-col border border-rosegold/30">
-                    <div class="relative h-72 border-b border-gray-800">
-                        <img src="https://placehold.co/600x400/0A0A0A/FFD700?text=FRAGANCIA" class="absolute inset-0 w-full h-full object-cover" alt="Fragancia">
-                        <div class="absolute inset-0 bg-black/40"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <h4 class="text-3xl font-extrabold text-white relative z-10">Fragancia</h4>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-grow">
-                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Perfume Élite Noir</h4>
-                        <p class="text-gray-400 mb-4 text-sm">Fragancia amaderada y especiada. Importada, 100ml.</p>
-                    </div>
-                    <div class="p-6 pt-0 flex justify-between items-center border-t border-gray-800">
-                        <span class="text-3xl font-extrabold text-gold">$65.000 ARS</span>
-                        <button onclick="addToCart({ id: 'P001', name: 'Perfume Élite Noir', price: 65000, qty: 1 })" 
-                           class="bg-gold text-black py-2 px-6 rounded-lg font-bold hover:bg-yellow-400 transition-colors flex items-center gap-2">
-                           <i data-lucide="plus" class="w-4 h-4"></i> Agregar
-                        </button>
-                    </div>
-                </div>
+        async function initializeFirebase() {
+            try {
+                const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
 
-                <!-- Producto 2 -->
-                <div class="card-soft-hover rounded-xl shadow-2xl overflow-hidden flex flex-col border border-rosegold/30">
-                    <div class="relative h-72 border-b border-gray-800">
-                        <img src="https://placehold.co/600x400/0A0A0A/D4D4D4?text=VAPER" class="absolute inset-0 w-full h-full object-cover" alt="Vaper">
-                        <div class="absolute inset-0 bg-black/40"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <h4 class="text-3xl font-extrabold text-white relative z-10">Vaper</h4>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-grow">
-                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Vaper Max Puff</h4>
-                        <p class="text-gray-400 mb-4 text-sm">5000 Puffs. Sabor Frutos Rojos. Nicotina 5%.</p>
-                    </div>
-                    <div class="p-6 pt-0 flex justify-between items-center border-t border-gray-800">
-                        <span class="text-3xl font-extrabold text-gold">$8.500 ARS</span>
-                        <button onclick="addToCart({ id: 'P002', name: 'Vaper Max Puff', price: 8500, qty: 1 })" 
-                           class="bg-gold text-black py-2 px-6 rounded-lg font-bold hover:bg-yellow-400 transition-colors flex items-center gap-2">
-                           <i data-lucide="plus" class="w-4 h-4"></i> Agregar
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Producto 3 -->
-                <div class="card-soft-hover rounded-xl shadow-2xl overflow-hidden flex flex-col border border-rosegold/30">
-                    <div class="relative h-72 border-b border-gray-800">
-                        <img src="https://placehold.co/600x400/0A0A0A/B76E79?text=SET+LUJO" class="absolute inset-0 w-full h-full object-cover" alt="Set">
-                        <div class="absolute inset-0 bg-black/40"></div>
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <h4 class="text-3xl font-extrabold text-white relative z-10">Set de Lujo</h4>
-                        </div>
-                    </div>
-                    <div class="p-6 flex-grow">
-                        <h4 class="text-2xl font-semibold mb-2 text-metallic-gradient">Set Black Collection</h4>
-                        <p class="text-gray-400 mb-4 text-sm">Incluye mini-perfume exclusivo y accesorio vaper.</p>
-                    </div>
-                    <div class="p-6 pt-0 flex justify-between items-center border-t border-gray-800">
-                        <span class="text-3xl font-extrabold text-gold">$95.000 ARS</span>
-                        <button onclick="addToCart({ id: 'P003', name: 'Set Black Collection', price: 95000, qty: 1 })" 
-                           class="bg-gold text-black py-2 px-6 rounded-lg font-bold hover:bg-yellow-400 transition-colors flex items-center gap-2">
-                           <i data-lucide="plus" class="w-4 h-4"></i> Agregar
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-        
-        <!-- ===== CONTACTO ===== -->
-        <section id="contacto" class="mt-28 bg-white p-10 md:p-16 rounded-xl shadow-2xl max-w-4xl mx-auto border-t-4 border-primary-gold">
-            <h3 class="text-4xl font-bold mb-8 text-center text-metallic-gradient">¡Hablemos!</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                
-                <div class="space-y-6">
-                    <p class="text-gray-600 text-lg">Contáctanos directamente para pedidos y envíos.</p>
-                    <div class="flex items-center space-x-4">
-                        <i data-lucide="mail" class="w-6 h-6 text-rosegold"></i>
-                        <span class="text-silver">tuemail@ejemplo.com</span>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <i data-lucide="phone" class="w-6 h-6 text-rosegold"></i>
-                        <span class="text-silver">+54 9 11 1234-5678</span>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <i data-lucide="map-pin" class="w-6 h-6 text-rosegold"></i>
-                        <span class="text-silver">Retiro y Envíos a todo Argentina</span>
-                    </div>
-                    <a href="https://wa.me/5491112345678" target="_blank" class="block mt-6 bg-black/80 text-center py-3 rounded-lg font-bold border border-rosegold/50 hover:bg-[#1a1a1a] transform hover:scale-[1.01] shadow-xl">
-                        <span class="text-metallic-gradient flex items-center justify-center gap-2">
-                            <i data-lucide="message-circle" class="w-5 h-5"></i> Escríbenos por WhatsApp
-                        </span>
-                    </a>
-                </div>
-                
-                <form action="https://formsubmit.co/ericdavidmorgan.dc@gmail.com" method="POST" class="space-y-4">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="text" name="name" placeholder="Nombre" required class="w-full px-4 py-3 rounded-lg focus:outline-none">
-                    <input type="email" name="email" placeholder="Email" required class="w-full px-4 py-3 rounded-lg focus:outline-none">
-                    <textarea name="message" rows="4" placeholder="Mensaje" required class="w-full px-4 py-3 rounded-lg focus:outline-none"></textarea>
-                    <button type="submit" class="w-full bg-gold text-black py-3 rounded-lg font-bold hover:bg-yellow-500 transition-colors shadow-lg">
-                        Enviar Mensaje
-                    </button>
-                </form>
-            </div>
-        </section>
-
-    </main>
-
-      <!-- ===== SECCIÓN SOCIAL MEDIA (Instagram con acento Oro/Rosegold) ===== -->
-    <section class="text-center pt-10 pb-16 bg-gray-900/50">
-        <!-- Tarjeta de tinte más oscuro y borde Rose Gold sutil -->
-        <div class="max-w-xs mx-auto p-6 rounded-xl bg-gray-900 border border-rosegold/50 card-soft-hover">
-            <!-- Título: Aplicamos el degradado -->
-            <h4 class="text-xl font-semibold mb-4 text-metallic-gradient">Síguenos en Instagram</h4>
-            <!-- Botón con el borde degradado Oro/Plata/Rose Gold -->
-            <div class="instagram-btn-wrapper">
-                <a href="https://www.instagram.com/eyasur.ok?utm_source=qr&igsh=cG1uNjZkajFtN2k3" target="_blank" class="inline-flex items-center justify-center p-3 rounded-full bg-gray-900">
-                    <i data-lucide="instagram" class="w-8 h-8 text-rosegold"></i>
-                </a>
-            </div>
-            <p class="text-xs text-gray-500 mt-4">@EyASur.Ok</p>
-        </div>
-    </section>
-
-    <!-- ===== FOOTER (PIE DE PÁGINA) ===== -->
-    <footer class="bg-black border-t border-rosegold/50 text-gray-500">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025-2026 EyASur.Ok. Todos los derechos reservados.</p>
-            <p class="text-sm mt-2">Diseño Gold por EDM</p>
-            <p class="text-sm mt-2">Creado con Amor ❤️ por EyASur.OK</p>
-        </div>
-    </footer>
-
-    <!-- Script para los iconos y el menú móvil -->
-    <script>
-        // Lógica para el menú móvil
-        const menuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        if (menuButton && mobileMenu) {
-            menuButton.addEventListener('click', () => {
-                const icon = menuButton.querySelector('i');
-                const isHidden = mobileMenu.classList.contains('hidden');
-                mobileMenu.classList.toggle('hidden');
-                
-                // Cambiar el icono (menu a x)
-                if (isHidden) {
-                    icon.setAttribute('data-lucide', 'x');
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await signInWithCustomToken(auth, __initial_auth_token);
                 } else {
-                    icon.setAttribute('data-lucide', 'menu');
+                    await signInAnonymously(auth);
                 }
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        setupCartListener();
+                        updateUserIdDisplay(userId);
+                        updateUserIdDisplayModal(userId);
+                    } else {
+                        userId = null;
+                        updateCartDisplay({});
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error al inicializar Firebase o autenticar:", error);
+                window.showMessage('Error al conectar con el servidor. Inténtalo de nuevo.', 'error');
+            }
+        }
+
+        // --- LISTENER DEL CARRITO (MODELO COLECCIÓN: /artifacts/{appId}/users/{userId}/cart/{itemId}) ---
+
+        /**
+         * Configura el listener en tiempo real para el carrito de compras (colección).
+         */
+        function setupCartListener() {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            // Listener a la colección
+            const cartRef = collection(db, `artifacts/${appId}/users/${userId}/cart`);
+            
+            onSnapshot(cartRef, (snapshot) => {
+                const cartItems = {};
+                let totalItems = 0;
                 
-                // Volver a renderizar los iconos de Lucide
+                snapshot.forEach((doc) => {
+                    const item = doc.data();
+                    // Usar doc.id (que es el productId) como clave, y añadir el docId para operaciones
+                    cartItems[doc.id] = { ...item, docId: doc.id }; 
+                    totalItems += item.quantity;
+                });
+                updateCartDisplay(cartItems, totalItems); 
+            }, (error) => {
+                console.error("Error al escuchar el carrito:", error);
+                window.showMessage('Error al actualizar el carrito en tiempo real.', 'error');
+            });
+        }
+
+
+        // --- FUNCIONES GLOBALES PARA ONCLICK ---
+        
+        /**
+         * Actualiza el ID de usuario en la interfaz principal.
+         */
+        function updateUserIdDisplay(id) {
+            const userIdDisplay = document.getElementById('user-id-display');
+            if (userIdDisplay) {
+                userIdDisplay.textContent = id;
+            }
+        }
+        
+        /**
+         * Actualiza el ID de usuario en el modal del carrito.
+         */
+        function updateUserIdDisplayModal(id) {
+            const userIdDisplay = document.getElementById('user-id-display-modal');
+            if (userIdDisplay) {
+                userIdDisplay.textContent = id;
+            }
+        }
+
+        /**
+         * Muestra un mensaje flotante de notificación.
+         */
+        window.showMessage = (text, type = 'info') => {
+            const container = document.getElementById('message-container');
+            if (!container) return;
+            
+            // Eliminar mensajes anteriores para evitar sobrecarga visual
+            container.innerHTML = ''; 
+
+            const message = document.createElement('div');
+            let icon;
+            let bgColorClasses;
+
+            // Determinar clases y icono según el tipo
+            switch (type) {
+                case 'success':
+                    icon = 'check-circle';
+                    // **CORRECCIÓN:** Fondo sólido sin opacidad para máxima legibilidad.
+                    bgColorClasses = 'bg-green-600 text-white-ghost shadow-xl shadow-green-700/50'; 
+                    break;
+                case 'error':
+                    icon = 'x-octagon';
+                    bgColorClasses = 'bg-red-700 text-white-ghost shadow-xl shadow-red-700/50';
+                    break;
+                case 'warning':
+                    icon = 'alert-triangle';
+                    bgColorClasses = 'bg-yellow-500 text-black-deep shadow-xl shadow-yellow-500/50'; 
+                    break;
+                case 'info':
+                default:
+                    icon = 'info';
+                    bgColorClasses = 'bg-gray-700 text-white-ghost shadow-xl shadow-gray-700/50';
+            }
+
+            // Aplicar clases de estilo base. Usamos z-50 para asegurar el frente.
+            // Opacidad y transformación se controlan para la animación de entrada/salida.
+            message.className = `interactive-message p-4 rounded-xl z-50 transform transition-all duration-300 ease-in-out opacity-0 translate-x-full ${bgColorClasses}`;
+            
+            // Contenido HTML con el botón de cierre
+            message.innerHTML = `
+                <div class="flex items-center justify-between w-full" onclick="this.closest('.interactive-message').remove()">
+                    <div class="flex items-center space-x-3">
+                        <i data-lucide="${icon}" class="w-5 h-5 flex-shrink-0"></i>
+                        <p class="font-medium text-sm">${text}</p>
+                    </div>
+                    <!-- Botón de Cierre Manual -->
+                    <i data-lucide="x" class="w-5 h-5 ml-4 flex-shrink-0"></i>
+                </div>
+            `;
+            
+            container.appendChild(message);
+
+            // Animar entrada (aparecer en el centro, deslizarse desde la derecha)
+            setTimeout(() => {
+                message.classList.remove('opacity-0', 'translate-x-full');
+                message.classList.add('opacity-100', 'translate-x-0');
                 if (typeof lucide !== 'undefined') {
                     lucide.createIcons();
                 }
-            });
-        }
+            }, 10); // Pequeño retraso para asegurar la transición
 
-        // Reemplaza todos los iconos de Lucide una vez que el DOM esté cargado
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            } else {
-                console.error('El script de Lucide (iconos) no se cargó correctamente.');
-            }
-        });
-
-    </script>
-
-    <div id="message-container" class="fixed bottom-4 right-4 z-[200] space-y-2"></div>
-
-    <!-- LÓGICA JS -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // --- CONFIGURACIÓN FIREBASE ---
-        // 1. Intentamos leer variables del entorno (Canvas)
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app';
-        const canvasConfigStr = typeof __firebase_config !== 'undefined' ? __firebase_config : null;
-        const initialToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        // 2. Definimos tus claves manuales (FALLBACK)
-        const MANUAL_CONFIG = {
-          apiKey: "AIzaSyBI51rUSOhyJFzhchADiEEMGQBM6eumD5A",
-          authDomain: "eyasur-ab07f.firebaseapp.com",
-          projectId: "eyasur-ab07f",
-          storageBucket: "eyasur-ab07f.firebasestorage.app",
-          messagingSenderId: "394656799972",
-          appId: "1:394656799972:web:dae4f4943f3975abe360f1"
+            // Ocultar automáticamente después de 4 segundos
+            setTimeout(() => {
+                message.classList.remove('opacity-100', 'translate-x-0');
+                message.classList.add('opacity-0', 'translate-x-full'); // Deslizar hacia la derecha para salir
+                message.addEventListener('transitionend', () => message.remove());
+            }, 4000);
         };
 
-        // 3. Lógica de selección de configuración
-        let firebaseConfig = MANUAL_CONFIG; // Por defecto usamos las tuyas
 
-        if (canvasConfigStr) {
-            try {
-                const parsedConfig = JSON.parse(canvasConfigStr);
-                // Si la config del entorno tiene apiKey, la usamos. Si no, nos quedamos con MANUAL_CONFIG.
-                if (parsedConfig && parsedConfig.apiKey) {
-                    firebaseConfig = parsedConfig;
-                }
-            } catch (e) {
-                console.error("Error parseando config canvas, usando manual", e);
-            }
-        }
-
-        let app, db, auth, userId = null, cartRef = null;
-        window.cartItems = []; 
-
-        async function initApp() {
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-            
-            app = initializeApp(firebaseConfig);
-            db = getFirestore(app);
-            auth = getAuth(app);
-
-            const idDisplay = document.getElementById('app-id-display');
-            if(idDisplay) idDisplay.textContent = appId;
-
-            // --- AUTENTICACIÓN ROBUSTA ---
-            try {
-                // Intentamos usar el token del entorno si existe
-                if (initialToken) {
-                     await signInWithCustomToken(auth, initialToken);
-                } else {
-                     // Si no hay token, inicio anónimo directo
-                     await signInAnonymously(auth);
-                }
-            } catch(e) { 
-                console.warn("Fallo auth inicial, reintentando anónimo...", e);
-                try {
-                   await signInAnonymously(auth);
-                } catch(e2) {
-                    console.error("Error fatal auth anónimo. Verifica tus claves en MANUAL_CONFIG.", e2);
-                    showMessage("Error de Autenticación. Revisa la consola.", "red");
-                }
-            }
-
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    userId = user.uid;
-                    const idEl = document.getElementById('current-user-id');
-                    if(idEl) idEl.textContent = userId;
-                    
-                    // Ruta del carrito: Por usuario
-                    cartRef = doc(db, 'artifacts', appId, 'users', userId, 'cart', 'current');
-                    setupCartListener();
-                    showMessage("Conectado al Carrito", "gold");
-                }
-            });
-        }
-
-        // --- FUNCIONES UI ---
-        function updateCartUI(items) {
-            window.cartItems = items || [];
-            
-            const container = document.getElementById('cart-items-container');
-            const navbarBadge = document.getElementById('navbar-cart-count');
-            const totalPriceEl = document.getElementById('cart-total-price');
-            const totalQtyEl = document.getElementById('modal-total-quantity');
-            const emptyMsg = document.getElementById('empty-cart-message');
-            const btnCheckout = document.getElementById('checkout-button');
-
-            if (!container) return;
-
-            container.innerHTML = '';
+        /**
+         * Actualiza la visualización del carrito y el contador.
+         */
+        function updateCartDisplay(cartItems, totalItems = 0) {
+            const cartItemsContainer = document.getElementById('cart-items-container');
+            const cartTotalDisplay = document.getElementById('cart-total-display');
+            const cartCounter = document.getElementById('cart-counter');
             let total = 0;
-            let qty = 0;
 
-            if (window.cartItems.length === 0) {
-                if(emptyMsg) emptyMsg.classList.remove('hidden');
-                if(btnCheckout) {
-                    btnCheckout.disabled = true;
-                    btnCheckout.classList.add('opacity-50', 'cursor-not-allowed');
+            if (cartItemsContainer) {
+                cartItemsContainer.innerHTML = ''; 
+
+                if (Object.keys(cartItems).length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="text-center text-silver/60 py-8 px-4">El carrito está vacío. ¡Es momento de invertir en tu lujo!</p>';
+                } else {
+                    Object.values(cartItems).forEach(item => {
+                        const itemTotal = item.price * item.quantity;
+                        total += itemTotal;
+
+                        const itemElement = document.createElement('div');
+                        // Diseño mejorado de la tarjeta de ítem en el modal
+                        itemElement.className = 'flex items-center justify-between p-4 bg-gray-900/50 border-b border-gold/10 transition-colors hover:bg-gray-800/80';
+                        
+                        itemElement.innerHTML = `
+                            <div class="flex-grow">
+                                <p class="font-semibold text-silver text-lg">${item.name}</p>
+                                <p class="text-sm text-rosegold">$${item.price.toFixed(2)} x <span class="font-bold">${item.quantity}</span> unidad(es)</p>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="font-extrabold text-gold text-xl">$${itemTotal.toFixed(2)}</span>
+                                <div class="flex items-center space-x-1 border border-rosegold/50 rounded-lg p-0.5">
+                                    <button onclick="window.updateQuantity('${item.docId}', ${item.quantity - 1})" 
+                                        class="text-silver hover:text-gold transition-colors p-1 rounded-md"
+                                        aria-label="Disminuir cantidad">
+                                        <i data-lucide="minus" class="w-4 h-4"></i>
+                                    </button>
+                                    <button onclick="window.updateQuantity('${item.docId}', ${item.quantity + 1})" 
+                                        class="text-silver hover:text-gold transition-colors p-1 rounded-md"
+                                        aria-label="Aumentar cantidad">
+                                        <i data-lucide="plus" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        cartItemsContainer.appendChild(itemElement);
+                    });
+                }
+
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            }
+
+            // Actualizar total y contador
+            if (cartTotalDisplay) {
+                cartTotalDisplay.textContent = total.toFixed(2);
+            }
+            if (cartCounter) {
+                cartCounter.textContent = totalItems.toString();
+                cartCounter.classList.toggle('hidden', totalItems === 0);
+            }
+        }
+
+
+        /**
+         * Agrega un producto al carrito o incrementa su cantidad (MODELO COLECCIÓN).
+         */
+        window.addToCart = async function(productId) {
+            if (!userId || !db) {
+                window.showMessage('Error: El sistema de usuario se está inicializando.', 'error');
+                return;
+            }
+
+            const product = products.find(p => p.id === productId);
+            if (!product) {
+                window.showMessage('Error: Producto no encontrado.', 'error');
+                return;
+            }
+
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const cartRef = collection(db, `artifacts/${appId}/users/${userId}/cart`);
+
+            try {
+                // Usamos el productId como ID del documento dentro de la colección 'cart'
+                const docRef = doc(cartRef, productId);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const newQuantity = docSnap.data().quantity + 1;
+                    await updateDoc(docRef, { quantity: newQuantity });
+                } else {
+                    await setDoc(docRef, {
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        quantity: 1,
+                    });
+                }
+                window.showMessage(`"${product.name}" añadido al carrito.`, 'success');
+
+            } catch (error) {
+                console.error("Error al añadir al carrito:", error);
+                window.showMessage('Error al añadir el producto al carrito.', 'error');
+            }
+        }
+
+        /**
+         * Actualiza la cantidad de un ítem en el carrito o lo elimina.
+         */
+        window.updateQuantity = async function(docId, newQuantity) {
+            if (!userId || !db) return;
+
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            // docId es el mismo que productId
+            const docRef = doc(db, `artifacts/${appId}/users/${userId}/cart`, docId); 
+
+            if (newQuantity <= 0) {
+                try {
+                    await deleteDoc(docRef);
+                    window.showMessage('Producto eliminado del carrito.', 'info');
+                } catch (error) {
+                    console.error("Error al eliminar del carrito:", error);
+                    window.showMessage('Error al eliminar el producto.', 'error');
                 }
             } else {
-                if(emptyMsg) emptyMsg.classList.add('hidden');
-                if(btnCheckout) {
-                    btnCheckout.disabled = false;
-                    btnCheckout.classList.remove('opacity-50', 'cursor-not-allowed');
+                try {
+                    await updateDoc(docRef, { quantity: newQuantity });
+                } catch (error) {
+                    console.error("Error al actualizar cantidad:", error);
+                    window.showMessage('Error al actualizar la cantidad del producto.', 'error');
+                }
+            }
+        }
+
+
+        /**
+         * Alterna la visibilidad del modal del carrito.
+         */
+        window.toggleCartModal = function() {
+            const cartModal = document.getElementById('cart-modal');
+            if (cartModal) {
+                cartModal.classList.toggle('hidden');
+                document.body.classList.toggle('overflow-hidden', !cartModal.classList.contains('hidden'));
+            }
+        }
+
+        /**
+         * Maneja el proceso de pago (checkout) con número de pedido persistente.
+         */
+        window.checkout = async function() {
+            if (!auth.currentUser || !db) {
+                window.showMessage('Error: El usuario no está autenticado o la base de datos no está lista.', 'error');
+                return;
+            }
+
+            const userId = auth.currentUser.uid;
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const cartRef = collection(db, `artifacts/${appId}/users/${userId}/cart`);
+
+            const checkoutButton = document.getElementById('checkout-button');
+            if (checkoutButton) {
+                checkoutButton.disabled = true;
+                checkoutButton.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+
+            try {
+                const querySnapshot = await getDocs(cartRef);
+
+                if (querySnapshot.empty) {
+                    window.showMessage('El carrito está vacío. ¡No hay nada que comprar!', 'warning');
+                    return;
+                }
+                
+                // Lógica de Número de Pedido Persistente (Público)
+                const ORDER_COUNTER_PATH = `artifacts/${appId}/public/data/metadata/orderCounter`;
+                const STARTING_ORDER_NUMBER = 3000;
+
+                let orderNumber;
+
+                // Transacción para obtener e incrementar el contador de pedidos
+                await runTransaction(db, async (transaction) => {
+                    const orderCounterRef = doc(db, ORDER_COUNTER_PATH);
+                    const counterSnap = await transaction.get(orderCounterRef);
+                    let currentCount = 0;
+
+                    if (counterSnap.exists()) {
+                        currentCount = counterSnap.data().lastOrderNumber || 0;
+                    }
+
+                    const newCount = currentCount + 1;
+                    orderNumber = STARTING_ORDER_NUMBER + newCount;
+
+                    // Actualizar el contador
+                    transaction.set(orderCounterRef, { lastOrderNumber: newCount }, { merge: true });
+                });
+
+                // Limpiar el carrito (eliminar todos los documentos de la colección)
+                const deletePromises = [];
+                querySnapshot.forEach((docSnap) => {
+                    // Se debe crear una referencia de documento completa para deleteDoc
+                    const docToDeleteRef = doc(db, cartRef.path, docSnap.id);
+                    deletePromises.push(deleteDoc(docToDeleteRef));
+                });
+                await Promise.all(deletePromises);
+
+                window.showMessage(`¡Compra finalizada! Número de pedido: #${orderNumber}. Revisa tu correo electrónico.`, 'success');
+
+                const cartModal = document.getElementById('cart-modal');
+                if (cartModal) {
+                    cartModal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
                 }
 
-                window.cartItems.forEach(item => {
-                    const p = parseInt(item.price);
-                    const q = parseInt(item.qty);
-                    total += p * q;
-                    qty += q;
+                // Opcional: Simular redirección a Instagram
+                console.log(`Simulando redirección a Instagram para el pedido #${orderNumber}`);
 
-                    const div = document.createElement('div');
-                    div.className = 'flex items-center justify-between p-3 bg-[#111] rounded-lg border border-gray-800 shadow-sm';
-                    div.innerHTML = `
-                        <div class="flex flex-col">
-                            <span class="font-medium text-silver">${item.name}</span>
-                            <span class="text-xs text-gray-500">$${p.toLocaleString()} x ${q}</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <button onclick="updateQuantity('${item.id}', -1)" class="text-gray-500 hover:text-rosegold"><i data-lucide="minus-circle" class="w-5 h-5"></i></button>
-                            <span class="text-gold font-bold">${q}</span>
-                            <button onclick="updateQuantity('${item.id}', 1)" class="text-gray-500 hover:text-gold"><i data-lucide="plus-circle" class="w-5 h-5"></i></button>
-                            <button onclick="removeFromCart('${item.id}')" class="text-red-500 ml-2"><i data-lucide="trash-2" class="w-5 h-5"></i></button>
-                        </div>
-                    `;
-                    container.appendChild(div);
+            } catch (error) {
+                console.error("Error al finalizar la compra:", error);
+                window.showMessage(`Error al finalizar la compra: ${error.message}`, 'error');
+            } finally {
+                if (checkoutButton) {
+                    checkoutButton.disabled = false;
+                    checkoutButton.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
+        }
+        // --- FIN DE FUNCIONES GLOBALES ---
+
+        // Lógica de UI (Menú Móvil, Iconos, Botones de Carrito)
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeFirebase(); 
+            
+            // Lógica para el menú móvil
+            const menuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    const icon = menuButton.querySelector('i');
+                    const isHidden = mobileMenu.classList.contains('hidden');
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    if (isHidden) {
+                        if (icon) icon.setAttribute('data-lucide', 'x');
+                    } else {
+                        if (icon) icon.setAttribute('data-lucide', 'menu');
+                    }
+                    
+                    if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                    }
                 });
             }
 
-            if (navbarBadge) {
-                navbarBadge.innerText = qty;
-                if(qty === 0) navbarBadge.classList.add('hidden');
-                else navbarBadge.classList.remove('hidden');
-            }
-
-            if (totalPriceEl) totalPriceEl.innerText = `$${total.toLocaleString()} ARS`;
-            if (totalQtyEl) totalQtyEl.innerText = qty;
-            
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        }
-
-        function setupCartListener() {
-            if (!cartRef) return;
-            onSnapshot(cartRef, (snap) => {
-                if (snap.exists()) updateCartUI(snap.data().items);
-                else updateCartUI([]);
+            // Listener para los botones "Añadir al carrito"
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = e.currentTarget.getAttribute('data-id');
+                    if (productId) {
+                        // Llamada a la función global con el ID correcto
+                        window.addToCart(productId);
+                    }
+                });
             });
-        }
 
-        async function saveCart(items) {
-            if (!cartRef) return;
-            await setDoc(cartRef, { items: items, updatedAt: new Date().toISOString() }, { merge: true });
-        }
 
-        // --- FUNCIONES GLOBALES ---
-        window.addToCart = function(product) {
-            if (!userId) { showMessage("Cargando...", "red"); return; }
-            let items = [...window.cartItems];
-            const idx = items.findIndex(i => i.id === product.id);
-            
-            if (idx > -1) {
-                const current = parseInt(items[idx].qty || 0);
-                items[idx].qty = current + 1;
-            } else {
-                items.push({ ...product, qty: 1 });
+            // Renderizar iconos iniciales
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
             }
-
-            updateCartUI(items); 
-            saveCart(items);
-            showMessage("Agregado al carrito", "gold");
-            window.openCart();
-        };
-
-        window.updateQuantity = function(id, delta) {
-            let items = [...window.cartItems];
-            const idx = items.findIndex(i => i.id === id);
-            if (idx > -1) {
-                const current = parseInt(items[idx].qty || 0);
-                items[idx].qty = current + delta;
-                if (items[idx].qty <= 0) items.splice(idx, 1);
-                updateCartUI(items);
-                if(cartRef) saveCart(items);
-            }
-        };
-
-        window.removeFromCart = function(id) {
-            const items = window.cartItems.filter(i => i.id !== id);
-            updateCartUI(items);
-            if(cartRef) saveCart(items);
-        };
-
-        window.checkoutToWhatsApp = function() {
-            if (window.cartItems.length === 0) return;
-            let msg = "Hola EyASur! Pedido:\n";
-            let total = 0;
-            window.cartItems.forEach(i => {
-                msg += `- ${i.name} (${i.qty}): $${(i.price*i.qty).toLocaleString()}\n`;
-                total += i.price * i.qty;
-            });
-            msg += `Total: $${total.toLocaleString()}`;
-            window.open(`https://wa.me/5491112345678?text=${encodeURIComponent(msg)}`, '_blank');
-        };
-
-        window.openCart = () => {
-            document.getElementById('cart-offcanvas').classList.add('open');
-            document.getElementById('backdrop').classList.remove('hidden');
-        };
-        window.closeCart = () => {
-            document.getElementById('cart-offcanvas').classList.remove('open');
-            document.getElementById('backdrop').classList.add('hidden');
-        };
-
-        window.showMessage = (msg, color) => {
-            const box = document.getElementById('message-container');
-            if(!box) return;
-            const d = document.createElement('div');
-            const c = color === 'gold' ? 'bg-gold/20 text-gold border-gold' : 'bg-red-900/80 text-white border-red-500';
-            d.className = `p-3 rounded border ${c} mb-2 backdrop-blur`;
-            d.innerText = msg;
-            box.appendChild(d);
-            setTimeout(() => d.remove(), 3000);
-        };
-
-        const menuBtn = document.getElementById('mobile-menu-button');
-        const menu = document.getElementById('mobile-menu');
-        if(menuBtn) menuBtn.onclick = () => menu.classList.toggle('hidden');
-
-        initApp();
+        });
+        
     </script>
+
+    <!-- Contenedor principal para mensajes flotantes (fixed y sin pointer-events) -->
+    <!-- Z-Index alto (z-[100]) para asegurar visibilidad sobre todos los modales. -->
+    <div id="message-container" class="fixed top-4 right-4 z-[100] space-y-2"></div>
+
+    <!-- Header / Navegación -->
+    <header class="sticky top-0 z-50 bg-black-deep/95 backdrop-blur-sm border-b border-rosegold/20">
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-widest text-gold">EyASur.Ok</div>
+            
+            <!-- Menú Desktop -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#inicio" class="text-silver hover:text-gold transition-colors font-medium">Inicio</a>
+                <a href="#coleccion" class="text-silver hover:text-gold transition-colors font-medium">Colección</a>
+                <a href="#servicios" class="text-silver hover:text-gold transition-colors font-medium">Servicios</a>
+                <a href="#contacto" class="text-silver hover:text-gold transition-colors font-medium">Contacto</a>
+            </div>
+
+            <!-- Iconos de Usuario y Carrito (Desktop) -->
+            <div class="flex items-center space-x-4">
+                 <div class="text-xs text-silver/50 hidden lg:block truncate max-w-[150px]">
+                    ID: <span id="user-id-display" class="font-mono">Cargando...</span>
+                </div>
+                <button id="cart-button" onclick="window.toggleCartModal()" class="relative text-silver hover:text-gold transition-colors p-2 rounded-full" title="Carrito de Compras" aria-label="Abrir Carrito">
+                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                    <span id="cart-counter" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-black-deep transform translate-x-1/2 -translate-y-1/2 bg-gold rounded-full ring-2 ring-black-deep hidden">0</span>
+                </button>
+                
+                <!-- Botón de Menú Móvil -->
+                <button id="mobile-menu-button" class="md:hidden text-silver p-2 rounded-full" aria-label="Abrir Menú">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </nav>
+        
+        <!-- Menú Móvil (Desplegable) -->
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-rosegold/10">
+                <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-silver hover:bg-rosegold/10 hover:text-gold transition-colors">Inicio</a>
+                <a href="#coleccion" class="block px-3 py-2 rounded-md text-base font-medium text-silver hover:bg-rosegold/10 hover:text-gold transition-colors">Colección</a>
+                <a href="#servicios" class="block px-3 py-2 rounded-md text-base font-medium text-silver hover:bg-rosegold/10 hover:text-gold transition-colors">Servicios</a>
+                <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium text-silver hover:bg-rosegold/10 hover:text-gold transition-colors">Contacto</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección de Inicio (Hero) -->
+        <section id="inicio" class="relative overflow-hidden pt-24 pb-12 md:pt-32 md:pb-20 bg-gradient-to-br from-black-deep to-gray-900/50 min-h-[60vh]">
+            <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between">
+                <!-- Contenido de Texto -->
+                <div class="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
+                    <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-white-ghost mb-4">
+                        Arte con <span class="text-gold">Lujo Metalizado</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-rosegold/80 mb-8 font-light">
+                        Donde la elegancia se encuentra con la vanguardia. Descubre piezas únicas que transformarán tu espacio.
+                    </p>
+                    <a href="#coleccion" class="btn-gold inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-semibold rounded-full shadow-lg hover:shadow-xl transition duration-300 uppercase tracking-wider">
+                        Ver Colección Ahora
+                    </a>
+                </div>
+                
+                <!-- Imagen/Placeholder (Adaptado a la temática) -->
+                <div class="lg:w-1/2 flex justify-center">
+                    <img src="https://placehold.co/500x350/0A0A0A/FFD700?text=EyASur.Ok%0AColecci%C3%B3n+Exclusiva" 
+                         alt="Arte moderno metalizado" 
+                         class="w-full max-w-md rounded-2xl shadow-[0_0_50px_rgba(255,215,0,0.1),0_0_100px_rgba(183,110,121,0.2)] border border-gold/10 transition duration-500 hover:scale-[1.05] object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Colección Exclusiva -->
+        <section id="coleccion" class="py-16 md:py-24 bg-color-black-deep text-color-silver">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-gold uppercase tracking-widest">
+                    Colección Exclusiva
+                </h2>
+                
+                <!-- CUADROS DE LA COLECCIÓN (Añadir al Carrito Corregido) -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Producto 1: Éxtasis Dorado (ID: 1) -->
+                    <div class="product-card bg-gray-900/50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] border border-rosegold/30">
+                        <img src="https://placehold.co/600x400/111827/FFD700?text=Éxtasis+Dorado" 
+                             alt="Cuadro Éxtasis Dorado" 
+                             class="w-full h-48 object-cover rounded-lg mb-4 border border-gold/20">
+                        <h3 class="text-2xl font-bold text-gold mb-2">Éxtasis Dorado</h3>
+                        <p class="text-sm text-rosegold mb-4">Arte Abstracto. 120x80cm.</p>
+                        <p class="text-silver mb-4 line-clamp-3">Una explosión de pan de oro y resina sobre lienzo negro, capturando el movimiento y la luz. Perfecto para salas de estar modernas.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-white-ghost">$4.500 USD</span>
+                            <button class="btn-gold px-4 py-2 text-sm font-semibold rounded-full uppercase add-to-cart" data-id="1">
+                                Añadir 
+                                <i data-lucide="shopping-cart" class="w-4 h-4 inline ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 2: Esencia Nocturna (ID: 2) -->
+                    <div class="product-card bg-gray-900/50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] border border-rosegold/30">
+                        <img src="https://placehold.co/600x400/111827/B76E79?text=Esencia+Nocturna" 
+                             alt="Cuadro Esencia Nocturna" 
+                             class="w-full h-48 object-cover rounded-lg mb-4 border border-rosegold/20">
+                        <h3 class="text-2xl font-bold text-gold mb-2">Esencia Nocturna</h3>
+                        <p class="text-sm text-rosegold mb-4">Minimalismo. 60x60cm.</p>
+                        <p class="text-silver mb-4 line-clamp-3">Un estudio de la oscuridad con acentos sutiles de oro rosa. Trae calma y profundidad a cualquier dormitorio o estudio.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-white-ghost">$2.800 USD</span>
+                            <button class="btn-gold px-4 py-2 text-sm font-semibold rounded-full uppercase add-to-cart" data-id="2">
+                                Añadir 
+                                <i data-lucide="shopping-cart" class="w-4 h-4 inline ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Producto 3: Fénix de Plata (ID: 4) -->
+                    <div class="product-card bg-gray-900/50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] border border-rosegold/30">
+                        <img src="https://placehold.co/600x400/111827/D4D4D4?text=F%C3%A9nix+de+Plata" 
+                             alt="Cuadro Fénix de Plata" 
+                             class="w-full h-48 object-cover rounded-lg mb-4 border border-silver/20">
+                        <h3 class="text-2xl font-bold text-gold mb-2">Fénix de Plata</h3>
+                        <p class="text-sm text-rosegold mb-4">Figurativo. 100x150cm.</p>
+                        <p class="text-silver mb-4 line-clamp-3">Representación dramática de un ave mítica con texturas de plata líquida. Una pieza central impactante.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-xl font-extrabold text-white-ghost">$6.200 USD</span>
+                            <button class="btn-gold px-4 py-2 text-sm font-semibold rounded-full uppercase add-to-cart" data-id="4">
+                                Añadir 
+                                <i data-lucide="shopping-cart" class="w-4 h-4 inline ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Otras Secciones (Servicios y Contacto, simplificadas) -->
+        <section id="servicios" class="py-16 md:py-24 bg-gray-900/50">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gold">Nuestros Servicios</h2>
+                <p class="text-rosegold text-lg mb-8">Personalización y asesoramiento exclusivo.</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-6 bg-black-deep rounded-xl border border-rosegold/20 shadow-xl">
+                        <i data-lucide="palette" class="w-10 h-10 mx-auto text-gold mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">Arte a Medida</h3>
+                        <p class="text-sm text-silver/80">Creación de piezas personalizadas según sus especificaciones de tamaño y paleta.</p>
+                    </div>
+                    <div class="p-6 bg-black-deep rounded-xl border border-rosegold/20 shadow-xl">
+                        <i data-lucide="shield-check" class="w-10 h-10 mx-auto text-gold mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">Certificación</h3>
+                        <p class="text-sm text-silver/80">Todas las obras vienen con un certificado de autenticidad y origen de los materiales.</p>
+                    </div>
+                    <div class="p-6 bg-black-deep rounded-xl border border-rosegold/20 shadow-xl">
+                        <i data-lucide="send" class="w-10 h-10 mx-auto text-gold mb-3"></i>
+                        <h3 class="text-xl font-bold mb-2">Envío Global</h3>
+                        <p class="text-sm text-silver/80">Embalaje de lujo y envío seguro a cualquier parte del mundo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto" class="py-16 md:py-24 bg-color-black-deep">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gold">Contáctenos</h2>
+                <p class="text-rosegold text-lg mb-8 max-w-xl mx-auto">Nuestro equipo de expertos en arte está listo para asistirte.</p>
+                <!-- Formulario de Contacto (Placeholder) -->
+                <form class="max-w-lg mx-auto space-y-4">
+                    <input type="text" placeholder="Nombre completo" class="w-full p-3 rounded-lg bg-gray-800 text-silver border border-rosegold/30 focus:border-gold focus:ring-1 focus:ring-gold transition-colors" required>
+                    <input type="email" placeholder="Correo electrónico" class="w-full p-3 rounded-lg bg-gray-800 text-silver border border-rosegold/30 focus:border-gold focus:ring-1 focus:ring-gold transition-colors" required>
+                    <textarea rows="4" placeholder="Su mensaje o consulta" class="w-full p-3 rounded-lg bg-gray-800 text-silver border border-rosegold/30 focus:border-gold focus:ring-1 focus:ring-gold transition-colors" required></textarea>
+                    <button type="submit" class="btn-gold w-full py-3 font-semibold rounded-full shadow-lg hover:shadow-xl transition duration-300">Enviar Mensaje</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/50 border-t border-rosegold/20 py-8">
+        <div class="container mx-auto px-4 text-center text-sm text-silver/70">
+            <p>&copy; 2025 EyASur.Ok. Todos los derechos reservados.</p>
+            <div class="mt-2 space-x-4">
+                <a href="#" class="hover:text-gold transition-colors">Política de Privacidad</a>
+                <a href="#" class="hover:text-gold transition-colors">Términos de Servicio</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal del Carrito -->
+    <div id="cart-modal" class="fixed inset-0 bg-black-deep/90 backdrop-blur-sm z-50 hidden" onclick="if(event.target.id === 'cart-modal') window.toggleCartModal()">
+        
+        <!-- Contenido del Modal (Panel lateral) -->
+        <div class="absolute top-0 right-0 w-full max-w-sm h-full bg-gray-900 border-l border-gold/50 shadow-2xl flex flex-col transform translate-x-0 transition-transform duration-300">
+            
+            <!-- Encabezado del Carrito -->
+            <div class="flex justify-between items-center p-5 border-b border-gold/20 bg-gray-900 sticky top-0">
+                <h3 class="text-3xl font-bold text-gold">Tu Carrito</h3>
+                <button onclick="window.toggleCartModal()" class="text-silver hover:text-gold transition-colors p-2 rounded-full hover:bg-black-deep/50" aria-label="Cerrar Carrito">
+                    <i data-lucide="x" class="w-7 h-7"></i>
+                </button>
+            </div>
+
+            <!-- Ítems del Carrito (Contenedor con scroll) -->
+            <div id="cart-items-container" class="flex-grow overflow-y-auto custom-scrollbar">
+                <!-- Los ítems se insertan aquí mediante JavaScript -->
+            </div>
+
+            <!-- Botón de Checkout/Finalizar Compra -->
+            <div class="p-5 border-t border-gold/20 bg-gray-900 sticky bottom-0">
+                <p class="text-xl font-bold text-silver mb-3 flex justify-between">
+                    <span>Total Estimado:</span>
+                    <span class="text-gold">$<span id="cart-total-display">0.00</span></span>
+                </p>
+                
+                <button id="checkout-button" onclick="window.checkout()"
+                    class="w-full btn-gold py-3 rounded-full font-bold text-lg hover:shadow-xl transition-all">
+                    Finalizar Compra
+                </button>
+            </div>
+
+            <!-- Nota de usuario -->
+            <div class="p-2 bg-rosegold/10 text-xs text-silver/70 text-center border-t border-rosegold/30">
+                <i data-lucide="user" class="w-4 h-4 inline mr-1"></i>
+                ID de Sesión: <span class="font-mono text-gold/80" id="user-id-display-modal">Cargando...</span>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>
