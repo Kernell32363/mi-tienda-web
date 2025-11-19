@@ -25,10 +25,66 @@
                 }
             }
         }
-    </script>
+    </script>  
     <!-- Estilos personalizados para efectos hover y animaciones -->
     <style>
        @import url('https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775');
+      /* Desde acá es la prueba de imagen centraada */
+      /* ------------------------------------- */
+        /* 1. Fondo con Zoom Animado y Oscurecimiento */
+        /* ------------------------------------- */
+        .background-zoom-effect {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Centrado, visible y cubriendo */
+            background-image: url('https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* Animación de acercamiento (zoom) */
+            transform: scale(1.0);
+            animation: zoom-in-out 30s infinite alternate ease-in-out;
+            
+            /* Capa de oscurecimiento (para mejor visibilidad del texto) */
+            box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); 
+        }
+        @keyframes zoom-in-out {
+            from {
+                transform: scale(1.0);
+            }
+            to {
+                transform: scale(1.1);
+            }
+        }
+        /* ------------------------------------- */
+        /* 2. Caja Central con Borde Brillante (Shiny Border) */
+        /* ------------------------------------- */
+        .shiny-border-box {
+            /* Crea espacio para el efecto de sombra */
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); /* Sombra inicial dorada */
+            border: 1px solid rgba(255, 215, 0, 0.3); /* Borde sutil */
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .shiny-border-box:hover {
+            /* El efecto brillante es más notorio al pasar el ratón */
+            box-shadow: 0 0 35px rgba(255, 215, 0, 0.9), 
+                        0 0 10px rgba(255, 255, 255, 0.4); 
+        }
+        /* ------------------------------------- */
+        /* 3. Fuentes Sofisticadas */
+        /* ------------------------------------- */
+        .font-serif-fancy {
+            font-family: 'Playfair Display', Georgia, serif; 
+            letter-spacing: 2px;
+        }
+        .font-sans-elegant {
+            font-family: 'Montserrat', 'Helvetica Neue', sans-serif;
+        }
+        /* Hasta acá es la prueba de imagen centraada */
         
         /* Asegura que el fondo del body sea el oscuro principal */
         body {
@@ -130,21 +186,25 @@
 
     <main>
         <!-- SECCIÓN HERO/BANNER (Inicio) -->
-        <section id="inicio" class="bg-e-dark text-e-text py-20 px-4 md:py-32 flex items-center justify-center text-center border-b border-e-gold/20"
-                             style="background-image: url('https://img.freepik.com/premium-photo/luxurious-perfume-bottle-with-golden-details-dark-background_7023-421979.jpg?w=360');"
-                             style="width: 100%; display: inline-block;"
-            <div class="max-w-4xl">
-                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 luxury-gradient leading-tight">
-                    Fragancias y Vapers Exclusivos
-                </h1>
-                <p class="text-xl md:text-2xl text-e-silver mb-8">
-                    Descubre la calidad premium que te mereces. Envío a todo el país.
-                </p>
-                <a href="#featured-products" class="inline-block bg-e-gold text-e-dark font-bold py-3 px-8 rounded-full shadow-lg hover:bg-amber-400 transition duration-300 transform hover:scale-105 glow-pulse">
-                    Explorar Colección
-                </a>
-            </div>
-        </section>
+<section id="inicio" class="relative py-20 px-4 md:py-32 flex items-center justify-center text-center border-b border-e-gold/20 overflow-hidden min-h-screen">
+    
+    <div class="background-zoom-effect"></div>
+
+    <div class="relative z-10 p-8 md:p-12 max-w-4xl mx-auto rounded-lg backdrop-blur-sm bg-black/50 shiny-border-box">
+        
+        <h1 class="text-6xl md:text-8xl font-serif-fancy mb-4 luxury-gradient leading-tight">
+            Fragancias y Vapers Exclusivos
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-e-silver mb-10 font-sans-elegant">
+            Descubre la calidad premium que te mereces. Envío a todo el país.
+        </p>
+        
+        <a href="#featured-products" class="inline-block bg-e-gold text-e-dark font-bold py-3 px-8 rounded-full shadow-xl hover:bg-amber-400 transition duration-300 transform hover:scale-105 glow-pulse">
+            Explorar Colección
+        </a>
+    </div>
+</section>
 
         <!-- SECCIÓN DE CATEGORÍAS DESTACADAS (Productos) -->
         <section id="featured-products" class="py-16 px-4 max-w-7xl mx-auto bg-e-dark">
