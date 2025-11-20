@@ -3,76 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="https://images.icon-icons.com/3810/PNG/96/perfume_love_heart_valentine_romantic_fragrance_valentines_day_icon_233314.png" type="image/x-icon">
-    <title>EyASur.Ok Prueba - Fragancias y Vapers Gold</title>
+    <title>EyASur.Ok - Fragancias y Vapers Gold</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'e-dark': '#0a0a0a', // Negro absoluto premium
-                        'e-panel': '#121212', // Panel ligeramente más claro
-                        'e-text': '#F5F5F5', // Blanco humo
-                        'e-gold': '#D4AF37', // Oro Metálico Real
-                        'e-rosegold': '#E0BFB8', // Champagne suave
-                        'e-silver': '#C0C0C0', // Plata
-                        'e-bronze': '#cd7f32', // Bronce
+                        'e-dark': '#0a0a0a', 
+                        'e-panel': '#121212',
+                        'e-text': '#F5F5F5',
+                        'e-gold': '#D4AF37', 
+                        'e-rosegold': '#E0BFB8',
+                        'e-silver': '#C0C0C0',
+                        'e-bronze': '#cd7f32',
                     },
                     fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'], // Fuente elegante para lectura
-                        serif: ['Playfair Display', 'serif'], // Fuente de lujo para títulos
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     },
                 }
             }
         }
     </script>  
+    
     <style>
        @import url('https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775');
       
-       /* Efecto de Fondo Zoom */
         .background-zoom-effect {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url('https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            transform: scale(1.0);
-            animation: zoom-in-out 30s infinite alternate ease-in-out;
-            filter: brightness(0.4); /* Oscurecer para que resalte el texto */
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            transform: scale(1.0); animation: zoom-in-out 30s infinite alternate ease-in-out;
+            filter: brightness(0.4);
         }
-        @keyframes zoom-in-out {
-            from { transform: scale(1.0); }
-            to { transform: scale(1.15); }
-        }
+        @keyframes zoom-in-out { from { transform: scale(1.0); } to { transform: scale(1.15); } }
 
-        /* Caja central con brillo dorado */
         .shiny-border-box {
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(10px);
+            background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(10px);
             transition: all 0.4s ease;
         }
-        .shiny-border-box:hover {
-            box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); 
-            border-color: #D4AF37;
-        }
+        .shiny-border-box:hover { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); border-color: #D4AF37; }
 
-        /* Tipografía */
         .font-serif-fancy { font-family: 'Playfair Display', serif; letter-spacing: 1px; }
         .font-sans-elegant { font-family: 'Montserrat', sans-serif; }
-
         body { background-color: #0a0a0a; }
 
-        /* Tarjetas de Productos */
         .product-card {
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-            background-size: cover;
-            background-position: center;
+            background-size: cover; background-position: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .product-card:hover {
@@ -81,53 +65,35 @@
             border-color: rgba(212, 175, 55, 0.5);
         }
 
-        /* Gradiente de Lujo (Oro a Plata) */
         .luxury-gradient {
             background: linear-gradient(to right, #D4AF37, #F8F1D2, #D4AF37);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% auto;
-            animation: shine 4s linear infinite;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-size: 200% auto; animation: shine 4s linear infinite;
         }
-        @keyframes shine {
-            to { background-position: 200% center; }
-        }
+        @keyframes shine { to { background-position: 200% center; } }
 
-        /* Botón Gold Instagram */
-        .insta-btn-gold {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            color: white;
-        }
-
-        .glow-pulse { animation: subtle-glow 3s infinite alternate; }
-        @keyframes subtle-glow {
-            0% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); }
-            100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.6); }
-        }
-
-        /* Mobile Menu */
-        .mobile-menu {
-            transition: max-height 0.4s ease-in-out, opacity 0.4s;
-            max-height: 0; overflow: hidden; opacity: 0;
-        }
+        .mobile-menu { transition: max-height 0.4s ease-in-out, opacity 0.4s; max-height: 0; overflow: hidden; opacity: 0; }
         .mobile-menu.open { max-height: 300px; opacity: 1; }
         
-        /* Inputs personalizados */
         input, textarea {
             background-color: rgba(255,255,255,0.05) !important;
             border: 1px solid rgba(212, 175, 55, 0.3) !important;
             color: #F5F5F5 !important;
         }
         input:focus, textarea:focus {
-            border-color: #D4AF37 !important;
+            border-color: #D4AF37 !important; outline: none;
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.3) !important;
-            outline: none;
         }
+        
+        /* Estilos para el scrollbar del carrito */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
     </style>
 </head>
 <body class="bg-e-dark font-sans text-e-text">
 
-    <div id="notification-container" class="fixed top-4 right-4 z-50 space-y-3"></div>
+    <div id="notification-container" class="fixed top-4 right-4 z-50 space-y-3 pointer-events-none"></div>
 
     <header class="bg-e-dark/95 backdrop-blur-md text-e-text shadow-2xl sticky top-0 z-40 border-b border-e-gold/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -151,14 +117,14 @@
                 </nav>
 
                 <div class="flex items-center space-x-5">
-                    <button id="open-cart-btn" class="relative p-2 hover:scale-110 transition duration-300">
+                    <button onclick="openCart()" class="relative p-2 hover:scale-110 transition duration-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-e-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
                         <span id="cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
                     </button>
                     
-                    <button id="menu-toggle" class="md:hidden text-e-gold">
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-e-gold">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                     </button>
                 </div>
@@ -169,10 +135,7 @@
                 <a href="#featured-products" class="block px-4 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Productos</a>
                 <a href="#contact" class="block px-4 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Contacto</a>
                 <a href="https://www.instagram.com/eyasur.ok" target="_blank" class="block px-4 py-3 text-e-gold hover:bg-gray-900 font-bold text-sm uppercase tracking-widest">
-                    <span class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                        Visítanos en Instagram
-                    </span>
+                    Visítanos en Instagram
                 </a>
             </nav>
         </div>
@@ -201,11 +164,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                     <div class="product-card h-96 rounded-sm relative group cursor-pointer overflow-hidden"
                          style="background-image: url('https://img.freepik.com/premium-photo/luxurious-perfume-bottle-with-golden-details-dark-background_7023-421979.jpg?w=360');"
-                         onclick="simulateAddToCart({id: 1, name: 'Perfumes Gold', price: 8500})">
+                         onclick="addToCart(1, 'Perfumes Gold', 8500)">
                         <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition duration-500"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8 text-center">
                             <h3 class="text-3xl font-serif-fancy text-white mb-2">Perfumes</h3>
-                            <p class="text-e-silver text-sm mb-4">Fragancias importadas</p>
                             <div class="inline-block border border-e-gold text-e-gold px-6 py-2 rounded-sm font-bold backdrop-blur-sm">
                                 $8.500
                             </div>
@@ -214,11 +176,10 @@
 
                     <div class="product-card h-96 rounded-sm relative group cursor-pointer overflow-hidden"
                          style="background-image: url('https://scontent-eze1-2.xx.fbcdn.net/v/t39.30808-6/491949787_1185299673605784_8229986934607711890_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=1s-8NSaXdrAQ7kNvwFvB29D&_nc_oc=Adnveb58J4FYyOy1xYEHCZFQPyoszmDlKHhITpMCjWTDqDKYi6suwwBH6dlQGIuPZAw&_nc_zt=23&_nc_ht=scontent-eze1-2.xx&_nc_gid=iigdqveUOJl6YiFWEvzhKg&oh=00_Afi0_e4lL1g43T2SpzGpEvYvqM1e_KWn3PbFgT24eeD4rA&oe=69206976');"
-                         onclick="simulateAddToCart({id: 2, name: 'Vapers Desechables', price: 40000})">
+                         onclick="addToCart(2, 'Vapers Desechables', 40000)">
                         <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition duration-500"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8 text-center">
                             <h3 class="text-3xl font-serif-fancy text-white mb-2">Vapers</h3>
-                            <p class="text-e-silver text-sm mb-4">Sabores intensos</p>
                             <div class="inline-block border border-e-gold text-e-gold px-6 py-2 rounded-sm font-bold backdrop-blur-sm">
                                 $40.000
                             </div>
@@ -227,11 +188,10 @@
 
                     <div class="product-card h-96 rounded-sm relative group cursor-pointer overflow-hidden"
                          style="background-image: url('https://media.istockphoto.com/id/1366568938/photo/three-black-gift-boxes.jpg?s=612x612&w=0&k=20&c=0fIIMIIpdmw3b3cFSo3yC_wRPYp67J4ZLQ0RhA31MdQ=');"
-                         onclick="simulateAddToCart({id: 3, name: 'Set de Lujo Premium', price: 70000})">
+                         onclick="addToCart(3, 'Set de Lujo Premium', 70000)">
                         <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition duration-500"></div>
                         <div class="absolute bottom-0 left-0 right-0 p-8 text-center">
                             <h3 class="text-3xl font-serif-fancy text-white mb-2">Set de Lujo</h3>
-                            <p class="text-e-silver text-sm mb-4">El regalo perfecto</p>
                             <div class="inline-block border border-e-gold text-e-gold px-6 py-2 rounded-sm font-bold backdrop-blur-sm">
                                 $70.000
                             </div>
@@ -241,35 +201,28 @@
             </div>
         </section>
 
-        <section id="about" class="bg-e-panel py-20 px-4 border-y border-gray-800">
-            <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-serif-fancy mb-8 text-e-gold">Nuestra Esencia</h2>
-                <p class="text-xl text-e-silver font-sans-elegant leading-relaxed">
-                    En <span class="text-e-gold font-bold">EyASur.Ok</span>, redefinimos la exclusividad. Nos especializamos en fragancias importadas y dispositivos de vapeo de alta gama. Calidad innegociable y autenticidad garantizada para clientes exigentes.
-                </p>
-            </div>
-        </section>
-
-        <section id="contact" class="py-20 px-4 bg-e-dark">
+        <section id="contact" class="py-20 px-4 bg-e-dark border-t border-gray-900">
             <div class="max-w-2xl mx-auto bg-e-panel p-10 rounded-sm border border-gray-800 shadow-2xl">
                 <h2 class="text-3xl font-serif-fancy text-center mb-10 text-e-text">Contacto Directo</h2>
                 
-                <form id="contact-form" action="https://formsubmit.co/ericdavidmorgan.dc@gmail.com" method="POST" target="hidden-iframe" onsubmit="handleContactSubmit()">
+                <form id="contact-form" action="https://formsubmit.co/ericdavidmorgan.dc@gmail.com" method="POST" target="hidden-iframe" onsubmit="return handleContactSubmit()">
                     
-                    <input type="hidden" name="_subject" value="Nuevo Mensaje - EyASur Web">
+                    <input type="hidden" name="_subject" value="Nuevo Mensaje de Contacto">
                     <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table"> <div class="space-y-6">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="space-y-6">
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-e-gold mb-2">Nombre</label>
-                            <input type="text" name="name" required class="w-full px-4 py-3 rounded-sm bg-black border border-gray-700 text-white focus:border-e-gold transition-colors">
+                            <input type="text" name="name" required class="w-full px-4 py-3 rounded-sm">
                         </div>
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-e-gold mb-2">Email</label>
-                            <input type="email" name="email" required class="w-full px-4 py-3 rounded-sm bg-black border border-gray-700 text-white focus:border-e-gold transition-colors">
+                            <input type="email" name="email" required class="w-full px-4 py-3 rounded-sm">
                         </div>
                         <div>
                             <label class="block text-xs uppercase tracking-widest text-e-gold mb-2">Mensaje</label>
-                            <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-sm bg-black border border-gray-700 text-white focus:border-e-gold transition-colors"></textarea>
+                            <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-sm"></textarea>
                         </div>
                         <button type="submit" class="w-full bg-e-gold text-black font-bold py-4 uppercase tracking-widest hover:bg-white transition duration-300">
                             Enviar Mensaje
@@ -286,21 +239,23 @@
     </footer>
 
     <div id="cart-modal" class="fixed inset-0 bg-black/90 z-50 hidden justify-center items-center p-4 backdrop-blur-sm">
-        <div class="bg-e-panel border border-e-gold/30 w-full max-w-lg rounded-sm shadow-2xl animate-fade-in">
+        <div class="bg-e-panel border border-e-gold/30 w-full max-w-lg rounded-sm shadow-2xl">
             <div class="p-6">
                 <div class="flex justify-between items-center border-b border-gray-700 pb-4 mb-4">
                     <h3 class="text-2xl font-serif-fancy text-e-gold">Tu Selección</h3>
-                    <button onclick="closeCartModal()" class="text-gray-400 hover:text-white">&times;</button>
+                    <button onclick="closeCart()" class="text-gray-400 hover:text-white text-3xl">&times;</button>
                 </div>
-                <div id="cart-items-list" class="max-h-64 overflow-y-auto space-y-4 mb-6">
-                    <p id="empty-cart-message" class="text-center text-gray-500 py-4">El carrito está vacío.</p>
-                </div>
+                
+                <div id="cart-items-list" class="max-h-64 overflow-y-auto space-y-4 mb-6 pr-2">
+                    </div>
+                <p id="empty-cart-message" class="text-center text-gray-500 py-4">El carrito está vacío.</p>
+
                 <div class="pt-4 border-t border-gray-700">
                     <div class="flex justify-between items-center mb-6">
-                        <span class="text-lg text-gray-300">Total Estimado:</span>
+                        <span class="text-lg text-gray-300">Total:</span>
                         <span id="cart-total" class="text-2xl font-bold text-e-gold">$0.00</span>
                     </div>
-                    <button onclick="openCheckoutModal()" id="checkout-btn" disabled class="w-full bg-e-gold text-black font-bold py-3 uppercase tracking-widest hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button id="btn-init-checkout" onclick="openCheckout()" disabled class="w-full bg-e-gold text-black font-bold py-3 uppercase tracking-widest hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed">
                         Iniciar Compra
                     </button>
                 </div>
@@ -309,21 +264,21 @@
     </div>
 
     <div id="checkout-modal" class="fixed inset-0 bg-black/95 z-[60] hidden justify-center items-center p-4 backdrop-blur-md">
-        <div class="bg-e-panel border border-e-gold/50 w-full max-w-md rounded-sm shadow-2xl">
+        <div class="bg-e-panel border border-e-gold/50 w-full max-w-md rounded-sm shadow-2xl animate-fade-in">
             <div class="p-8">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-2xl font-serif-fancy text-white">Finalizar Pedido</h3>
-                    <button onclick="closeCheckoutModal()" class="text-gray-400 hover:text-white">&times;</button>
+                    <button onclick="closeCheckout()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
                 </div>
 
-                <div class="mb-8 text-center">
-                    <p class="text-gray-400 text-sm uppercase tracking-widest">Total a Pagar</p>
-                    <p id="checkout-total-display" class="text-4xl font-serif-fancy text-e-gold mt-2">$0.00</p>
+                <div class="mb-8 text-center bg-black/40 p-4 rounded border border-e-gold/20">
+                    <p class="text-gray-400 text-xs uppercase tracking-widest">Total a Pagar</p>
+                    <p id="checkout-total-display" class="text-3xl font-serif-fancy text-e-gold mt-1">$0.00</p>
                 </div>
 
-                <form id="order-form" action="https://formsubmit.co/ericdavidmorgan.dc@gmail.com" method="POST" target="hidden-iframe" onsubmit="handleOrderSubmit()">
+                <form id="order-form" action="https://formsubmit.co/ericdavidmorgan.dc@gmail.com" method="POST" target="hidden-iframe" onsubmit="return handleOrderSubmit()">
                     
-                    <input type="hidden" name="_subject" value="NUEVO PEDIDO - EyASur Web">
+                    <input type="hidden" name="_subject" value="NUEVO PEDIDO DE VENTA - EyASur">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_template" value="table">
                     
@@ -336,15 +291,15 @@
                             <input type="text" name="Nombre" required class="w-full mt-1 px-3 py-2 bg-black border border-gray-700 text-white focus:border-e-gold">
                         </div>
                         <div>
-                            <label class="text-xs text-e-gold uppercase">Correo Electrónico</label>
+                            <label class="text-xs text-e-gold uppercase">Email</label>
                             <input type="email" name="Email" required class="w-full mt-1 px-3 py-2 bg-black border border-gray-700 text-white focus:border-e-gold">
                         </div>
                         <div>
-                            <label class="text-xs text-e-gold uppercase">Teléfono / WhatsApp</label>
+                            <label class="text-xs text-e-gold uppercase">Whatsapp / Teléfono</label>
                             <input type="text" name="Telefono" required class="w-full mt-1 px-3 py-2 bg-black border border-gray-700 text-white focus:border-e-gold">
                         </div>
                         <button type="submit" class="w-full mt-4 bg-e-gold text-black font-bold py-3 uppercase hover:bg-white transition shadow-[0_0_15px_rgba(212,175,55,0.4)]">
-                            Confirmar Pedido
+                            Confirmar y Enviar
                         </button>
                     </div>
                 </form>
@@ -352,21 +307,21 @@
         </div>
     </div>
 
-    <div id="final-confirmation-modal" class="fixed inset-0 bg-black/95 z-[70] hidden justify-center items-center p-4">
+    <div id="final-modal" class="fixed inset-0 bg-black/95 z-[70] hidden justify-center items-center p-4">
         <div class="bg-e-panel border-t-4 border-e-gold w-full max-w-md p-8 text-center shadow-2xl rounded-sm">
-            <div class="mb-4 text-e-gold">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <div class="mb-4 text-e-gold flex justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
-            <h3 class="text-3xl font-serif-fancy text-white mb-2">¡Pedido Recibido!</h3>
-            <p class="text-gray-400 mb-8">Hemos recibido tu orden correctamente. Te contactaremos a la brevedad.</p>
+            <h3 class="text-3xl font-serif-fancy text-white mb-2">¡Pedido Enviado!</h3>
+            <p class="text-gray-400 mb-8">Recibirás un correo de confirmación. Finaliza tu compra contactándonos.</p>
             
             <div class="space-y-3">
                 <button onclick="goToInstagram()" class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-sm hover:opacity-90 transition flex justify-center items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                    Seguinos en Instagram
+                    Ir a Instagram
                 </button>
-                <button onclick="continueShopping()" class="w-full py-3 bg-transparent border border-gray-600 text-gray-300 hover:text-white hover:border-white transition">
-                    Volver a la tienda
+                <button onclick="closeFinalModal()" class="w-full py-3 bg-transparent border border-gray-600 text-gray-300 hover:text-white hover:border-white transition">
+                    Seguir Comprando
                 </button>
             </div>
         </div>
@@ -375,138 +330,152 @@
     <iframe name="hidden-iframe" style="display:none;"></iframe>
 
     <script>
-        // --- LÓGICA DEL CARRITO Y UI ---
-        let cartItems = [];
-        const INSTAGRAM_URL = "https://www.instagram.com/eyasur.ok"; 
+        // --- VARIABLES GLOBALES ---
+        let cart = [];
+        const INSTAGRAM_URL = "https://www.instagram.com/eyasur.ok";
 
-        // Mostrar notificaciones
-        function showNotification(message, type) {
-            const container = document.getElementById('notification-container');
-            const div = document.createElement('div');
-            div.className = `bg-e-panel border-l-4 ${type === 'success' ? 'border-green-500' : 'border-e-gold'} text-white px-6 py-4 shadow-2xl flex items-center gap-3 animate-bounce-in`;
-            div.innerHTML = `<span class="text-xl">${type === 'success' ? '✓' : '✨'}</span><p>${message}</p>`;
-            container.appendChild(div);
-            setTimeout(() => div.remove(), 4000);
-        }
+        // --- FUNCIONES DE CARRITO ---
 
-        // Simular agregar al carrito
-        function simulateAddToCart(product) {
-            const existing = cartItems.find(item => item.id === product.id);
-            if (existing) existing.quantity++;
-            else cartItems.push({...product, quantity: 1});
-            
-            updateCartUI();
-            showNotification(`${product.name} agregado`, 'gold');
-        }
-
-        // Actualizar UI del carrito
-        function updateCartUI() {
-            const totalCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-            const totalAmount = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const formattedTotal = totalAmount.toLocaleString('es-AR', {style: 'currency', currency: 'ARS'});
-
-            document.getElementById('cart-count').textContent = totalCount;
-            document.getElementById('cart-total').textContent = formattedTotal;
-            document.getElementById('checkout-total-display').textContent = formattedTotal;
-
-            const list = document.getElementById('cart-items-list');
-            list.innerHTML = '';
-
-            if (cartItems.length === 0) {
-                document.getElementById('empty-cart-message').style.display = 'block';
-                document.getElementById('checkout-btn').disabled = true;
+        // Agregar producto
+        window.addToCart = function(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.qty++;
             } else {
-                document.getElementById('empty-cart-message').style.display = 'none';
-                document.getElementById('checkout-btn').disabled = false;
-                
-                cartItems.forEach((item, index) => {
-                    list.innerHTML += `
-                        <div class="flex justify-between items-center bg-black/30 p-3 rounded border border-gray-800">
-                            <div>
-                                <p class="font-bold text-white">${item.name}</p>
-                                <p class="text-xs text-e-gold">$${item.price} x ${item.quantity}</p>
-                            </div>
-                            <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-200 text-sm">eliminar</button>
+                cart.push({ id: id, name: name, price: price, qty: 1 });
+            }
+            renderCart();
+            showNotification(`Agregado: ${name}`, 'success');
+        };
+
+        // Eliminar producto
+        window.removeFromCart = function(index) {
+            cart.splice(index, 1);
+            renderCart();
+        };
+
+        // Renderizar UI del Carrito
+        function renderCart() {
+            const list = document.getElementById('cart-items-list');
+            const emptyMsg = document.getElementById('empty-cart-message');
+            const totalEl = document.getElementById('cart-total');
+            const countEl = document.getElementById('cart-count');
+            const checkoutBtn = document.getElementById('btn-init-checkout');
+
+            // Calcular totales
+            let total = 0;
+            let count = 0;
+            
+            list.innerHTML = ''; // Limpiar lista
+
+            if (cart.length === 0) {
+                emptyMsg.style.display = 'block';
+                checkoutBtn.disabled = true;
+                checkoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                emptyMsg.style.display = 'none';
+                checkoutBtn.disabled = false;
+                checkoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+                // Generar HTML de items
+                cart.forEach((item, index) => {
+                    total += item.price * item.qty;
+                    count += item.qty;
+
+                    const div = document.createElement('div');
+                    div.className = 'flex justify-between items-center bg-black/40 p-3 rounded border border-gray-700';
+                    div.innerHTML = `
+                        <div>
+                            <p class="font-bold text-white text-sm">${item.name}</p>
+                            <p class="text-xs text-e-gold">$${item.price} x ${item.qty}</p>
                         </div>
+                        <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-200 text-xs font-bold uppercase border border-red-900 px-2 py-1 rounded hover:bg-red-900/30 transition">
+                            Eliminar
+                        </button>
                     `;
+                    list.appendChild(div);
                 });
             }
-        }
 
-        function removeFromCart(index) {
-            cartItems.splice(index, 1);
-            updateCartUI();
-        }
-
-        // --- MODALES ---
-        const cartModal = document.getElementById('cart-modal');
-        const checkoutModal = document.getElementById('checkout-modal');
-        const finalModal = document.getElementById('final-confirmation-modal');
-
-        document.getElementById('open-cart-btn').onclick = () => cartModal.classList.replace('hidden', 'flex');
-        function closeCartModal() { cartModal.classList.replace('flex', 'hidden'); }
-
-        function openCheckoutModal() {
-            closeCartModal();
-            // 1. PREPARAR DATOS PARA EL FORMULARIO
-            const detailsInput = document.getElementById('hidden-order-details');
-            const totalInput = document.getElementById('hidden-order-total');
+            // Actualizar textos
+            const formattedTotal = `$${total.toLocaleString('es-AR')}`;
+            totalEl.innerText = formattedTotal;
+            countEl.innerText = count;
             
-            // Crear string legible para el mail
-            let detailsString = cartItems.map(item => 
-                `- ${item.name} (Cant: ${item.quantity}) - Precio Unit: $${item.price}`
-            ).join(' | '); // Usamos pipe o salto de linea
-
-            detailsInput.value = detailsString;
-            totalInput.value = document.getElementById('cart-total').textContent;
-
-            checkoutModal.classList.replace('hidden', 'flex');
+            // Guardar total para el checkout
+            document.getElementById('checkout-total-display').innerText = formattedTotal;
+            document.getElementById('hidden-order-total').value = formattedTotal;
         }
-        
-        function closeCheckoutModal() { checkoutModal.classList.replace('flex', 'hidden'); }
 
-        // --- MANEJO DE ENVÍO DE FORMULARIOS (SIN RECARGA) ---
-        
-        // 1. Formulario de Contacto
-        function handleContactSubmit() {
-            // El form se envía al iframe oculto. Nosotros mostramos feedback manual.
+        // --- FUNCIONES DE MODALES ---
+
+        window.openCart = function() {
+            document.getElementById('cart-modal').classList.replace('hidden', 'flex');
+        };
+        window.closeCart = function() {
+            document.getElementById('cart-modal').classList.replace('flex', 'hidden');
+        };
+
+        window.openCheckout = function() {
+            closeCart();
+            // Preparar string de detalles para el mail
+            const detalles = cart.map(i => `${i.name} (Cant: ${i.qty}) - $${i.price * i.qty}`).join(' | ');
+            document.getElementById('hidden-order-details').value = detalles;
+            
+            document.getElementById('checkout-modal').classList.replace('hidden', 'flex');
+        };
+        window.closeCheckout = function() {
+            document.getElementById('checkout-modal').classList.replace('flex', 'hidden');
+        };
+
+        window.closeFinalModal = function() {
+            document.getElementById('final-modal').classList.replace('flex', 'hidden');
+        }
+
+        // --- MANEJO DE FORMULARIOS ---
+
+        window.handleContactSubmit = function() {
             setTimeout(() => {
                 document.getElementById('contact-form').reset();
-                showNotification('Mensaje enviado con éxito', 'success');
-            }, 1000); // Simulamos retardo de red
-            // Retorna true para que el submit ocurra
-            return true; 
-        }
+                showNotification('Mensaje enviado correctamente', 'success');
+            }, 1500);
+            return true; // Permite envío al iframe
+        };
 
-        // 2. Formulario de Pedido (Carrito)
-        function handleOrderSubmit() {
+        window.handleOrderSubmit = function() {
+            // Cerrar modal de formulario y abrir el de éxito
             setTimeout(() => {
-                closeCheckoutModal();
-                finalModal.classList.replace('hidden', 'flex');
+                closeCheckout();
+                document.getElementById('final-modal').classList.replace('hidden', 'flex');
                 
-                // Limpiar carrito despues del pedido
-                cartItems = [];
-                updateCartUI();
+                // Resetear todo
+                cart = [];
+                renderCart();
                 document.getElementById('order-form').reset();
-            }, 800);
-            return true;
-        }
+            }, 1000);
+            return true; // Permite envío al iframe
+        };
 
-        // Acciones finales
-        function goToInstagram() {
+        // --- UTILIDADES ---
+
+        window.goToInstagram = function() {
             window.open(INSTAGRAM_URL, '_blank');
-            finalModal.classList.replace('flex', 'hidden');
+            closeFinalModal();
+        };
+
+        window.toggleMobileMenu = function() {
+            document.getElementById('mobile-menu-links').classList.toggle('open');
+        };
+
+        function showNotification(msg, type) {
+            const container = document.getElementById('notification-container');
+            const div = document.createElement('div');
+            div.className = `bg-e-panel border-l-4 border-e-gold text-white px-6 py-4 shadow-2xl rounded-sm animate-bounce`;
+            div.style.animation = "fadeIn 0.5s";
+            div.innerHTML = `<p class="font-bold">${msg}</p>`;
+            container.appendChild(div);
+            setTimeout(() => div.remove(), 3000);
         }
-
-        function continueShopping() {
-            finalModal.classList.replace('flex', 'hidden');
-        }
-
-        // Mobile Menu Toggle
-        const menuBtn = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu-links');
-        menuBtn.onclick = () => mobileMenu.classList.toggle('open');
-
     </script>
 </body>
 </html>
