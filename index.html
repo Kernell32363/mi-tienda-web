@@ -219,7 +219,7 @@
                             </button>
                             <a href="https://www.instagram.com/eyasur.ok" target="_blank" 
                                 class="block w-full text-e-gold border border-e-gold/50 py-2 text-sm font-bold uppercase hover:bg-e-gold/10 transition duration-300">
-                                Mirá cómo quedaría
+                                Mirá cómo quedaría tu Set
                             </a>
                         </div>
                     </div>
@@ -261,7 +261,7 @@
 
       
 
- <section id="instagram-cta" class="py-16 px-4 bg-e-dark border-t border-gray-900" style="background-image: url('https://us.123rf.com/450wm/kanawatth/kanawatth1905/kanawatth190500100/124173183-onda-de-part%C3%ADculas-digitales-de-color-dorado-abstracto-con-bokeh-y-fondo-claro.jpg?ver=6'); background-size: cover; background-position: center;">
+<section id="instagram-cta" class="py-16 px-4 bg-e-dark border-t border-gray-900" style="background-image: url('https://us.123rf.com/450wm/kanawatth/kanawatth1905/kanawatth190500100/124173183-onda-de-part%C3%ADculas-digitales-de-color-dorado-abstracto-con-bokeh-y-fondo-claro.jpg?ver=6'); background-size: cover; background-position: center;">
             <div class="max-w-4xl mx-auto text-center shiny-border-box p-8">
                 <h3 class="text-2xl font-serif-fancy text-white mb-6">
                     Mantenete actualizado con nuestras novedades en Fragancias y Vaporizadores y no te pierdas ninguna de nuestras historias.
@@ -360,7 +360,8 @@
                     <input type="hidden" name="Numero_Orden" id="hidden-order-id">
                     <input type="hidden" name="Detalle_Pedido" id="hidden-order-details">
                     <input type="hidden" name="Monto_Total" id="hidden-order-total">
-
+                     <input type="hidden" name="_cc" id="hidden-customer-cc">
+                    
                     <div class="space-y-4">
                         <div>
                             <label class="text-xs text-e-gold uppercase">Nombre Completo</label>
@@ -389,7 +390,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
             <h3 class="text-3xl font-serif-fancy text-white mb-2">¡Pedido Enviado!</h3>
-            <p class="text-gray-400 mb-8">Ya recibimos tu pedido. Para Finalizar los detalles de pago y entrega de tu compra escribinos por Instagram.</p>
+            <p class="text-gray-400 mb-8">Ya recibimos tu pedido. Recibirás un correo de confirmación. Para Finalizar los detalles de pago y entrega de tu compra escribinos por Instagram.</p>
             
             <div class="space-y-3">
                 <button onclick="finishProcess('instagram')" class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-sm hover:opacity-90 transition flex justify-center items-center gap-2">
@@ -411,7 +412,7 @@
         let currentOrderNumber = ''; // Ahora es un string de fecha/hora
         const INSTAGRAM_URL = "https://www.instagram.com/eyasur.ok";
 
-        // --- SISTEMA DE ORDEN (Nuevo Formato #HHMM-DDMM) ---
+        // --- SISTEMA DE ORDEN (Formato #HHMM-DDMM) ---
         function generateTimeBasedOrderNumber() {
             const now = new Date();
             
@@ -428,8 +429,6 @@
 
             return `#${HH}${MM_minutes}-${DD}${MM_month}`;
         }
-        
-        // **Se eliminaron las funciones getNextOrderNumber y saveOrderNumber basadas en localStorage**
 
         // --- MENÚ MÓVIL AUTOMÁTICO ---
         document.querySelectorAll('.mobile-link').forEach(link => {
@@ -543,7 +542,9 @@
         };
 
         window.handleOrderSubmit = function() {
-            // No hay que guardar nada en LocalStorage aquí, solo se envía.
+            // MODIFICACIÓN 1: Obtener el email del cliente y asignarlo al campo _cc para la copia del mail
+            const customerEmail = document.querySelector('input[name="Email"]').value;
+            document.getElementById('hidden-customer-cc').value = customerEmail; 
             
             setTimeout(() => {
                 closeCheckout();
