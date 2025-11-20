@@ -132,7 +132,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-e-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                         </svg>
-                        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center hidden">0</span>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center **hidden**">0</span>
                     </button>
                     
                     <button onclick="toggleMobileMenu()" class="md:hidden text-e-gold">
@@ -602,6 +602,25 @@
                 if(div.parentNode) div.remove();
             }, 5000);
         }
+
+        // --- FUNCIÓN QUE NO MUESTRA NINGÚN NÚMERO SI NO HAY NADA EN EL CARRITO ---
+        function updateCartCount(cartItems) {
+            const cartCountElement = document.getElementById('cart-count');
+    
+            // 1. Actualizar el número mostrado
+            cartCountElement.textContent = cartItems;
+
+            // 2. Controlar la visibilidad
+            if (cartItems > 0) {
+                // Muestra el contador (quita la clase 'hidden')
+                cartCountElement.classList.remove('hidden'); 
+            } else {
+                // Oculta el contador (añade la clase 'hidden')
+        cartCountElement.classList.add('hidden');
+    }
+}
+        // --- FIN FUNCIÓN QUE NO MUESTRA NINGÚN NÚMERO SI NO HAY NADA EN EL CARRITO ---
+        
     </script>
 </body>
 </html>
