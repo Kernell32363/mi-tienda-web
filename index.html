@@ -1,780 +1,628 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EyASur.Ok - Lujo Metalizado</title>
+    <title>EyASur.Ok - Fragancias y Vapers Gold</title>
     
-    <!-- Script de Tailwind CSS para el diseño -->
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2830/2830527.png" type="image/png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Fuente Inter de Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    
-    <!-- Iconos de Lucide -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <style>
-        /* Definición de la Paleta Metalizada */
-        :root {
-            --color-black-deep: #0A0A0A;    /* Fondo casi puro */
-            --color-silver: #D4D4D4;        /* Texto principal */
-            --color-gold: #FFD700;          /* Acento principal (Botones) */
-            --color-rosegold: #B76E79;      /* Acento secundario (Subtítulos, bordes) */
-            --color-white-ghost: #FAFAFA;   /* Texto secundario y fondo claro */
-        }
-
-        /* Configuración de Tailwind */
+    <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'black-deep': 'var(--color-black-deep)',
-                        'silver': 'var(--color-silver)',
-                        'gold': 'var(--color-gold)',
-                        'rosegold': 'var(--color-rosegold)',
-                        'white-ghost': 'var(--color-white-ghost)',
+                        'e-dark': '#0a0a0a',       
+                        'e-panel': '#121212',      
+                        'e-text': '#F5F5F5',       
+                        'e-gold': '#D4AF37',       
+                        'e-rosegold': '#E0BFB8',   
+                        'e-silver': '#C0C0C0',     
+                        'e-bronze': '#cd7f32',     
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    }
+                        sans: ['Montserrat', 'sans-serif'], 
+                        serif: ['Playfair Display', 'serif'], 
+                    },
                 }
             }
         }
-
-        /* Estilos generales */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--color-black-deep);
-            color: var(--color-silver);
+    </script>  
+    
+    <style>
+        /* Importación de imagen */
+       @import url('https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775');
+      
+        /* Fondo adaptable, centrado y con zoom más notorio */
+        .background-zoom-effect {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775');
+            background-size: cover; 
+            background-position: center center; 
+            background-repeat: no-repeat;
+            /* MODIFICACIÓN: Animación más rápida y notoria */
+            transform: scale(1.0); animation: zoom-in-out 20s infinite alternate ease-in-out;
+            filter: brightness(0.4);
         }
+        /* MODIFICACIÓN: Zoom final más intenso (de 1.0 a 1.25) */
+        @keyframes zoom-in-out { from { transform: scale(1.0); } to { transform: scale(1.25); } }
 
-        /* Estilo para el botón de acento con gradiente */
-        .btn-gold {
-            background-image: linear-gradient(to right, #FFD700, #F0C419);
-            color: var(--color-black-deep);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+        .shiny-border-box {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            /* MODIFICACIÓN: Fondo más transparente (0.3) */
+            background: rgba(10, 10, 10, 0.3); backdrop-filter: blur(10px); 
+            transition: all 0.4s ease;
         }
+        .shiny-border-box:hover { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); border-color: #D4AF37; }
 
-        .btn-gold:hover {
-            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
-            transform: translateY(-2px);
-        }
+        .font-serif-fancy { font-family: 'Playfair Display', serif; letter-spacing: 1px; }
+        .font-sans-elegant { font-family: 'Montserrat', sans-serif; }
+        body { background-color: #0a0a0a; }
 
-        /* Estilo para la tarjeta de producto con brillo sutil */
         .product-card {
-            box-shadow: 0 0 10px rgba(183, 110, 121, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background-size: cover; background-position: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .product-card:hover {
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2), 0 0 40px rgba(183, 110, 121, 0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.5);
         }
 
-        /* Contenedor de mensajes */
-        #message-container {
-            pointer-events: none;
+        .luxury-gradient {
+            background: linear-gradient(to right, #D4AF37, #F8F1D2, #D4AF37);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-size: 200% auto; animation: shine 4s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .mobile-menu { transition: max-height 0.4s ease-in-out, opacity 0.4s; max-height: 0; overflow: hidden; opacity: 0; }
+        .mobile-menu.open { max-height: 300px; opacity: 1; }
+        
+        input, textarea {
+            background-color: rgba(255,255,255,0.05) !important;
+            border: 1px solid rgba(212, 175, 55, 0.3) !important;
+            color: #F5F5F5 !important;
+        }
+        input:focus, textarea:focus {
+            border-color: #D4AF37 !important; outline: none;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3) !important;
         }
         
-        .interactive-message {
-            pointer-events: auto;
-            cursor: pointer;
-            /* Se ha eliminado el backdrop-blur-md para evitar el difuminado */
-        }
-
-        /* Estilos para el scrollbar del modal de carrito */
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #171717;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: var(--color-rosegold);
-            border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: var(--color-gold);
-        }
-
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
     </style>
 </head>
-<body class="min-h-screen antialiased">
+<body class="bg-e-dark font-sans text-e-text">
 
-    <!-- Script de Firebase (Lógica operativa - CORREGIDA) -->
-    <script type="module">
-        // --- Imports de Firebase (Completos) ---
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, query, runTransaction, getDocs } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // setLogLevel('debug'); // Descomentar para ver logs de Firestore
+    <div id="notification-container" class="fixed top-4 right-4 z-50 space-y-3"></div>
 
-        let app, db, auth, userId;
-        const products = [
-            // Definición de productos alinea con los data-id de la UI
-            { id: '1', name: 'Éxtasis Dorado', price: 4500.00, image: 'https://placehold.co/600x400/111827/FFD700?text=Éxtasis+Dorado' },
-            { id: '2', name: 'Esencia Nocturna', price: 2800.00, image: 'https://placehold.co/600x400/111827/B76E79?text=Esencia+Nocturna' },
-            { id: '4', name: 'Fénix de Plata', price: 6200.00, image: 'https://placehold.co/600x400/111827/D4D4D4?text=Fénix+de+Plata' },
-        ];
-
-
-        // --- INICIALIZACIÓN Y AUTENTICACIÓN ---
-
-        async function initializeFirebase() {
-            try {
-                const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-                app = initializeApp(firebaseConfig);
-                auth = getAuth(app);
-                db = getFirestore(app);
-
-                if (typeof __initial_auth_token !== 'undefined') {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        setupCartListener();
-                        updateUserIdDisplay(userId);
-                        updateUserIdDisplayModal(userId);
-                    } else {
-                        userId = null;
-                        updateCartDisplay({});
-                    }
-                });
-
-            } catch (error) {
-                console.error("Error al inicializar Firebase o autenticar:", error);
-                window.showMessage('Error al conectar con el servidor. Inténtalo de nuevo.', 'error');
-            }
-        }
-
-        // --- LISTENER DEL CARRITO (MODELO COLECCIÓN: /artifacts/{appId}/users/{userId}/cart/{itemId}) ---
-
-        /**
-         * Configura el listener en tiempo real para el carrito de compras (colección).
-         */
-        function setupCartListener() {
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            // Listener a la colección
-            const cartRef = collection(db, `artifacts/${appId}/users/${userId}/cart`);
-            
-            onSnapshot(cartRef, (snapshot) => {
-                const cartItems = {};
-                let totalItems = 0;
+    <header class="bg-e-dark/95 backdrop-blur-md text-e-text shadow-2xl sticky top-0 z-40 border-b border-e-gold/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
                 
-                snapshot.forEach((doc) => {
-                    const item = doc.data();
-                    // Usar doc.id (que es el productId) como clave, y añadir el docId para operaciones
-                    cartItems[doc.id] = { ...item, docId: doc.id }; 
-                    totalItems += item.quantity;
-                });
-                updateCartDisplay(cartItems, totalItems); 
-            }, (error) => {
-                console.error("Error al escuchar el carrito:", error);
-                window.showMessage('Error al actualizar el carrito en tiempo real.', 'error');
-            });
-        }
-
-
-        // --- FUNCIONES GLOBALES PARA ONCLICK ---
-        
-        /**
-         * Actualiza el ID de usuario en la interfaz principal.
-         */
-        function updateUserIdDisplay(id) {
-            const userIdDisplay = document.getElementById('user-id-display');
-            if (userIdDisplay) {
-                userIdDisplay.textContent = id;
-            }
-        }
-        
-        /**
-         * Actualiza el ID de usuario en el modal del carrito.
-         */
-        function updateUserIdDisplayModal(id) {
-            const userIdDisplay = document.getElementById('user-id-display-modal');
-            if (userIdDisplay) {
-                userIdDisplay.textContent = id;
-            }
-        }
-
-        /**
-         * Muestra un mensaje flotante de notificación.
-         */
-        window.showMessage = (text, type = 'info') => {
-            const container = document.getElementById('message-container');
-            if (!container) return;
-            
-            // Eliminar mensajes anteriores para evitar sobrecarga visual
-            container.innerHTML = ''; 
-
-            const message = document.createElement('div');
-            let icon;
-            let bgColorClasses;
-
-            // Determinar clases y icono según el tipo
-            switch (type) {
-                case 'success':
-                    icon = 'check-circle';
-                    // **CORRECCIÓN:** Fondo sólido sin opacidad para máxima legibilidad.
-                    bgColorClasses = 'bg-green-600 text-white-ghost shadow-xl shadow-green-700/50'; 
-                    break;
-                case 'error':
-                    icon = 'x-octagon';
-                    bgColorClasses = 'bg-red-700 text-white-ghost shadow-xl shadow-red-700/50';
-                    break;
-                case 'warning':
-                    icon = 'alert-triangle';
-                    bgColorClasses = 'bg-yellow-500 text-black-deep shadow-xl shadow-yellow-500/50'; 
-                    break;
-                case 'info':
-                default:
-                    icon = 'info';
-                    bgColorClasses = 'bg-gray-700 text-white-ghost shadow-xl shadow-gray-700/50';
-            }
-
-            // Aplicar clases de estilo base. Usamos z-50 para asegurar el frente.
-            // Opacidad y transformación se controlan para la animación de entrada/salida.
-            message.className = `interactive-message p-4 rounded-xl z-50 transform transition-all duration-300 ease-in-out opacity-0 translate-x-full ${bgColorClasses}`;
-            
-            // Contenido HTML con el botón de cierre
-            message.innerHTML = `
-                <div class="flex items-center justify-between w-full" onclick="this.closest('.interactive-message').remove()">
-                    <div class="flex items-center space-x-3">
-                        <i data-lucide="${icon}" class="w-5 h-5 flex-shrink-0"></i>
-                        <p class="font-medium text-sm">${text}</p>
-                    </div>
-                    <!-- Botón de Cierre Manual -->
-                    <i data-lucide="x" class="w-5 h-5 ml-4 flex-shrink-0"></i>
+                <div class="flex items-center">
+                    <a href="#" class="text-3xl md:text-4xl font-serif-fancy luxury-gradient font-bold tracking-widest">
+                        EyASur.Ok
+                    </a>
                 </div>
-            `;
-            
-            container.appendChild(message);
 
-            // Animar entrada (aparecer en el centro, deslizarse desde la derecha)
-            setTimeout(() => {
-                message.classList.remove('opacity-0', 'translate-x-full');
-                message.classList.add('opacity-100', 'translate-x-0');
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
-                }
-            }, 10); // Pequeño retraso para asegurar la transición
-
-            // Ocultar automáticamente después de 4 segundos
-            setTimeout(() => {
-                message.classList.remove('opacity-100', 'translate-x-0');
-                message.classList.add('opacity-0', 'translate-x-full'); // Deslizar hacia la derecha para salir
-                message.addEventListener('transitionend', () => message.remove());
-            }, 4000);
-        };
-
-
-        /**
-         * Actualiza la visualización del carrito y el contador.
-         */
-        function updateCartDisplay(cartItems, totalItems = 0) {
-            const cartItemsContainer = document.getElementById('cart-items-container');
-            const cartTotalDisplay = document.getElementById('cart-total-display');
-            const cartCounter = document.getElementById('cart-counter');
-            let total = 0;
-
-            if (cartItemsContainer) {
-                cartItemsContainer.innerHTML = ''; 
-
-                if (Object.keys(cartItems).length === 0) {
-                    cartItemsContainer.innerHTML = '<p class="text-center text-silver/60 py-8 px-4">El carrito está vacío. ¡Es momento de invertir en tu lujo!</p>';
-                } else {
-                    Object.values(cartItems).forEach(item => {
-                        const itemTotal = item.price * item.quantity;
-                        total += itemTotal;
-
-                        const itemElement = document.createElement('div');
-                        // Diseño mejorado de la tarjeta de ítem en el modal
-                        itemElement.className = 'flex items-center justify-between p-4 bg-gray-900/50 border-b border-gold/10 transition-colors hover:bg-gray-800/80';
-                        
-                        itemElement.innerHTML = `
-                            <div class="flex-grow">
-                                <p class="font-semibold text-silver text-lg">${item.name}</p>
-                                <p class="text-sm text-rosegold">$${item.price.toFixed(2)} x <span class="font-bold">${item.quantity}</span> unidad(es)</p>
-                            </div>
-                            <div class="flex items-center space-x-3">
-                                <span class="font-extrabold text-gold text-xl">$${itemTotal.toFixed(2)}</span>
-                                <div class="flex items-center space-x-1 border border-rosegold/50 rounded-lg p-0.5">
-                                    <button onclick="window.updateQuantity('${item.docId}', ${item.quantity - 1})" 
-                                        class="text-silver hover:text-gold transition-colors p-1 rounded-md"
-                                        aria-label="Disminuir cantidad">
-                                        <i data-lucide="minus" class="w-4 h-4"></i>
-                                    </button>
-                                    <button onclick="window.updateQuantity('${item.docId}', ${item.quantity + 1})" 
-                                        class="text-silver hover:text-gold transition-colors p-1 rounded-md"
-                                        aria-label="Aumentar cantidad">
-                                        <i data-lucide="plus" class="w-4 h-4"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        cartItemsContainer.appendChild(itemElement);
-                    });
-                }
-
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
-                }
-            }
-
-            // Actualizar total y contador
-            if (cartTotalDisplay) {
-                cartTotalDisplay.textContent = total.toFixed(2);
-            }
-            if (cartCounter) {
-                cartCounter.textContent = totalItems.toString();
-                cartCounter.classList.toggle('hidden', totalItems === 0);
-            }
-        }
-
-
-        /**
-         * Agrega un producto al carrito o incrementa su cantidad (MODELO COLECCIÓN).
-         */
-        window.addToCart = async function(productId) {
-            if (!userId || !db) {
-                window.showMessage('Error: El sistema de usuario se está inicializando.', 'error');
-                return;
-            }
-
-            const product = products.find(p => p.id === productId);
-            if (!product) {
-                window.showMessage('Error: Producto no encontrado.', 'error');
-                return;
-            }
-
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const cartRef = collection(db, `artifacts/${appId}/users/${userId}/cart`);
-
-            try {
-                // Usamos el productId como ID del documento dentro de la colección 'cart'
-                const docRef = doc(cartRef, productId);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const newQuantity = docSnap.data().quantity + 1;
-                    await updateDoc(docRef, { quantity: newQuantity });
-                } else {
-                    await setDoc(docRef, {
-                        id: product.id,
-                        name: product.name,
-                        price: product.price,
-                        quantity: 1,
-                    });
-                }
-                window.showMessage(`"${product.name}" añadido al carrito.`, 'success');
-
-            } catch (error) {
-                console.error("Error al añadir al carrito:", error);
-                window.showMessage('Error al añadir el producto al carrito.', 'error');
-            }
-        }
-
-        /**
-         * Actualiza la cantidad de un ítem en el carrito o lo elimina.
-         */
-        window.updateQuantity = async function(docId, newQuantity) {
-            if (!userId || !db) return;
-
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            // docId es el mismo que productId
-            const docRef = doc(db, `artifacts/${appId}/users/${userId}/cart`, docId); 
-
-            if (newQuantity <= 0) {
-                try {
-                    await deleteDoc(docRef);
-                    window.showMessage('Producto eliminado del carrito.', 'info');
-                } catch (error) {
-                    console.error("Error al eliminar del carrito:", error);
-                    window.showMessage('Error al eliminar el producto.', 'error');
-                }
-            } else {
-                try {
-                    await updateDoc(docRef, { quantity: newQuantity });
-                } catch (error) {
-                    console.error("Error al actualizar cantidad:", error);
-                    window.showMessage('Error al actualizar la cantidad del producto.', 'error');
-                }
-            }
-        }
-
-
-        /**
-         * Alterna la visibilidad del modal del carrito.
-         */
-        window.toggleCartModal = function() {
-            const cartModal = document.getElementById('cart-modal');
-            if (cartModal) {
-                cartModal.classList.toggle('hidden');
-                document.body.classList.toggle('overflow-hidden', !cartModal.classList.contains('hidden'));
-            }
-        }
-
-        /**
-         * Maneja el proceso de pago (checkout) con número de pedido persistente.
-         */
-        window.checkout = async function() {
-            if (!auth.currentUser || !db) {
-                window.showMessage('Error: El usuario no está autenticado o la base de datos no está lista.', 'error');
-                return;
-            }
-
-            const userId = auth.currentUser.uid;
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const cartRef = collection(db, `artifacts/${appId}/users/${userId}/cart`);
-
-            const checkoutButton = document.getElementById('checkout-button');
-            if (checkoutButton) {
-                checkoutButton.disabled = true;
-                checkoutButton.classList.add('opacity-50', 'cursor-not-allowed');
-            }
-
-            try {
-                const querySnapshot = await getDocs(cartRef);
-
-                if (querySnapshot.empty) {
-                    window.showMessage('El carrito está vacío. ¡No hay nada que comprar!', 'warning');
-                    return;
-                }
-                
-                // Lógica de Número de Pedido Persistente (Público)
-                const ORDER_COUNTER_PATH = `artifacts/${appId}/public/data/metadata/orderCounter`;
-                const STARTING_ORDER_NUMBER = 3000;
-
-                let orderNumber;
-
-                // Transacción para obtener e incrementar el contador de pedidos
-                await runTransaction(db, async (transaction) => {
-                    const orderCounterRef = doc(db, ORDER_COUNTER_PATH);
-                    const counterSnap = await transaction.get(orderCounterRef);
-                    let currentCount = 0;
-
-                    if (counterSnap.exists()) {
-                        currentCount = counterSnap.data().lastOrderNumber || 0;
-                    }
-
-                    const newCount = currentCount + 1;
-                    orderNumber = STARTING_ORDER_NUMBER + newCount;
-
-                    // Actualizar el contador
-                    transaction.set(orderCounterRef, { lastOrderNumber: newCount }, { merge: true });
-                });
-
-                // Limpiar el carrito (eliminar todos los documentos de la colección)
-                const deletePromises = [];
-                querySnapshot.forEach((docSnap) => {
-                    // Se debe crear una referencia de documento completa para deleteDoc
-                    const docToDeleteRef = doc(db, cartRef.path, docSnap.id);
-                    deletePromises.push(deleteDoc(docToDeleteRef));
-                });
-                await Promise.all(deletePromises);
-
-                window.showMessage(`¡Compra finalizada! Número de pedido: #${orderNumber}. Revisa tu correo electrónico.`, 'success');
-
-                const cartModal = document.getElementById('cart-modal');
-                if (cartModal) {
-                    cartModal.classList.add('hidden');
-                    document.body.classList.remove('overflow-hidden');
-                }
-
-                // Opcional: Simular redirección a Instagram
-                console.log(`Simulando redirección a Instagram para el pedido #${orderNumber}`);
-
-            } catch (error) {
-                console.error("Error al finalizar la compra:", error);
-                window.showMessage(`Error al finalizar la compra: ${error.message}`, 'error');
-            } finally {
-                if (checkoutButton) {
-                    checkoutButton.disabled = false;
-                    checkoutButton.classList.remove('opacity-50', 'cursor-not-allowed');
-                }
-            }
-        }
-        // --- FIN DE FUNCIONES GLOBALES ---
-
-        // Lógica de UI (Menú Móvil, Iconos, Botones de Carrito)
-        document.addEventListener('DOMContentLoaded', () => {
-            initializeFirebase(); 
-            
-            // Lógica para el menú móvil
-            const menuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener('click', () => {
-                    const icon = menuButton.querySelector('i');
-                    const isHidden = mobileMenu.classList.contains('hidden');
-                    mobileMenu.classList.toggle('hidden');
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Inicio</a>
+                    <a href="#featured-products" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Productos</a>
+                    <a href="#about-us" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Nosotros</a>
+                    <a href="#instagram-cta" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Novedades</a>
+                    <a href="#contact" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Contacto</a>
                     
-                    if (isHidden) {
-                        if (icon) icon.setAttribute('data-lucide', 'x');
-                    } else {
-                        if (icon) icon.setAttribute('data-lucide', 'menu');
-                    }
+                    <a href="https://www.instagram.com/eyasur.ok" target="_blank" class="flex items-center gap-2 px-4 py-2 border border-e-gold/50 rounded-full hover:bg-e-gold/10 transition duration-300 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-e-gold group-hover:text-pink-500 transition-colors"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        <span class="text-e-gold text-xs font-bold uppercase group-hover:text-e-text transition-colors">Visítanos en Instagram</span>
+                    </a>
+                </nav>
+
+                <div class="flex items-center space-x-5">
+                    <button onclick="openCart()" class="relative p-2 hover:scale-110 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-e-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                    </button>
                     
-                    if (typeof lucide !== 'undefined') {
-                        lucide.createIcons();
-                    }
-                });
-            }
-
-            // Listener para los botones "Añadir al carrito"
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const productId = e.currentTarget.getAttribute('data-id');
-                    if (productId) {
-                        // Llamada a la función global con el ID correcto
-                        window.addToCart(productId);
-                    }
-                });
-            });
-
-
-            // Renderizar iconos iniciales
-            if (typeof lucide !== 'undefined') {
-                lucide.createIcons();
-            }
-        });
-        
-    </script>
-
-    <!-- Contenedor principal para mensajes flotantes (fixed y sin pointer-events) -->
-    <!-- Z-Index alto (z-[100]) para asegurar visibilidad sobre todos los modales. -->
-    <div id="message-container" class="fixed top-4 right-4 z-[100] space-y-2"></div>
-
-    <!-- Header / Navegación -->
-    <header class="sticky top-0 z-50 bg-black-deep/95 backdrop-blur-sm border-b border-rosegold/20">
-        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold tracking-widest text-gold">EyASur.Ok</div>
-            
-            <!-- Menú Desktop -->
-            <div class="hidden md:flex space-x-8">
-                <a href="#inicio" class="text-silver hover:text-gold transition-colors font-medium">Inicio</a>
-                <a href="#coleccion" class="text-silver hover:text-gold transition-colors font-medium">Colección</a>
-                <a href="#servicios" class="text-silver hover:text-gold transition-colors font-medium">Servicios</a>
-                <a href="#contacto" class="text-silver hover:text-gold transition-colors font-medium">Contacto</a>
-            </div>
-
-            <!-- Iconos de Usuario y Carrito (Desktop) -->
-            <div class="flex items-center space-x-4">
-                 <div class="text-xs text-silver/50 hidden lg:block truncate max-w-[150px]">
-                    ID: <span id="user-id-display" class="font-mono">Cargando...</span>
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-e-gold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                    </button>
                 </div>
-                <button id="cart-button" onclick="window.toggleCartModal()" class="relative text-silver hover:text-gold transition-colors p-2 rounded-full" title="Carrito de Compras" aria-label="Abrir Carrito">
-                    <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-                    <span id="cart-counter" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-black-deep transform translate-x-1/2 -translate-y-1/2 bg-gold rounded-full ring-2 ring-black-deep hidden">0</span>
-                </button>
-                
-                <!-- Botón de Menú Móvil -->
-                <button id="mobile-menu-button" class="md:hidden text-silver p-2 rounded-full" aria-label="Abrir Menú">
-                    <i data-lucide="menu" class="w-6 h-6"></i>
-                </button>
             </div>
-        </nav>
-        
-        <!-- Menú Móvil (Desplegable) -->
-        <div id="mobile-menu" class="md:hidden hidden">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-rosegold/10">
-                <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-silver hover:bg-rosegold/10 hover:text-gold transition-colors">Inicio</a>
-                <a href="#coleccion" class="block px-3 py-2 rounded-md text-base font-medium text-silver hover:bg-rosegold/10 hover:text-gold transition-colors">Colección</a>
-                <a href="#servicios" class="block px-3 py-2 rounded-md text-base font-medium text-silver hover:bg-rosegold/10 hover:text-gold transition-colors">Servicios</a>
-                <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium text-silver hover:bg-rosegold/10 hover:text-gold transition-colors">Contacto</a>
-            </div>
+
+            <nav id="mobile-menu-links" class="mobile-menu md:hidden pb-6 bg-e-dark border-t border-gray-800">
+                <a href="#" class="mobile-link block px-4 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Inicio</a>
+                <a href="#featured-products" class="mobile-link block px-4 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Productos</a>
+                <a href="#about-us" class="mobile-link block px-4 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Nosotros</a>
+                <a href="#instagram-cta" class="mobile-link block px-4 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Novedades</a>
+                <a href="#contact" class="mobile-link block px-4 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Contacto</a>
+                <a href="https://www.instagram.com/eyasur.ok" target="_blank" class="mobile-link block px-4 py-3 text-e-gold hover:bg-gray-900 font-bold text-sm uppercase tracking-widest">
+                    Visítanos en Instagram
+                </a>
+            </nav>
         </div>
     </header>
 
     <main>
-        <!-- Sección de Inicio (Hero) -->
-        <section id="inicio" class="relative overflow-hidden pt-24 pb-12 md:pt-32 md:pb-20 bg-gradient-to-br from-black-deep to-gray-900/50 min-h-[60vh]">
-            <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-between">
-                <!-- Contenido de Texto -->
-                <div class="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0">
-                    <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-white-ghost mb-4">
-                        Arte con <span class="text-gold">Lujo Metalizado</span>
-                    </h1>
-                    <p class="text-xl md:text-2xl text-rosegold/80 mb-8 font-light">
-                        Donde la elegancia se encuentra con la vanguardia. Descubre piezas únicas que transformarán tu espacio.
-                    </p>
-                    <a href="#coleccion" class="btn-gold inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-semibold rounded-full shadow-lg hover:shadow-xl transition duration-300 uppercase tracking-wider">
-                        Ver Colección Ahora
-                    </a>
-                </div>
-                
-                <!-- Imagen/Placeholder (Adaptado a la temática) -->
-                <div class="lg:w-1/2 flex justify-center">
-                    <img src="https://placehold.co/500x350/0A0A0A/FFD700?text=EyASur.Ok%0AColecci%C3%B3n+Exclusiva" 
-                         alt="Arte moderno metalizado" 
-                         class="w-full max-w-md rounded-2xl shadow-[0_0_50px_rgba(255,215,0,0.1),0_0_100px_rgba(183,110,121,0.2)] border border-gold/10 transition duration-500 hover:scale-[1.05] object-cover">
-                </div>
+        <section id="inicio" class="relative py-32 md:py-48 px-4 flex items-center justify-center text-center overflow-hidden">
+            <div class="background-zoom-effect"></div>
+            <div class="relative z-10 p-10 md:p-16 max-w-5xl mx-auto rounded-sm shiny-border-box">
+                <h1 class="text-5xl md:text-7xl font-serif-fancy mb-6 text-e-gold drop-shadow-lg">
+                    Fragancias y Vapers <br/><span class="text-white text-4xl md:text-6xl italic">Exclusivos</span>
+                </h1>
+                <p class="text-lg md:text-xl text-e-silver mb-12 font-sans-elegant tracking-wide max-w-2xl mx-auto">
+                    Descubre la esencia del lujo. Envíos seguros a todo el país.
+                </p>
+                <a href="#featured-products" class="inline-block bg-e-gold text-black font-bold py-4 px-10 rounded-sm hover:bg-white transition duration-500 tracking-widest text-sm uppercase shadow-[0_0_20px_rgba(212,175,55,0.5)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)]">
+                    Ver Colección
+                </a>
             </div>
         </section>
 
-        <!-- Sección de Colección Exclusiva -->
-        <section id="coleccion" class="py-16 md:py-24 bg-color-black-deep text-color-silver">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl md:text-5xl font-extrabold text-center mb-12 text-gold uppercase tracking-widest">
-                    Colección Exclusiva
-                </h2>
+        <section id="featured-products" class="py-20 px-4 bg-e-dark">
+            <div class="max-w-7xl mx-auto">
+                <h2 class="text-4xl font-serif-fancy text-center mb-16 text-e-gold">Selección Premium</h2>
                 
-                <!-- CUADROS DE LA COLECCIÓN (Añadir al Carrito Corregido) -->
-                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                     
-                    <!-- Producto 1: Éxtasis Dorado (ID: 1) -->
-                    <div class="product-card bg-gray-900/50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] border border-rosegold/30">
-                        <img src="https://placehold.co/600x400/111827/FFD700?text=Éxtasis+Dorado" 
-                             alt="Cuadro Éxtasis Dorado" 
-                             class="w-full h-48 object-cover rounded-lg mb-4 border border-gold/20">
-                        <h3 class="text-2xl font-bold text-gold mb-2">Éxtasis Dorado</h3>
-                        <p class="text-sm text-rosegold mb-4">Arte Abstracto. 120x80cm.</p>
-                        <p class="text-silver mb-4 line-clamp-3">Una explosión de pan de oro y resina sobre lienzo negro, capturando el movimiento y la luz. Perfecto para salas de estar modernas.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-extrabold text-white-ghost">$4.500 USD</span>
-                            <button class="btn-gold px-4 py-2 text-sm font-semibold rounded-full uppercase add-to-cart" data-id="1">
-                                Añadir 
-                                <i data-lucide="shopping-cart" class="w-4 h-4 inline ml-1"></i>
+                    <div class="product-card h-96 rounded-sm relative group overflow-hidden"
+                         style="background-image: url('https://img.freepik.com/premium-photo/luxurious-perfume-bottle-with-golden-details-dark-background_7023-421979.jpg?w=360');">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition duration-500"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 text-center">
+                            <h3 class="text-3xl font-serif-fancy text-white mb-2">Perfumes</h3>
+                            <button onclick="addToCart(1, 'Perfumes Gold', 8500)"
+                                    class="mb-4 inline-block border border-e-gold text-e-gold px-6 py-2 rounded-sm font-bold backdrop-blur-sm cursor-pointer hover:bg-e-gold hover:text-black transition duration-300">
+                                $8.500 | Agregar
                             </button>
+                            <a href="https://www.instagram.com/eyasur.ok" target="_blank" 
+                                class="block w-full text-e-gold border border-e-gold/50 py-2 text-sm font-bold uppercase hover:bg-e-gold/10 transition duration-300">
+                                Mirá la las fragancias disponibles
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Producto 2: Esencia Nocturna (ID: 2) -->
-                    <div class="product-card bg-gray-900/50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] border border-rosegold/30">
-                        <img src="https://placehold.co/600x400/111827/B76E79?text=Esencia+Nocturna" 
-                             alt="Cuadro Esencia Nocturna" 
-                             class="w-full h-48 object-cover rounded-lg mb-4 border border-rosegold/20">
-                        <h3 class="text-2xl font-bold text-gold mb-2">Esencia Nocturna</h3>
-                        <p class="text-sm text-rosegold mb-4">Minimalismo. 60x60cm.</p>
-                        <p class="text-silver mb-4 line-clamp-3">Un estudio de la oscuridad con acentos sutiles de oro rosa. Trae calma y profundidad a cualquier dormitorio o estudio.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-extrabold text-white-ghost">$2.800 USD</span>
-                            <button class="btn-gold px-4 py-2 text-sm font-semibold rounded-full uppercase add-to-cart" data-id="2">
-                                Añadir 
-                                <i data-lucide="shopping-cart" class="w-4 h-4 inline ml-1"></i>
+                    <div class="product-card h-96 rounded-sm relative group overflow-hidden"
+                         style="background-image: url('https://scontent-eze1-2.xx.fbcdn.net/v/t39.30808-6/491949787_1185299673605784_8229986934607711890_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=1s-8NSaXdrAQ7kNvwFvB29D&_nc_oc=Adnveb58J4FYyOy1xYEHCZFQPyoszmDlKHhITpMCjWTDqDKYi6suwwBH6dlQGIuPZAw&_nc_zt=23&_nc_ht=scontent-eze1-2.xx&_nc_gid=iigdqveUOJl6YiFWEvzhKg&oh=00_Afi0_e4lL1g43T2SpzGpEvYvqM1e_KWn3PbFgT24eeD4rA&oe=69206776');">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition duration-500"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 text-center">
+                            <h3 class="text-3xl font-serif-fancy text-white mb-2">Vapers</h3>
+                            <button onclick="addToCart(2, 'Vapers Desechables', 40000)"
+                                    class="mb-4 inline-block border border-e-gold text-e-gold px-6 py-2 rounded-sm font-bold backdrop-blur-sm cursor-pointer hover:bg-e-gold hover:text-black transition duration-300">
+                                $40.000 | Agregar
                             </button>
+                            <a href="https://www.instagram.com/eyasur.ok" target="_blank" 
+                                class="block w-full text-e-gold border border-e-gold/50 py-2 text-sm font-bold uppercase hover:bg-e-gold/10 transition duration-300">
+                                Mirá los sabores disponibles
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Producto 3: Fénix de Plata (ID: 4) -->
-                    <div class="product-card bg-gray-900/50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-[1.02] border border-rosegold/30">
-                        <img src="https://placehold.co/600x400/111827/D4D4D4?text=F%C3%A9nix+de+Plata" 
-                             alt="Cuadro Fénix de Plata" 
-                             class="w-full h-48 object-cover rounded-lg mb-4 border border-silver/20">
-                        <h3 class="text-2xl font-bold text-gold mb-2">Fénix de Plata</h3>
-                        <p class="text-sm text-rosegold mb-4">Figurativo. 100x150cm.</p>
-                        <p class="text-silver mb-4 line-clamp-3">Representación dramática de un ave mítica con texturas de plata líquida. Una pieza central impactante.</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-xl font-extrabold text-white-ghost">$6.200 USD</span>
-                            <button class="btn-gold px-4 py-2 text-sm font-semibold rounded-full uppercase add-to-cart" data-id="4">
-                                Añadir 
-                                <i data-lucide="shopping-cart" class="w-4 h-4 inline ml-1"></i>
+                    <div class="product-card h-96 rounded-sm relative group overflow-hidden"
+                         style="background-image: url('https://media.istockphoto.com/id/1366568938/photo/three-black-gift-boxes.jpg?s=612x612&w=0&k=20&c=0fIIMIIpdmw3b3cFSo3yC_wRPYp67J4ZLQ0RhA31MdQ=');">
+                        <div class="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition duration-500"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 text-center">
+                            <h3 class="text-3xl font-serif-fancy text-white mb-2">Set de Lujo</h3>
+                            <button onclick="addToCart(3, 'Set de Lujo Premium', 70000)"
+                                    class="mb-4 inline-block border border-e-gold text-e-gold px-6 py-2 rounded-sm font-bold backdrop-blur-sm cursor-pointer hover:bg-e-gold hover:text-black transition duration-300">
+                                $70.000 | Agregar
                             </button>
+                            <a href="https://www.instagram.com/eyasur.ok" target="_blank" 
+                                class="block w-full text-e-gold border border-e-gold/50 py-2 text-sm font-bold uppercase hover:bg-e-gold/10 transition duration-300">
+                                Mirá cómo quedaría
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Otras Secciones (Servicios y Contacto, simplificadas) -->
-        <section id="servicios" class="py-16 md:py-24 bg-gray-900/50">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gold">Nuestros Servicios</h2>
-                <p class="text-rosegold text-lg mb-8">Personalización y asesoramiento exclusivo.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="p-6 bg-black-deep rounded-xl border border-rosegold/20 shadow-xl">
-                        <i data-lucide="palette" class="w-10 h-10 mx-auto text-gold mb-3"></i>
-                        <h3 class="text-xl font-bold mb-2">Arte a Medida</h3>
-                        <p class="text-sm text-silver/80">Creación de piezas personalizadas según sus especificaciones de tamaño y paleta.</p>
-                    </div>
-                    <div class="p-6 bg-black-deep rounded-xl border border-rosegold/20 shadow-xl">
-                        <i data-lucide="shield-check" class="w-10 h-10 mx-auto text-gold mb-3"></i>
-                        <h3 class="text-xl font-bold mb-2">Certificación</h3>
-                        <p class="text-sm text-silver/80">Todas las obras vienen con un certificado de autenticidad y origen de los materiales.</p>
-                    </div>
-                    <div class="p-6 bg-black-deep rounded-xl border border-rosegold/20 shadow-xl">
-                        <i data-lucide="send" class="w-10 h-10 mx-auto text-gold mb-3"></i>
-                        <h3 class="text-xl font-bold mb-2">Envío Global</h3>
-                        <p class="text-sm text-silver/80">Embalaje de lujo y envío seguro a cualquier parte del mundo.</p>
+        <section id="about-us" class="py-20 px-4 bg-e-panel border-t border-e-gold/20">
+            <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 text-left">
+                    <h2 class="text-4xl font-serif-fancy text-e-gold mb-6">Sobre Nosotros</h2>
+                    <div class="w-16 h-1 bg-e-gold mb-6"></div>
+                    <p class="text-e-silver text-lg leading-relaxed mb-4 font-sans-elegant">
+                        En <span class="text-e-text font-bold">EyASur.Ok</span>, nos dedicamos apasionadamente a la comercialización de experiencias sensoriales únicas.
+                    </p>
+                    <p class="text-e-silver text-lg leading-relaxed mb-4 font-sans-elegant">
+                        Nos especializamos en traer al mercado las fragancias importadas más exclusivas y los dispositivos de vapeo (Vapers) de mayor calidad y tendencia mundial.
+                    </p>
+                    <p class="text-e-silver text-lg leading-relaxed font-sans-elegant">
+                        Nuestro compromiso es la <span class="text-e-gold">autenticidad</span> y la satisfacción del cliente, garantizando envíos seguros y una atención personalizada en cada pedido.
+                    </p>
+                </div>
+                <div class="md:w-1/2 w-full">
+                    <div class="relative p-1 bg-gradient-to-tr from-e-gold to-transparent rounded-lg">
+                        <div class="bg-e-dark p-8 rounded-lg border border-e-gold/20 text-center shadow-2xl">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-e-gold mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                            <h3 class="text-2xl text-white font-serif-fancy mb-2">Calidad Gold</h3>
+                            <p class="text-gray-400 text-sm">Solo productos seleccionados bajo los más altos estándares.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contacto" class="py-16 md:py-24 bg-color-black-deep">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-gold">Contáctenos</h2>
-                <p class="text-rosegold text-lg mb-8 max-w-xl mx-auto">Nuestro equipo de expertos en arte está listo para asistirte.</p>
-                <!-- Formulario de Contacto (Placeholder) -->
-                <form class="max-w-lg mx-auto space-y-4">
-                    <input type="text" placeholder="Nombre completo" class="w-full p-3 rounded-lg bg-gray-800 text-silver border border-rosegold/30 focus:border-gold focus:ring-1 focus:ring-gold transition-colors" required>
-                    <input type="email" placeholder="Correo electrónico" class="w-full p-3 rounded-lg bg-gray-800 text-silver border border-rosegold/30 focus:border-gold focus:ring-1 focus:ring-gold transition-colors" required>
-                    <textarea rows="4" placeholder="Su mensaje o consulta" class="w-full p-3 rounded-lg bg-gray-800 text-silver border border-rosegold/30 focus:border-gold focus:ring-1 focus:ring-gold transition-colors" required></textarea>
-                    <button type="submit" class="btn-gold w-full py-3 font-semibold rounded-full shadow-lg hover:shadow-xl transition duration-300">Enviar Mensaje</button>
+        <section id="instagram-cta" class="py-16 px-4 bg-e-dark border-t border-gray-900">
+            <div class="max-w-4xl mx-auto text-center shiny-border-box p-8">
+                <h3 class="text-2xl font-serif-fancy text-white mb-6">
+                    Mantenete actualizado con nuestras últimas novedades en Fragancias y Vaporizadores
+                </h3>
+                <a href="https://www.instagram.com/eyasur.ok" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-8 rounded-sm hover:opacity-90 transition shadow-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    Síguenos en Instagram
+                </a>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 px-4 bg-e-dark border-t border-gray-900">
+            <div class="max-w-2xl mx-auto bg-e-panel p-10 rounded-sm border border-gray-800 shadow-2xl">
+                <h2 class="text-3xl font-serif-fancy text-center mb-10 text-e-text">Contacto Directo</h2>
+                
+                <form id="contact-form" action="https://formsubmit.co/ericdavidmorgan.dc@gmail.com" method="POST" target="hidden-iframe" onsubmit="return handleContactSubmit()">
+                    
+                    <input type="hidden" name="_subject" value="Nuevo Mensaje de Contacto">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-e-gold mb-2">Nombre</label>
+                            <input type="text" name="name" required class="w-full px-4 py-3 rounded-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-e-gold mb-2">Email</label>
+                            <input type="email" name="email" required class="w-full px-4 py-3 rounded-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase tracking-widest text-e-gold mb-2">Mensaje</label>
+                            <textarea name="message" rows="4" required class="w-full px-4 py-3 rounded-sm"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-e-gold text-black font-bold py-4 uppercase tracking-widest hover:bg-white transition duration-300">
+                            Enviar Mensaje
+                        </button>
+                    </div>
                 </form>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900/50 border-t border-rosegold/20 py-8">
-        <div class="container mx-auto px-4 text-center text-sm text-silver/70">
-            <p>&copy; 2025 EyASur.Ok. Todos los derechos reservados.</p>
-            <div class="mt-2 space-x-4">
-                <a href="#" class="hover:text-gold transition-colors">Política de Privacidad</a>
-                <a href="#" class="hover:text-gold transition-colors">Términos de Servicio</a>
-            </div>
-        </div>
+    <footer class="bg-black text-gray-500 py-10 text-center border-t border-gray-900">
+        <p class="text-sm">&copy; 2025 EyASur.Ok. Todos los derechos reservados.</p>
+        <p class="text-xs mt-2 text-e-gold/50">Diseño Gold Exclusivo</p>
     </footer>
 
-    <!-- Modal del Carrito -->
-    <div id="cart-modal" class="fixed inset-0 bg-black-deep/90 backdrop-blur-sm z-50 hidden" onclick="if(event.target.id === 'cart-modal') window.toggleCartModal()">
-        
-        <!-- Contenido del Modal (Panel lateral) -->
-        <div class="absolute top-0 right-0 w-full max-w-sm h-full bg-gray-900 border-l border-gold/50 shadow-2xl flex flex-col transform translate-x-0 transition-transform duration-300">
-            
-            <!-- Encabezado del Carrito -->
-            <div class="flex justify-between items-center p-5 border-b border-gold/20 bg-gray-900 sticky top-0">
-                <h3 class="text-3xl font-bold text-gold">Tu Carrito</h3>
-                <button onclick="window.toggleCartModal()" class="text-silver hover:text-gold transition-colors p-2 rounded-full hover:bg-black-deep/50" aria-label="Cerrar Carrito">
-                    <i data-lucide="x" class="w-7 h-7"></i>
-                </button>
-            </div>
-
-            <!-- Ítems del Carrito (Contenedor con scroll) -->
-            <div id="cart-items-container" class="flex-grow overflow-y-auto custom-scrollbar">
-                <!-- Los ítems se insertan aquí mediante JavaScript -->
-            </div>
-
-            <!-- Botón de Checkout/Finalizar Compra -->
-            <div class="p-5 border-t border-gold/20 bg-gray-900 sticky bottom-0">
-                <p class="text-xl font-bold text-silver mb-3 flex justify-between">
-                    <span>Total Estimado:</span>
-                    <span class="text-gold">$<span id="cart-total-display">0.00</span></span>
-                </p>
+    <div id="cart-modal" class="fixed inset-0 bg-black/90 z-50 hidden justify-center items-center p-4 backdrop-blur-sm">
+        <div class="bg-e-panel border border-e-gold/30 w-full max-w-lg rounded-sm shadow-2xl">
+            <div class="p-6">
+                <div class="flex justify-between items-center border-b border-gray-700 pb-4 mb-4">
+                    <h3 class="text-2xl font-serif-fancy text-e-gold">Tu Selección</h3>
+                    <button onclick="closeCart()" class="text-gray-400 hover:text-white text-3xl">&times;</button>
+                </div>
                 
-                <button id="checkout-button" onclick="window.checkout()"
-                    class="w-full btn-gold py-3 rounded-full font-bold text-lg hover:shadow-xl transition-all">
-                    Finalizar Compra
-                </button>
-            </div>
+                <div id="cart-items-list" class="max-h-64 overflow-y-auto space-y-4 mb-6 pr-2"></div>
+                
+                <p id="empty-cart-message" class="text-center text-gray-500 py-4">El carrito está vacío.</p>
 
-            <!-- Nota de usuario -->
-            <div class="p-2 bg-rosegold/10 text-xs text-silver/70 text-center border-t border-rosegold/30">
-                <i data-lucide="user" class="w-4 h-4 inline mr-1"></i>
-                ID de Sesión: <span class="font-mono text-gold/80" id="user-id-display-modal">Cargando...</span>
+                <div class="pt-4 border-t border-gray-700">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-lg text-gray-300">Total:</span>
+                        <span id="cart-total" class="text-2xl font-bold text-e-gold">$0.00</span>
+                    </div>
+                    <button id="btn-init-checkout" onclick="openCheckout()" disabled class="w-full bg-e-gold text-black font-bold py-3 uppercase tracking-widest hover:bg-white transition disabled:opacity-50 disabled:cursor-not-allowed">
+                        Iniciar Compra
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
+    <div id="checkout-modal" class="fixed inset-0 bg-black/95 z-[60] hidden justify-center items-center p-4 backdrop-blur-md">
+        <div class="bg-e-panel border border-e-gold/50 w-full max-w-md rounded-sm shadow-2xl animate-fade-in">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-serif-fancy text-white">Finalizar Pedido</h3>
+                    <button onclick="closeCheckout()" class="text-gray-400 hover:text-white text-2xl">&times;</button>
+                </div>
 
+                <div class="mb-8 text-center bg-black/40 p-4 rounded border border-e-gold/20">
+                    <p class="text-gray-400 text-xs uppercase tracking-widest">Total a Pagar</p>
+                    <p id="checkout-total-display" class="text-3xl font-serif-fancy text-e-gold mt-1">$0.00</p>
+                </div>
+
+                <form id="order-form" action="https://formsubmit.co/ericdavidmorgan.dc@gmail.com" method="POST" target="hidden-iframe" onsubmit="return handleOrderSubmit()">
+                    
+                    <input type="hidden" name="_subject" value="NUEVO PEDIDO DE VENTA - EyASur">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <input type="hidden" name="Numero_Orden" id="hidden-order-id">
+                    <input type="hidden" name="Detalle_Pedido" id="hidden-order-details">
+                    <input type="hidden" name="Monto_Total" id="hidden-order-total">
+                    <input type="hidden" name="_cc" id="hidden-customer-cc">
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="text-xs text-e-gold uppercase">Nombre Completo</label>
+                            <input type="text" name="Nombre" required class="w-full mt-1 px-3 py-2 bg-black border border-gray-700 text-white focus:border-e-gold">
+                        </div>
+                        <div>
+                            <label class="text-xs text-e-gold uppercase">Email</label>
+                            <input type="email" name="Email" required class="w-full mt-1 px-3 py-2 bg-black border border-gray-700 text-white focus:border-e-gold">
+                        </div>
+                        <div>
+                            <label class="text-xs text-e-gold uppercase">Whatsapp / Teléfono</label>
+                            <input type="text" name="Telefono" required class="w-full mt-1 px-3 py-2 bg-black border border-gray-700 text-white focus:border-e-gold">
+                        </div>
+                        <button type="submit" class="w-full mt-4 bg-e-gold text-black font-bold py-3 uppercase hover:bg-white transition shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                            Confirmar y Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="final-modal" class="fixed inset-0 bg-black/95 z-[70] hidden justify-center items-center p-4">
+        <div class="bg-e-panel border-t-4 border-e-gold w-full max-w-md p-8 text-center shadow-2xl rounded-sm">
+            <div class="mb-4 text-e-gold flex justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            </div>
+            <h3 class="text-3xl font-serif-fancy text-white mb-2">¡Pedido Enviado!</h3>
+            <p class="text-gray-400 mb-8">Recibirás un correo de confirmación. Para agilizar tu compra, escríbenos al Instagram.</p>
+            
+            <div class="space-y-3">
+                <button onclick="finishProcess('instagram')" class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-sm hover:opacity-90 transition flex justify-center items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    Ir a Instagram
+                </button>
+                <button onclick="finishProcess('shop')" class="w-full py-3 bg-transparent border border-gray-600 text-gray-300 hover:text-white hover:border-white transition">
+                    Seguir Comprando
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <iframe name="hidden-iframe" style="display:none;"></iframe>
+
+    <script>
+        // Variables
+        let cart = [];
+        let currentOrderNumber = ''; // Ahora es un string de fecha/hora
+        const INSTAGRAM_URL = "https://www.instagram.com/eyasur.ok";
+
+        // --- SISTEMA DE ORDEN (Formato #HHMM-DDMM) ---
+        function generateTimeBasedOrderNumber() {
+            const now = new Date();
+            
+            // HH (12-hour format)
+            let hours = now.getHours();
+            hours = hours % 12; 
+            hours = hours ? hours : 12; // 0 (medianoche) se convierte a 12
+            
+            const HH = String(hours).padStart(2, '0');
+            const MM_minutes = String(now.getMinutes()).padStart(2, '0');
+            const DD = String(now.getDate()).padStart(2, '0');
+            const MM_month = String(now.getMonth() + 1).padStart(2, '0'); 
+
+            return `#${HH}${MM_minutes}-${DD}${MM_month}`;
+        }
+        
+        // --- MENÚ MÓVIL AUTOMÁTICO ---
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu-links').classList.remove('open');
+            });
+        });
+
+        // --- CARRITO ---
+        window.addToCart = function(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cart.push({ id: id, name: name, price: price, qty: 1 });
+            }
+            renderCart();
+            showNotification(`Agregado: ${name}`, 'success');
+        };
+
+        window.updateQty = function(index, change) {
+            if (cart[index].qty + change <= 0) {
+                cart.splice(index, 1);
+            } else {
+                cart[index].qty += change;
+            }
+            renderCart();
+        };
+
+        window.removeFromCart = function(index) {
+            cart.splice(index, 1);
+            renderCart();
+        };
+
+        function renderCart() {
+            const list = document.getElementById('cart-items-list');
+            const emptyMsg = document.getElementById('empty-cart-message');
+            const totalEl = document.getElementById('cart-total');
+            const countEl = document.getElementById('cart-count');
+            const checkoutBtn = document.getElementById('btn-init-checkout');
+
+            let total = 0;
+            let count = 0;
+            
+            list.innerHTML = '';
+
+            if (cart.length === 0) {
+                emptyMsg.style.display = 'block';
+                checkoutBtn.disabled = true;
+                checkoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                emptyMsg.style.display = 'none';
+                checkoutBtn.disabled = false;
+                checkoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+                cart.forEach((item, index) => {
+                    total += item.price * item.qty;
+                    count += item.qty;
+
+                    const div = document.createElement('div');
+                    div.className = 'flex justify-between items-center bg-black/40 p-3 rounded border border-gray-700';
+                    div.innerHTML = `
+                        <div>
+                            <p class="font-bold text-white text-sm">${item.name}</p>
+                            <p class="text-xs text-e-gold">$${item.price} c/u</p>
+                        </div>
+                        <div class="flex items-center gap-3 bg-e-dark border border-gray-600 rounded px-2 py-1">
+                            <button onclick="updateQty(${index}, -1)" class="text-gray-400 hover:text-white font-bold text-lg px-1">-</button>
+                            <span class="text-white font-bold text-sm w-4 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${index}, 1)" class="text-e-gold hover:text-white font-bold text-lg px-1">+</button>
+                        </div>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+
+            const formattedTotal = `$${total.toLocaleString('es-AR')}`;
+            totalEl.innerText = formattedTotal;
+            countEl.innerText = count;
+            
+            document.getElementById('checkout-total-display').innerText = formattedTotal;
+            document.getElementById('hidden-order-total').value = formattedTotal;
+        }
+
+        // --- MODALES ---
+        window.openCart = function() { document.getElementById('cart-modal').classList.replace('hidden', 'flex'); };
+        window.closeCart = function() { document.getElementById('cart-modal').classList.replace('flex', 'hidden'); };
+
+        window.openCheckout = function() {
+            closeCart();
+            currentOrderNumber = generateTimeBasedOrderNumber();
+            
+            document.getElementById('hidden-order-id').value = currentOrderNumber;
+            
+            const detalles = cart.map(i => `${i.name} (Cant: ${i.qty}) - $${i.price * i.qty}`).join(' | ');
+            document.getElementById('hidden-order-details').value = detalles;
+            
+            document.getElementById('checkout-modal').classList.replace('hidden', 'flex');
+        };
+        window.closeCheckout = function() { document.getElementById('checkout-modal').classList.replace('flex', 'hidden'); };
+        window.closeFinalModal = function() { document.getElementById('final-modal').classList.replace('flex', 'hidden'); };
+
+        // --- MANEJO DE FORMULARIOS ---
+        window.handleContactSubmit = function() {
+            setTimeout(() => {
+                document.getElementById('contact-form').reset();
+                showNotification('Mensaje enviado correctamente', 'success');
+            }, 1500);
+            return true;
+        };
+
+        window.handleOrderSubmit = function() {
+            // MODIFICACIÓN 1: Obtener el email del cliente y asignarlo al campo _cc para la copia del mail
+            const customerEmail = document.querySelector('input[name="Email"]').value;
+            document.getElementById('hidden-customer-cc').value = customerEmail; 
+            
+            setTimeout(() => {
+                closeCheckout();
+                document.getElementById('final-modal').classList.replace('hidden', 'flex');
+                cart = [];
+                renderCart();
+                document.getElementById('order-form').reset();
+            }, 1000);
+            return true;
+        };
+
+        // --- ACCIÓN FINAL (Instagram o Shop) Y NOTIFICACIÓN DE ORDEN ---
+        window.finishProcess = function(action) {
+            closeFinalModal();
+            
+            const orderMsg = `Se envió tu pedido. Tu número de orden es: ${currentOrderNumber}`;
+            
+            // MODIFICACIÓN 2: Guardar la notificación para hacerla persistente
+            localStorage.setItem('eyasur_pending_order_notification', JSON.stringify({
+                msg: orderMsg,
+                type: 'order'
+            }));
+            
+            showNotification(orderMsg, 'order'); 
+
+            if (action === 'instagram') {
+                setTimeout(() => {
+                    window.open(INSTAGRAM_URL, '_blank');
+                }, 1500);
+            }
+        };
+
+        window.toggleMobileMenu = function() {
+            document.getElementById('mobile-menu-links').classList.toggle('open');
+        };
+
+        // --- NOTIFICACIONES CON PERSISTENCIA ---
+        function showNotification(msg, type) {
+            const container = document.getElementById('notification-container');
+            const div = document.createElement('div');
+            
+            let borderClass = type === 'success' ? 'border-green-500' : (type === 'order' ? 'border-blue-500' : 'border-e-gold');
+            let icon = type === 'success' ? '✨' : (type === 'order' ? '🧾' : '🔔');
+
+            div.className = `bg-e-panel border-l-4 ${borderClass} text-white px-4 py-4 shadow-2xl rounded-sm animate-bounce flex items-center justify-between gap-4 min-w-[300px] pointer-events-auto`;
+            div.style.animation = "fadeIn 0.5s";
+            
+            div.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">${icon}</span>
+                    <p class="font-bold text-sm">${msg}</p>
+                </div>
+                <button class="text-gray-400 hover:text-white font-bold px-2">✕</button>
+            `;
+            
+            container.appendChild(div);
+            
+            const closeButton = div.querySelector('button');
+
+            if (type !== 'order') {
+                // Notificaciones temporales (5 segundos)
+                closeButton.onclick = function() { div.remove(); };
+                setTimeout(() => {
+                    if(div.parentNode) div.remove();
+                }, 5000);
+            } else {
+                // MODIFICACIÓN 2: Notificación persistente
+                closeButton.onclick = function(e) {
+                    e.preventDefault(); 
+                    div.remove();
+                    // Limpiar la memoria local solo cuando se cierra manualmente
+                    localStorage.removeItem('eyasur_pending_order_notification');
+                };
+            }
+        }
+        
+        // --- INICIAR VERIFICACIÓN DE NOTIFICACIONES PENDIENTES ---
+        function checkPersistentNotification() {
+            const stored = localStorage.getItem('eyasur_pending_order_notification');
+            if (stored) {
+                const data = JSON.parse(stored);
+                // Mostrar la notificación que se hará persistente automáticamente por showNotification
+                showNotification(data.msg, data.type); 
+            }
+        }
+
+        // Ejecutar al cargar la página
+        document.addEventListener('DOMContentLoaded', checkPersistentNotification);
+    </script>
 </body>
 </html>
