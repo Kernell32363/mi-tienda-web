@@ -37,7 +37,7 @@
         /* Importación de imagen */
        @import url('https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775');
       
-        /* Fondo adaptable, centrado y con zoom más notorio */
+           /* Fondo adaptable, centrado y con zoom más notorio */
         .background-zoom-effect {
             position: absolute; top: 0; left: 0;width: 100%; height: 100%;
             background-image: url('https://disfragancias.com/cdn/shop/articles/envato-labs-ai-214adbf0-56f6-4e7e-a959-63afb6bff051_1024x1024.jpg?v=1750277775');
@@ -45,7 +45,7 @@
             background-position: center center; 
             background-repeat: no-repeat;
             /* MODIFICACIÓN: Animación más rápida y notoria */
-            transform: scale(1.0); animation: zoom-in-out 20s infinite alternate ease-in-out;
+            transform: scale(1.0); animation: zoom-in-out 10s infinite alternate ease-in-out;
             filter: brightness(0.4);
         }
         /* MODIFICACIÓN: Zoom final más intenso (de 1.0 a 1.25) */
@@ -55,7 +55,7 @@
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
             border: 1px solid rgba(212, 175, 55, 0.4);
             /* MODIFICACIÓN: Fondo más transparente (0.3) */
-            background: rgba(10, 10, 10, 0.3); backdrop-filter: blur(0.5px); 
+            background: rgba(10, 10, 10, 0.3); backdrop-filter: blur(0.1px); 
             transition: all 0.4s ease;
         }
         .shiny-border-box:hover { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); border-color: #D4AF37; }
