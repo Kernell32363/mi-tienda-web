@@ -550,7 +550,7 @@
         window.handleContactSubmit = function() {
             setTimeout(() => {
                 document.getElementById('contact-form').reset();
-                showNotification('Mensaje Enviado. En breve nos pondremos en contacto con vos para responder tu consulta ☺️', 'success');
+                showNotification('Mensaje Enviado. En breve nos pondremos en contacto para responder tu consulta ☺️', 'success');
             }, 1500);
             return true;
         };
@@ -575,7 +575,7 @@
             closeFinalModal();
             
             // Mostrar la notificación con el número de orden generado
-            showNotification(`Se envió tu pedido. Tu número de orden es: ${currentOrderNumber}`, 'order');
+            showNotification(`Tu pedido ya fué enviado ☺️. En breve recibirás un correo de confirmación. Tu número de orden es: ${currentOrderNumber}`, 'order');
 
            
             
