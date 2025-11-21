@@ -550,7 +550,7 @@
         window.handleContactSubmit = function() {
             setTimeout(() => {
                 document.getElementById('contact-form').reset();
-                showNotification('Mensaje Enviado. En breve nos pondremos en contacto con vos para responder tu consulta ☺️', 'success');
+                showNotification('Mensaje Enviado. En breve nos pondremos en contacto para responder tu consulta ☺️', 'success');
             }, 1500);
             return true;
         };
@@ -575,7 +575,7 @@
             closeFinalModal();
 
             
-            const orderMsg = `Se envió tu pedido. Tu número de orden es: ${currentOrderNumber}`;
+            const orderMsg = `Tu pedido ya fué enviado ☺️. En breve recibirás un correo de confirmación. Tu número de orden es: ${currentOrderNumber}`;
             // MODIFICACIÓN Verificar a partir de acá OJOOOO.!!!
             // MODIFICACIÓN (anterior): Guardar la notificación para hacerla persistente
             localStorage.setItem('eyasur_pending_order_notification', JSON.stringify({
