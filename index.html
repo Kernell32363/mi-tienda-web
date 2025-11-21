@@ -162,7 +162,7 @@
                     Fragancias y Vapers <br/><span class="text-white text-4xl md:text-6xl italic">Exclusivos</span>
                 </h1>
                 <p class="text-lg md:text-xl text-e-silver mb-12 font-sans-elegant tracking-wide max-w-2xl mx-auto">
-                    Descubrí y explorá las esencias y vaporizadores más buscados. Envíos seguros a todo el país 🇦🇷.
+                    Descubrí y explorá las esencias y vaporizadores más buscados. Envíos seguros a todo el país 🇦🇷
                 </p>
                 <a href="#featured-products" class="inline-block bg-e-gold text-black font-bold py-4 px-10 rounded-sm hover:bg-white transition duration-500 tracking-widest text-sm uppercase shadow-[0_0_20px_rgba(212,175,55,0.5)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)]">
                     Ver Colección
@@ -217,7 +217,7 @@
                                     class="mb-4 inline-block border border-e-gold text-e-gold px-6 py-2 rounded-sm font-bold backdrop-blur-sm cursor-pointer hover:bg-e-gold hover:text-black transition duration-300">
                                 $70.000 | Agregar
                             </button>
-                            <a href="https://www.instagram.com/eyasur.ok" target="_blank" 
+                            <a href="https://thumbs.dreamstime.com/b/regalo-de-perfume-lujo-para-mujeres-fragancia-%C3%A1mbar-caja-negra-cinta-seda-dorada-presentaci%C3%B3n-elegante-en-una-con-un-lujoso-y-la-386760814.jpg" target="_blank" 
                                 class="block w-full text-e-gold border border-e-gold/50 py-2 text-sm font-bold uppercase hover:bg-e-gold/10 transition duration-300">
                                 Mirá cómo quedaría tu Set
                             </a>
@@ -258,15 +258,11 @@
                 </div>
             </div>
         </section>
-
-      
-
+        
 <section id="instagram-cta" class="py-16 px-4 bg-e-dark border-t border-gray-900" style="background-image: url('https://st4.depositphotos.com/5366154/31119/i/450/depositphotos_311198154-stock-photo-gold-glitter-light-particles-splash.jpg'); background-size: cover; background-position: center;">
             <div class="max-w-4xl mx-auto text-center shiny-border-box p-8">
                 <h3 class="text-2xl font-serif-fancy text-white mb-6">
                     Mantenete actualizado con nuestras novedades en Fragancias y Vaporizadores y no te pierdas ninguna de nuestras historias.
-                </h3>
-                
                 </h3>
                 <a href="https://www.instagram.com/eyasur.ok" target="_blank" class="inline-flex items-center gap-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-3 px-8 rounded-sm hover:opacity-90 transition shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
@@ -391,7 +387,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>
             <h3 class="text-3xl font-serif-fancy text-white mb-2">¡Pedido Enviado!</h3>
-            <p class="text-gray-400 mb-8">Ya recibimos tu pedido. Recibirás un correo de confirmación. Para Finalizar los detalles de pago y entrega de tu compra escribinos por Instagram.</p>
+            <p class="text-gray-400 mb-8">Ya recibimos tu pedido. En breve recibirás un correo de confirmación. 
+                Para Finalizar los detalles de pago y entrega de tu compra escribinos por Instagram.</p>
             
             <div class="space-y-3">
                 <button onclick="finishProcess('instagram')" class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold rounded-sm hover:opacity-90 transition flex justify-center items-center gap-2">
@@ -510,10 +507,26 @@
             totalEl.innerText = formattedTotal;
             countEl.innerText = count;
             
+            // MODIFICACIÓN ÚNICA SOLICITADA: Ocultar el contador si el carrito está vacío
+            if (count === 0) {
+                countEl.style.display = 'none';
+            } else {
+                // Asegurar que el display sea visible (flex, como estaba definido por las clases de Tailwind)
+                countEl.style.display = 'flex'; 
+            }
+
             document.getElementById('checkout-total-display').innerText = formattedTotal;
             document.getElementById('hidden-order-total').value = formattedTotal;
+             
+            // Si es la primera ejecución, asegurar que esté oculto si el carrito está vacío
+            if(count === 0) {
+                countEl.style.display = 'none';
+            }
         }
 
+                // Ejecutar renderCart en la carga para inicializar el contador
+        document.addEventListener('DOMContentLoaded', renderCart);
+        
         // --- MODALES ---
         window.openCart = function() { document.getElementById('cart-modal').classList.replace('hidden', 'flex'); };
         window.closeCart = function() { document.getElementById('cart-modal').classList.replace('flex', 'hidden'); };
@@ -543,7 +556,7 @@
         };
 
         window.handleOrderSubmit = function() {
-            // MODIFICACIÓN 1: Obtener el email del cliente y asignarlo al campo _cc para la copia del mail
+            // MODIFICACIÓN (anterior): Obtener el email del cliente y asignarlo al campo _cc para la copia del mail
             const customerEmail = document.querySelector('input[name="Email"]').value;
             document.getElementById('hidden-customer-cc').value = customerEmail; 
             
@@ -564,6 +577,14 @@
             // Mostrar la notificación con el número de orden generado
             showNotification(`Se envió tu pedido. Tu número de orden es: ${currentOrderNumber}`, 'order');
 
+           
+            
+            
+            
+            
+            
+            
+            
             if (action === 'instagram') {
                 setTimeout(() => {
                     window.open(INSTAGRAM_URL, '_blank');
