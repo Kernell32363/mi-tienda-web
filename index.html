@@ -103,7 +103,7 @@
         <style>
              
        /* --- Estilos para la Nueva Sección (Fondo de Imagen) --- */
-        #mi-nueva-seccion {
+        .mi-nueva-seccion {
     background-image: url('https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fnote-of-the-week-incense-v0-jhvhw8e9fhxd1.jpeg%3Fwidth%3D1080%26crop%3Dsmart%26auto%3Dwebp%26s%3D70b5d3a6f103633d06df6954da84296ddc2947e7'); /* ¡IMPORTANTE! Reemplaza con tu URL */
     background-size: cover;
     background-position: center;
@@ -117,7 +117,7 @@
 }
 
 /* --- Estilos para el Overlay Negro Semitransparente (El Cuadro Traslúcido) --- */
-        #mi-nueva-seccion .background-overlay-negro {
+        .mi-nueva-seccion .background-overlay-negro {
     content: ""; /* Obligatorio para pseudoelementos, aunque aquí lo usaremos en un div */
     position: absolute;
     top: 0;
@@ -132,7 +132,7 @@
 }
 
 /* Asegura que el contenido (h2, p, etc.) esté por encima del overlay */
-        #mi-nueva-seccion .relative.z-10 {
+        .mi-nueva-seccion .relative.z-10 {
     z-index: 2; /* Un z-index mayor que el del overlay (-1 o el que sea) */
 }
         
