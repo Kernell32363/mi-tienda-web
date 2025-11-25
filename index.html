@@ -102,22 +102,39 @@
     
         <style>
              
-            /* Importación de imagen */
-               @import url('https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fnote-of-the-week-incense-v0-jhvhw8e9fhxd1.jpeg%3Fwidth%3D1080%26crop%3Dsmart%26auto%3Dwebp%26s%3D70b5d3a6f103633d06df6954da84296ddc2947e7');
-                .seccion-con-fondo {
-                /* Aquí es donde agregas la URL de tu imagen */
-                background-image: url('https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fnote-of-the-week-incense-v0-jhvhw8e9fhxd1.jpeg%3Fwidth%3D1080%26crop%3Dsmart%26auto%3Dwebp%26s%3D70b5d3a6f103633d06df6954da84296ddc2947e7'); 
+       /* --- Estilos para la Nueva Sección (Fondo de Imagen) --- */
+        #mi-nueva-seccion {
+    background-image: url('URL_DE_TU_IMAGEN_DE_FONDO_AQUI.jpg'); /* ¡IMPORTANTE! Reemplaza con tu URL */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                /* ... el resto de tus estilos para el fondo ... */
+    /* Asegúrate de que tenga una altura mínima para que la imagen se vea */
+    min-height: 400px; 
     
-                position: relative; 
-                z-index: 1; 
-                }
+    position: relative; /* Necesario para posicionar el overlay */
+    z-index: 1; /* Asegura que el contenido quede encima del fondo */
+}
 
-                 /* ... el resto de tu CSS para el overlay y otros estilos ... */
+/* --- Estilos para el Overlay Negro Semitransparente (El Cuadro Traslúcido) --- */
+        #mi-nueva-seccion .background-overlay-negro {
+    content: ""; /* Obligatorio para pseudoelementos, aunque aquí lo usaremos en un div */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* Fondo Negro Semitransparente (ajusta el 0.6 a tu gusto) */
+    background-color: rgba(0, 0, 0, 0.6); 
+    
+    z-index: -1; /* Coloca el overlay detrás del texto y el cuadro principal */
+}
+
+/* Asegura que el contenido (h2, p, etc.) esté por encima del overlay */
+        #mi-nueva-seccion .relative.z-10 {
+    z-index: 2; /* Un z-index mayor que el del overlay (-1 o el que sea) */
+}
         
         </style>
 </head>
@@ -192,20 +209,20 @@
         </section>
 
         
-        <section id="seccion-con-fondo" class="mt-12 seccion-con-fondo relative py-32 md:py-48 px-4 flex items-center justify-center text-center overflow-hidden">
+       <section id="mi-nueva-seccion" class="relative py-24 md:py-32 px-4 flex items-center justify-center text-center overflow-hidden mt-12">
     
-         <div class="background-zoom-effect"></div> 
+    <div class="background-overlay-negro"></div>
     
-              <div class="relative z-10 p-10 md:p-16 max-w-5xl mx-auto rounded-sm shiny-border-box">
+    <div class="relative z-10 p-10 md:p-16 max-w-5xl mx-auto rounded-sm shiny-border-box">
         
-                <h1 class="text-5xl md:text-7xl font-serif-fancy mb-6 text-e-gold drop-shadow-lg">
-                Cómo comprar en <br/><span class="text-white text-4xl md:text-6xl italic">EyASur.Ok</span>
-                </h1>
+        <h2 class="text-5xl md:text-7xl font-serif-fancy mb-6 text-e-gold drop-shadow-lg">
+            Título de Mi Nueva Sección
+        </h2>
         
-                <p class="text-lg md:text-xl text-e-silver mb-12 font-sans-elegant tracking-wide max-w-2xl mx-auto">
-                Aquí puedes describir los pasos o la información sobre "Cómo comprar". 
-                Puedes agregar más texto o incluso otros elementos HTML aquí.
-                </p>
+        <p class="text-lg md:text-xl text-e-silver mb-12 font-sans-elegant tracking-wide max-w-2xl mx-auto">
+            Aquí puedes añadir la descripción o el contenido principal de esta nueva sección.
+            Este texto tendrá un estilo similar al de "Descripción de Cómo comprar".
+        </p>
         
         </div>
 </section>
