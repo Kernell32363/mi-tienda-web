@@ -51,6 +51,24 @@
         /* MODIFICACIÓN: Zoom final más intenso (de 1.0 a 1.25) */
         @keyframes zoom-in-out { from { transform: scale(1.0); } to { transform: scale(1.25); } }
 
+         /* Importación de imagen */
+       @import url('https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fnote-of-the-week-incense-v0-jhvhw8e9fhxd1.jpeg%3Fwidth%3D1080%26crop%3Dsmart%26auto%3Dwebp%26s%3D70b5d3a6f103633d06df6954da84296ddc2947e7');
+      
+           /* Fondo adaptable, centrado y con zoom más notorio */
+        .background-zoom-effect {
+            position: absolute; top: 0; left: 0;width: 100%; height: 100%;
+            background-image: url('https://www.reddit.com/media?url=https%3A%2F%2Fpreview.redd.it%2Fnote-of-the-week-incense-v0-jhvhw8e9fhxd1.jpeg%3Fwidth%3D1080%26crop%3Dsmart%26auto%3Dwebp%26s%3D70b5d3a6f103633d06df6954da84296ddc2947e7');
+            background-size: cover; 
+            background-position: center center; 
+            background-repeat: no-repeat;
+            /* MODIFICACIÓN: Animación más rápida y notoria */
+            transform: scale(1.0); animation: zoom-in-out 10s infinite alternate ease-in-out;
+            filter: brightness(0.4);
+        }
+        /* MODIFICACIÓN: Zoom final más intenso (de 1.0 a 1.25) */
+        @keyframes zoom-in-out { from { transform: scale(1.0); } to { transform: scale(1.25); } }
+
+
         .shiny-border-box {
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
             border: 1px solid rgba(212, 175, 55, 0.4);
