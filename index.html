@@ -576,26 +576,39 @@
 
     <script>
         // Variables
-        let cart = [];
-        let currentOrderNumber = ''; // Ahora es un string de fecha/hora
+        // Modificamos a let para que pueda ser reasignada
+        let cart = []; 
+        let currentOrderNumber = ''; 
         const INSTAGRAM_URL = "https://www.instagram.com/eyasur.ok";
+        const STORAGE_KEY = 'eyasur_cart'; // Clave única para guardar en el navegador
 
         // --- SISTEMA DE ORDEN (Formato #HHMM-DDMM) ---
         function generateTimeBasedOrderNumber() {
             const now = new Date();
-            
-            // HH (12-hour format)
             let hours = now.getHours();
             hours = hours % 12; 
-            hours = hours ? hours : 12; // 0 (medianoche) se convierte a 12
+            hours = hours ? hours : 12;
             
             const HH = String(hours).padStart(2, '0');
             const MM_minutes = String(now.getMinutes()).padStart(2, '0');
             const DD = String(now.getDate()).padStart(2, '0');
-            // getMonth() es 0-index, por eso se suma 1
             const MM_month = String(now.getMonth() + 1).padStart(2, '0'); 
 
             return `#${HH}${MM_minutes}-${DD}${MM_month}`;
+        }
+        
+        // --- PERSISTENCIA: CARGAR CARRITO AL INICIO ---
+        function loadCart() {
+            const storedCart = localStorage.getItem(STORAGE_KEY);
+            if (storedCart) {
+                try {
+                    // Intentamos parsear el JSON y si falla, lo ignoramos y el carrito queda vacío
+                    cart = JSON.parse(storedCart);
+                } catch (e) {
+                    console.error("Error al cargar el carrito de localStorage:", e);
+                    cart = [];
+                }
+            }
         }
         
         // --- MENÚ MÓVIL AUTOMÁTICO ---
@@ -661,7 +674,7 @@
                     div.innerHTML = `
                         <div>
                             <p class="font-bold text-white text-sm">${item.name}</p>
-                            <p class="text-xs text-e-gold">$${item.price} c/u</p>
+                            <p class="text-xs text-e-gold">$${item.price.toLocaleString('es-AR')} c/u</p>
                         </div>
                         <div class="flex items-center gap-3 bg-e-dark border border-gray-600 rounded px-2 py-1">
                             <button onclick="updateQty(${index}, -1)" class="text-gray-400 hover:text-white font-bold text-lg px-1">-</button>
@@ -677,46 +690,39 @@
             totalEl.innerText = formattedTotal;
             countEl.innerText = count;
             
-            // MODIFICACIÓN ÚNICA SOLICITADA: Ocultar el contador si el carrito está vacío
             if (count === 0) {
                 countEl.style.display = 'none';
             } else {
-                // Asegurar que el display sea visible (flex, como estaba definido por las clases de Tailwind)
                 countEl.style.display = 'flex'; 
             }
 
             document.getElementById('checkout-total-display').innerText = formattedTotal;
             document.getElementById('hidden-order-total').value = formattedTotal;
             
-            // Si es la primera ejecución, asegurar que esté oculto si el carrito está vacío
             if(count === 0) {
                 countEl.style.display = 'none';
             }
+            
+            // --- PERSISTENCIA: GUARDAR CARRITO AL FINALIZAR EL RENDERIZADO ---
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
         }
 
-        // Ejecutar renderCart en la carga para inicializar el contador
-        document.addEventListener('DOMContentLoaded', renderCart);
-
-        // --- MODALES ---
+        // --- MODALES Y CHECKOUT (Mismo código que antes) ---
         window.openCart = function() { document.getElementById('cart-modal').classList.replace('hidden', 'flex'); };
         window.closeCart = function() { document.getElementById('cart-modal').classList.replace('flex', 'hidden'); };
 
         window.openCheckout = function() {
             closeCart();
-             // Generar el nuevo número de orden basado en tiempo/fecha
             currentOrderNumber = generateTimeBasedOrderNumber();
-            
             document.getElementById('hidden-order-id').value = currentOrderNumber;
-            
             const detalles = cart.map(i => `${i.name} (Cant: ${i.qty}) - $${i.price * i.qty}`).join(' | ');
             document.getElementById('hidden-order-details').value = detalles;
-            
             document.getElementById('checkout-modal').classList.replace('hidden', 'flex');
         };
         window.closeCheckout = function() { document.getElementById('checkout-modal').classList.replace('flex', 'hidden'); };
         window.closeFinalModal = function() { document.getElementById('final-modal').classList.replace('flex', 'hidden'); };
 
-        // --- MANEJO DE FORMULARIOS ---
+        // --- MANEJO DE FORMULARIOS Y NOTIFICACIONES (Mismo código que antes) ---
         window.handleContactSubmit = function() {
             setTimeout(() => {
                 document.getElementById('contact-form').reset();
@@ -725,69 +731,42 @@
             return true;
         };
 
-window.handleOrderSubmit = function() {
-    
-    // =======================================================
-    // 1. VALIDACIÓN DEL TELÉFONO (¡Tiene que ser lo primero!)
-    // =======================================================
-    const telefonoInput = document.querySelector('[name="Telefono"]');
-    const telefonoValor = telefonoInput.value.replace(/\s/g, ''); // Limpiamos espacios
+        window.handleOrderSubmit = function() {
+            const telefonoInput = document.querySelector('[name="Telefono"]');
+            const telefonoValor = telefonoInput.value.replace(/\s/g, ''); 
 
-    // Validamos que tenga al menos 8 dígitos
-    if (telefonoValor.length < 10) {
-        alert("¡Ingrese un teléfono válido e intente nuevamente por favor!");
-        
-        telefonoInput.focus(); 
-        
-        return false; // <-- Si falla la validación, DETIENE el envío y el resto del JS.
-    }
+            if (telefonoValor.length < 10) {
+                alert("¡Ingrese un teléfono válido e intente nuevamente por favor!");
+                telefonoInput.focus(); 
+                return false; 
+            }
+            const customerEmail = document.querySelector('input[name="Email"]').value;
+            document.getElementById('hidden-customer-cc').value = customerEmail; 
 
-    // =======================================================
-    // 2. ASIGNACIÓN FINAL DE DATOS (Solo si pasó la validación)
-    // =======================================================
-    
-    // Corregido: Usamos el campo _replyto para obtener el email.
-    const customerEmail = document.querySelector('input[name="Email"]').value;
-    document.getElementById('hidden-customer-cc').value = customerEmail; 
-    // <--const customerEmailInput = document.querySelector('input[name="Email"]').value;
+            setTimeout(() => {
+                closeCheckout();
+                document.getElementById('final-modal').classList.replace('hidden', 'flex'); 
+                
+                cart = [];
+                renderCart(); // Esto llama a localStorage.setItem(STORAGE_KEY, "[]")
+                document.getElementById('order-form').reset();
+            }, 1000); 
+            
+            return true;
+        };
 
-    // =======================================================
-    // 3. ANIMACIÓN Y RESETEO (Código de Post-Envío)
-    // =======================================================
-    
-    // Esto se ejecuta con un retraso de 1 segundo (mientras el formulario se envía a FormSubmit)
-    setTimeout(() => {
-        closeCheckout();
-        // Muestra el modal de "Pedido Enviado"
-        document.getElementById('final-modal').classList.replace('hidden', 'flex'); 
-        
-        // Resetea el carrito y el formulario
-        cart = [];
-        renderCart();
-        document.getElementById('order-form').reset();
-    }, 1000); 
-    
-    // =======================================================
-    // 4. PERMITIR ENVÍO A FORMSUBMIT
-    // =======================================================
-    return true; // <-- Permite que el navegador envíe el formulario a la URL de FormSubmit.
-};
-
-        // --- ACCIÓN FINAL (Instagram o Shop) Y NOTIFICACIÓN DE ORDEN ---
         window.finishProcess = function(action) {
             closeFinalModal();
-
             
             const orderMsg = `Tu pedido ya fué enviado ☺️. En breve recibirás un correo de confirmación. Tu número de orden es: ${currentOrderNumber}`;
-            // MODIFICACIÓN Verificar a partir de acá OJOOOO.!!!
-            // MODIFICACIÓN (anterior): Guardar la notificación para hacerla persistente
+            
             localStorage.setItem('eyasur_pending_order_notification', JSON.stringify({
                 msg: orderMsg,
                 type: 'order'
             }));
             
             showNotification(orderMsg, 'order'); 
-            // MODIFICACIÓN Verificar Hasta acá OJOOOO.!!!
+            
             if (action === 'instagram') {
                 setTimeout(() => {
                     window.open(INSTAGRAM_URL, '_blank');
@@ -799,7 +778,6 @@ window.handleOrderSubmit = function() {
             document.getElementById('mobile-menu-links').classList.toggle('open');
         };
 
-        // --- NOTIFICACIONES CON PERSISTENCIA ---
         function showNotification(msg, type) {
             const container = document.getElementById('notification-container');
             const div = document.createElement('div');
@@ -823,13 +801,11 @@ window.handleOrderSubmit = function() {
             const closeButton = div.querySelector('button');
 
             if (type !== 'order') {
-                // Notificaciones temporales (5 segundos)
                 closeButton.onclick = function() { div.remove(); };
                 setTimeout(() => {
                     if(div.parentNode) div.remove();
                 }, 5000);
             } else {
-                // Notificación persistente
                 closeButton.onclick = function(e) {
                     e.preventDefault(); 
                     div.remove();
@@ -838,7 +814,6 @@ window.handleOrderSubmit = function() {
             }
         }
         
-        // --- INICIAR VERIFICACIÓN DE NOTIFICACIONES PENDIENTES ---
         function checkPersistentNotification() {
             const stored = localStorage.getItem('eyasur_pending_order_notification');
             if (stored) {
@@ -847,8 +822,12 @@ window.handleOrderSubmit = function() {
             }
         }
 
-        // Ejecutar al cargar la página
-        document.addEventListener('DOMContentLoaded', checkPersistentNotification);
+        // --- INICIALIZACIÓN: CARGAR Y RENDERIZAR EN EL ORDEN CORRECTO ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart(); // 1. Cargamos el carrito de localStorage
+            renderCart(); // 2. Renderizamos lo cargado
+            checkPersistentNotification(); // 3. Revisamos notificaciones
+        });
     </script>
 </body>
 </html>
