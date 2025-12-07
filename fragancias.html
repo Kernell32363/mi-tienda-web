@@ -3,11 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fragancias - Tu Emprendimiento</title>
-    <link rel="stylesheet" href="style.css"> 
-</head>
-<body>
-    <h1>¡Mirá qué perfumes que tenemos!</h1>
+    <title>EyASur.Ok - Catálogo de Fragancias</title>
+    
+    <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUoen26zoSpe_oTRlnXL2jNAWe5wsnSlytKw&s" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        // Tu configuración de Tailwind
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'e-dark': '#0a0a0a',     
+                        'e-panel': '#121212',     
+                        'e-text': '#F5F5F5',     
+                        'e-gold': '#D4AF37',     
+                        'e-rosegold': '#E0BFB8',   
+                        'e-silver': '#C0C0C0',     
+                        'e-bronze': '#cd7f32',     
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'], 
+                        serif: ['Playfair Display', 'serif'], 
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* ==================================================== */
+        /* MODIFICACIÓN CLAVE: FONDO Y ANIMACIÓN PARA TODA LA PÁGINA */
+        /* ==================================================== */
 
-    <p>¡Pronto te mostramos todos!</p>
-</body>
+        /* Definición de Keyframes (Tomada de tu Index) */
+        @keyframes zoom-in-out { from { transform: scale(1.0); } to { transform: scale(1.50); } }
+
+        .background-zoom-effect {
+            /* ⚠️ Usamos tu nueva imagen de fondo */
+            background-image: url('https://i.imgur.com/pb4MCTD.jpeg'); 
+            
+            position: fixed; /* Fija el fondo al viewport */
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover; /* Cubre toda la pantalla */
+            background-position: center center; 
+            background-repeat: no-repeat;
+            
+            /* Aplicación de la animación */
+            transform: scale(1.0); 
+            animation: zoom-in-out 10s infinite alternate ease-in-out;
+            
+            /* Oscurece el fondo para que las tarjetas se vean mejor */
+            filter: brightness(0.25);
+            z-index: -1; /* Manda el fondo al fondo de todo */
+        }
+        
+        /* TU CÓDIGO CSS ORIGINAL (Ajustado a la nueva estructura) */
+        .shiny-border-box {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            background: rgba(18, 18, 18, 0.5); /* Usamos e-panel semi-transparente */
+            backdrop-filter: blur(5px); /* Fondo borroso para destacar el contenido */
+            transition: all 0.4s ease;
+        }
+        .shiny-border-box:hover { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); border-color: #D4AF37; }
+
+        .font-serif-fancy { font-family: 'Playfair Display', serif; letter-spacing: 1px; }
+        .font-sans-elegant { font-family: 'Montserrat', sans-serif; }
+        
+        /* Aseguramos que el body tenga el color oscuro (aunque el fondo ya es oscuro) */
+        body { background-color: #0a0a0a; }
+
+        .product-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background-size: cover; background-position: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        
+        .luxury-gradient {
+            background: linear-gradient(to right, #D4AF37, #F8F1D2, #D4AF37);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-size: 200% auto; animation: shine 4s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+        
+        /* Estilo para la capa semi-transparente de la tarjeta */
+        .card-overlay {
+            background: rgba(10, 10, 10, 0.85); /* Fondo negro casi opaco */
+            backdrop-filter: blur(2px);
+        }
+
+    </style>
+    </head>
+<body class="bg-e-dark font-sans text-e-text min-h-screen">
+
+    <div class="background-zoom-effect"></div>
+    
+    <div id="notification-container" class="fixed top-4 right-4 z-50 space-y-3"></div>
+
+    <header class="bg-e-dark/95 backdrop-blur-md text-e-text shadow-2xl sticky top-0 z-40 border-b border-e-gold/30">
+        </header>
+
+    <main class="relative z-10 pt-28 pb-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 class="text-5xl font-serif-fancy text-center mb-16 text-e-gold drop-shadow-lg">
+                Catálogo Completo de Fragancias
+            </h1>
+            
+            <p class="text-center text-e-silver mb-10 max-w-3xl mx-auto">
+                Elegí tus fragancias favoritas. Hacé clic en "Agregar al carrito" para iniciar tu pedido.
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_1');">
+                    
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 1</h3>
+                        
+                        <button onclick="addToCart(101, 'Nombre Fragancia 1', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_2');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 2</h3>
+                        <button onclick="addToCart(102, 'Nombre Fragancia 2', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_30');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 30</h3>
+                        <button onclick="addToCart(130, 'Nombre Fragancia 30', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </main>
+
+    </body>
+</html>
