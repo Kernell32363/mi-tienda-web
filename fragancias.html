@@ -344,4 +344,267 @@
                     <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
                     <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
                         <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 13</h3>
-                        <button onclick="addToCart(113, 'Nombre Fragancia 13', 650
+                        <button onclick="addToCart(113, 'Nombre Fragancia 13', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+
+
+
+<script>
+        // Variables
+        // Modificamos a let para que pueda ser reasignada
+        let cart = []; 
+        let currentOrderNumber = ''; 
+        const INSTAGRAM_URL = "https://www.instagram.com/eyasur.ok";
+        const STORAGE_KEY = 'eyasur_cart'; // Clave única para guardar en el navegador
+
+        // --- SISTEMA DE ORDEN (Formato #HHMM-DDMM) ---
+        function generateTimeBasedOrderNumber() {
+            const now = new Date();
+            let hours = now.getHours();
+            hours = hours % 12; 
+            hours = hours ? hours : 12;
+            
+            const HH = String(hours).padStart(2, '0');
+            const MM_minutes = String(now.getMinutes()).padStart(2, '0');
+            const DD = String(now.getDate()).padStart(2, '0');
+            const MM_month = String(now.getMonth() + 1).padStart(2, '0'); 
+
+            return `#${HH}${MM_minutes}-${DD}${MM_month}`;
+        }
+        
+        // --- PERSISTENCIA: CARGAR CARRITO AL INICIO ---
+        function loadCart() {
+            const storedCart = localStorage.getItem(STORAGE_KEY);
+            if (storedCart) {
+                try {
+                    // Intentamos parsear el JSON y si falla, lo ignoramos y el carrito queda vacío
+                    cart = JSON.parse(storedCart);
+                } catch (e) {
+                    console.error("Error al cargar el carrito de localStorage:", e);
+                    cart = [];
+                }
+            }
+        }
+        
+        // --- MENÚ MÓVIL AUTOMÁTICO ---
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu-links').classList.remove('open');
+            });
+        });
+
+        // --- CARRITO ---
+        window.addToCart = function(id, name, price) {
+            const existingItem = cart.find(item => item.id === id);
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cart.push({ id: id, name: name, price: price, qty: 1 });
+            }
+            renderCart();
+            showNotification(`Agregaste: ${name}`, 'success');
+        };
+
+        window.updateQty = function(index, change) {
+            if (cart[index].qty + change <= 0) {
+                cart.splice(index, 1);
+            } else {
+                cart[index].qty += change;
+            }
+            renderCart();
+        };
+
+        window.removeFromCart = function(index) {
+            cart.splice(index, 1);
+            renderCart();
+        };
+
+        function renderCart() {
+            const list = document.getElementById('cart-items-list');
+            const emptyMsg = document.getElementById('empty-cart-message');
+            const totalEl = document.getElementById('cart-total');
+            const countEl = document.getElementById('cart-count');
+            const checkoutBtn = document.getElementById('btn-init-checkout');
+
+            let total = 0;
+            let count = 0;
+            
+            list.innerHTML = '';
+
+            if (cart.length === 0) {
+                emptyMsg.style.display = 'block';
+                checkoutBtn.disabled = true;
+                checkoutBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                emptyMsg.style.display = 'none';
+                checkoutBtn.disabled = false;
+                checkoutBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+
+                cart.forEach((item, index) => {
+                    total += item.price * item.qty;
+                    count += item.qty;
+
+                    const div = document.createElement('div');
+                    div.className = 'flex justify-between items-center bg-black/40 p-3 rounded border border-gray-700';
+                    div.innerHTML = `
+                        <div>
+                            <p class="font-bold text-white text-sm">${item.name}</p>
+                            <p class="text-xs text-e-gold">$${item.price.toLocaleString('es-AR')} c/u</p>
+                        </div>
+                        <div class="flex items-center gap-3 bg-e-dark border border-gray-600 rounded px-2 py-1">
+                            <button onclick="updateQty(${index}, -1)" class="text-gray-400 hover:text-white font-bold text-lg px-1">-</button>
+                            <span class="text-white font-bold text-sm w-4 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${index}, 1)" class="text-e-gold hover:text-white font-bold text-lg px-1">+</button>
+                        </div>
+                    `;
+                    list.appendChild(div);
+                });
+            }
+
+            const formattedTotal = `$${total.toLocaleString('es-AR')}`;
+            totalEl.innerText = formattedTotal;
+            countEl.innerText = count;
+            
+            if (count === 0) {
+                countEl.style.display = 'none';
+            } else {
+                countEl.style.display = 'flex'; 
+            }
+
+            document.getElementById('checkout-total-display').innerText = formattedTotal;
+            document.getElementById('hidden-order-total').value = formattedTotal;
+            
+            if(count === 0) {
+                countEl.style.display = 'none';
+            }
+            
+            // --- PERSISTENCIA: GUARDAR CARRITO AL FINALIZAR EL RENDERIZADO ---
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+        }
+
+        // --- MODALES Y CHECKOUT (Mismo código que antes) ---
+        window.openCart = function() { document.getElementById('cart-modal').classList.replace('hidden', 'flex'); };
+        window.closeCart = function() { document.getElementById('cart-modal').classList.replace('flex', 'hidden'); };
+
+        window.openCheckout = function() {
+            closeCart();
+            currentOrderNumber = generateTimeBasedOrderNumber();
+            document.getElementById('hidden-order-id').value = currentOrderNumber;
+            const detalles = cart.map(i => `${i.name} (Cant: ${i.qty}) - $${i.price * i.qty}`).join(' | ');
+            document.getElementById('hidden-order-details').value = detalles;
+            document.getElementById('checkout-modal').classList.replace('hidden', 'flex');
+        };
+        window.closeCheckout = function() { document.getElementById('checkout-modal').classList.replace('flex', 'hidden'); };
+        window.closeFinalModal = function() { document.getElementById('final-modal').classList.replace('flex', 'hidden'); };
+
+        // --- MANEJO DE FORMULARIOS Y NOTIFICACIONES (Mismo código que antes) ---
+        window.handleContactSubmit = function() {
+            setTimeout(() => {
+                document.getElementById('contact-form').reset();
+                showNotification('Mensaje Enviado. En breve nos pondremos en contacto para responder tu consulta ☺️', 'success');
+            }, 1500);
+            return true;
+        };
+
+        window.handleOrderSubmit = function() {
+            const telefonoInput = document.querySelector('[name="Telefono"]');
+            const telefonoValor = telefonoInput.value.replace(/\s/g, ''); 
+
+            if (telefonoValor.length < 10) {
+                alert("¡Ingrese un teléfono válido e intente nuevamente por favor!");
+                telefonoInput.focus(); 
+                return false; 
+            }
+            const customerEmail = document.querySelector('input[name="Email"]').value;
+            document.getElementById('hidden-customer-cc').value = customerEmail; 
+
+            setTimeout(() => {
+                closeCheckout();
+                document.getElementById('final-modal').classList.replace('hidden', 'flex'); 
+                
+                cart = [];
+                renderCart(); // Esto llama a localStorage.setItem(STORAGE_KEY, "[]")
+                document.getElementById('order-form').reset();
+            }, 1000); 
+            
+            return true;
+        };
+
+        window.finishProcess = function(action) {
+            closeFinalModal();
+            
+            const orderMsg = `Tu pedido ya fué enviado ☺️. En breve recibirás un correo de confirmación. Tu número de orden es: ${currentOrderNumber}`;
+            
+            localStorage.setItem('eyasur_pending_order_notification', JSON.stringify({
+                msg: orderMsg,
+                type: 'order'
+            }));
+            
+            showNotification(orderMsg, 'order'); 
+            
+            if (action === 'instagram') {
+                setTimeout(() => {
+                    window.open(INSTAGRAM_URL, '_blank');
+                }, 1500);
+            }
+        };
+
+        window.toggleMobileMenu = function() {
+            document.getElementById('mobile-menu-links').classList.toggle('open');
+        };
+
+        function showNotification(msg, type) {
+            const container = document.getElementById('notification-container');
+            const div = document.createElement('div');
+            
+            let borderClass = type === 'success' ? 'border-green-500' : (type === 'order' ? 'border-blue-500' : 'border-e-gold');
+            let icon = type === 'success' ? '✨' : (type === 'order' ? '🧾' : '🔔');
+
+            div.className = `bg-e-panel border-l-4 ${borderClass} text-white px-4 py-4 shadow-2xl rounded-sm animate-bounce flex items-center justify-between gap-4 min-w-[300px] pointer-events-auto`;
+            div.style.animation = "fadeIn 0.5s";
+            
+            div.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <span class="text-xl">${icon}</span>
+                    <p class="font-bold text-sm">${msg}</p>
+                </div>
+                <button class="text-gray-400 hover:text-white font-bold px-2">✕</button>
+            `;
+            
+            container.appendChild(div);
+            
+            const closeButton = div.querySelector('button');
+
+            if (type !== 'order') {
+                closeButton.onclick = function() { div.remove(); };
+                setTimeout(() => {
+                    if(div.parentNode) div.remove();
+                }, 5000);
+            } else {
+                closeButton.onclick = function(e) {
+                    e.preventDefault(); 
+                    div.remove();
+                    localStorage.removeItem('eyasur_pending_order_notification');
+                };
+            }
+        }
+        
+        function checkPersistentNotification() {
+            const stored = localStorage.getItem('eyasur_pending_order_notification');
+            if (stored) {
+                const data = JSON.parse(stored);
+                showNotification(data.msg, data.type); 
+            }
+        }
+
+        // --- INICIALIZACIÓN: CARGAR Y RENDERIZAR EN EL ORDEN CORRECTO ---
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCart(); // 1. Cargamos el carrito de localStorage
+            renderCart(); // 2. Renderizamos lo cargado
+            checkPersistentNotification(); // 3. Revisamos notificaciones
+        });
+    </script>
