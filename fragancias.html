@@ -6,12 +6,12 @@
     <title>EyASur.Ok - Catálogo de Fragancias</title>
     
     <link rel="icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUoen26zoSpe_oTRlnXL2jNAWe5wsnSlytKw&s" type="image/png">
+
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
-        // Tu configuración de Tailwind
         tailwind.config = {
             theme: {
                 extend: {
@@ -34,20 +34,18 @@
     </script>
     
     <style>
-        /* ==================================================== */
         /* MODIFICACIÓN CLAVE: FONDO Y ANIMACIÓN PARA TODA LA PÁGINA */
-        /* ==================================================== */
-
+        
         /* Definición de Keyframes (Tomada de tu Index) */
         @keyframes zoom-in-out { from { transform: scale(1.0); } to { transform: scale(1.50); } }
 
         .background-zoom-effect {
-            /* ⚠️ Usamos tu nueva imagen de fondo */
+            /* ⚠️ Usamos tu nueva imagen de fondo de Imgur */
             background-image: url('https://i.imgur.com/pb4MCTD.jpeg'); 
             
-            position: fixed; /* Fija el fondo al viewport */
+            position: fixed; 
             top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover; /* Cubre toda la pantalla */
+            background-size: cover; 
             background-position: center center; 
             background-repeat: no-repeat;
             
@@ -55,25 +53,23 @@
             transform: scale(1.0); 
             animation: zoom-in-out 10s infinite alternate ease-in-out;
             
-            /* Oscurece el fondo para que las tarjetas se vean mejor */
+            /* Oscurece el fondo */
             filter: brightness(0.25);
-            z-index: -1; /* Manda el fondo al fondo de todo */
+            z-index: -1; 
         }
         
-        /* TU CÓDIGO CSS ORIGINAL (Ajustado a la nueva estructura) */
+        /* Estilos base */
         .shiny-border-box {
             box-shadow: 0 0 25px rgba(212, 175, 55, 0.15);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            background: rgba(18, 18, 18, 0.5); /* Usamos e-panel semi-transparente */
-            backdrop-filter: blur(5px); /* Fondo borroso para destacar el contenido */
+            background: rgba(18, 18, 18, 0.5); 
+            backdrop-filter: blur(5px); 
             transition: all 0.4s ease;
         }
         .shiny-border-box:hover { box-shadow: 0 0 40px rgba(212, 175, 55, 0.6); border-color: #D4AF37; }
 
         .font-serif-fancy { font-family: 'Playfair Display', serif; letter-spacing: 1px; }
         .font-sans-elegant { font-family: 'Montserrat', sans-serif; }
-        
-        /* Aseguramos que el body tenga el color oscuro (aunque el fondo ya es oscuro) */
         body { background-color: #0a0a0a; }
 
         .product-card {
@@ -82,9 +78,15 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
+            transform: translateY(-5px); /* Menos movimiento para la grilla */
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3); /* Sombra más sutil */
             border-color: rgba(212, 175, 55, 0.5);
+        }
+        
+        /* Estilo para la capa semi-transparente de la tarjeta */
+        .card-overlay {
+            background: rgba(10, 10, 10, 0.85); 
+            backdrop-filter: blur(2px);
         }
         
         .luxury-gradient {
@@ -94,14 +96,38 @@
         }
         @keyframes shine { to { background-position: 200% center; } }
         
-        /* Estilo para la capa semi-transparente de la tarjeta */
-        .card-overlay {
-            background: rgba(10, 10, 10, 0.85); /* Fondo negro casi opaco */
-            backdrop-filter: blur(2px);
+        /* Estilos de tu index original (incluidos para compatibilidad) */
+        .mobile-menu { transition: max-height 0.4s ease-in-out, opacity 0.4s; max-height: 0; overflow: hidden; opacity: 0; }
+        .mobile-menu.open { max-height: 300px; opacity: 1; }
+        
+        input, textarea { background-color: rgba(255,255,255,0.05) !important; border: 1px solid rgba(212, 175, 55, 0.3) !important; color: #F5F5F5 !important; }
+        input:focus, textarea:focus { border-color: #D4AF37 !important; outline: none; box-shadow: 0 0 10px rgba(212, 175, 55, 0.3) !important; }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #121212; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        
+        /* Ajustes para #como-comprar */
+        #como-comprar {
+            background-image: url('https://images.news18.com/static-bengali/uploads/2025/06/Pilot-4-2025-06-e22e94df4355d95abaf8586780b9a702.jpg?impolicy=website&width=827&height=620');
+            background-size: contain; background-position: center; background-repeat: no-repeat;
+            min-height: 250px; position: relative; z-index: 1; 
         }
-
+        #como-comprar .background-overlay-negro {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.1); z-index: -1; 
+        }
+        #como-comprar .relative.z-10 { z-index: 2; }
+        
+        @media (max-width: 768px) {
+            section { padding-top: 40px !important; padding-bottom: 40px !important; }
+            #inicio { padding-top: 60px !important; padding-bottom: 60px !important; }
+            #como-comprar { margin-top: 0 !important; }
+            #instagram-cta { padding-top: 30px !important; padding-bottom: 30px !important; }
+        }
     </style>
-    </head>
+    
+</head>
 <body class="bg-e-dark font-sans text-e-text min-h-screen">
 
     <div class="background-zoom-effect"></div>
@@ -109,15 +135,61 @@
     <div id="notification-container" class="fixed top-4 right-4 z-50 space-y-3"></div>
 
     <header class="bg-e-dark/95 backdrop-blur-md text-e-text shadow-2xl sticky top-0 z-40 border-b border-e-gold/30">
-        </header>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                
+                <div class="flex items-center">
+                    <a href="index.html" class="flex items-center"> <img src="https://i.imgur.com/IP6VCT8.png" alt="Logo de EyASur.Ok" class="h-24 w-auto">
+                    </a>
+                </div>
+
+                <nav class="hidden md:flex items-center space-x-3">
+                    <a href="index.html" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Inicio</a>
+                    <a href="index.html#como-comprar" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Cómo Comprar</a>
+                    <a href="fragancias.html" class="text-e-gold hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Productos</a> <a href="index.html#about-us" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Nosotros</a>
+                    <a href="index.html#instagram-cta" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Novedades</a>
+                    <a href="index.html#contact" class="text-e-silver hover:text-e-gold transition duration-300 text-sm font-bold uppercase tracking-widest">Contacto</a>
+                    
+                    <a href="https://www.instagram.com/eyasur.ok" target="_blank" class="flex items-center gap-2 px-4 py-2 border border-e-gold/50 rounded-full hover:bg-e-gold/10 transition duration-300 group">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-e-gold group-hover:text-pink-500 transition-colors"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                        <span class="text-e-gold text-xs font-bold uppercase group-hover:text-e-text transition-colors">Visitanos en Instagram</span>
+                    </a>
+                </nav>
+
+                <div class="flex items-center space-x-5">
+                    <button onclick="openCart()" class="relative p-2 hover:scale-110 transition duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-e-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] font-bold rounded-full h-4 w-4 flex items-center justify-center">0</span>
+                    </button>
+                    
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-e-gold">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                    </button>
+                </div>
+            </div>
+
+             <nav id="mobile-menu-links" class="mobile-menu md:hidden pb-6 bg-e-dark border-t border-gray-800">
+                <a href="index.html" class="mobile-link block px-3 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Inicio</a>
+                <a href="index.html#como-comprar" class="mobile-link block px-3 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Cómo Comprar</a>
+                <a href="fragancias.html" class="mobile-link block px-3 py-3 text-e-gold hover:bg-gray-900 text-sm uppercase tracking-widest">Productos</a> <a href="index.html#about-us" class="mobile-link block px-3 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Nosotros</a>
+                <a href="index.html#instagram-cta" class="mobile-link block px-3 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Novedades</a>
+                <a href="index.html#contact" class="mobile-link block px-3 py-3 text-e-silver hover:bg-gray-900 hover:text-e-gold text-sm uppercase tracking-widest">Contacto</a>
+                <a href="https://www.instagram.com/eyasur.ok" target="_blank" class="mobile-link block px-3 py-3 text-e-gold hover:bg-gray-900 font-bold text-sm uppercase tracking-widest">
+                    Visitanos en Instagram
+                </a>
+            </nav>
+        </div>
+    </header>
 
     <main class="relative z-10 pt-28 pb-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 class="text-5xl font-serif-fancy text-center mb-16 text-e-gold drop-shadow-lg">
+            <h1 class="text-5xl font-serif-fancy text-center mb-16 text-e-gold drop-shadow-lg shiny-border-box p-4 bg-e-panel/70">
                 Catálogo Completo de Fragancias
             </h1>
             
-            <p class="text-center text-e-silver mb-10 max-w-3xl mx-auto">
+            <p class="text-center text-e-silver mb-10 max-w-3xl mx-auto shiny-border-box p-3 bg-e-panel/70">
                 Elegí tus fragancias favoritas. Hacé clic en "Agregar al carrito" para iniciar tu pedido.
             </p>
 
@@ -125,12 +197,9 @@
                 
                 <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
                     style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_1');">
-                    
                     <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
-                    
                     <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
                         <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 1</h3>
-                        
                         <button onclick="addToCart(101, 'Nombre Fragancia 1', 6500)"
                             class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
                             $6.500 | Agregar
@@ -149,21 +218,130 @@
                         </button>
                     </div>
                 </div>
-
+                
                 <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
-                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_30');">
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_3');">
                     <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
                     <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
-                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 30</h3>
-                        <button onclick="addToCart(130, 'Nombre Fragancia 30', 6500)"
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 3</h3>
+                        <button onclick="addToCart(103, 'Nombre Fragancia 3', 6500)"
                             class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
                             $6.500 | Agregar
                         </button>
                     </div>
                 </div>
-                </div>
-        </div>
-    </main>
 
-    </body>
-</html>
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_4');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 4</h3>
+                        <button onclick="addToCart(104, 'Nombre Fragancia 4', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_5');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 5</h3>
+                        <button onclick="addToCart(105, 'Nombre Fragancia 5', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_6');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 6</h3>
+                        <button onclick="addToCart(106, 'Nombre Fragancia 6', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_7');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 7</h3>
+                        <button onclick="addToCart(107, 'Nombre Fragancia 7', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_8');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 8</h3>
+                        <button onclick="addToCart(108, 'Nombre Fragancia 8', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_9');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 9</h3>
+                        <button onclick="addToCart(109, 'Nombre Fragancia 9', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_10');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 10</h3>
+                        <button onclick="addToCart(110, 'Nombre Fragancia 10', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_11');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 11</h3>
+                        <button onclick="addToCart(111, 'Nombre Fragancia 11', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_12');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 12</h3>
+                        <button onclick="addToCart(112, 'Nombre Fragancia 12', 6500)"
+                            class="mb-1 inline-block bg-e-gold text-black px-4 py-2 text-sm rounded-sm font-bold cursor-pointer hover:bg-white transition duration-300">
+                            $6.500 | Agregar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="product-card h-80 rounded-sm relative group overflow-hidden shadow-xl"
+                    style="background-image: url('URL_DE_LA_IMAGEN_DEL_PRODUCTO_13');">
+                    <div class="absolute inset-0 card-overlay group-hover:bg-black/50 transition duration-500"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-4 text-center">
+                        <h3 class="text-xl font-serif-fancy text-white mb-1">Nombre Fragancia 13</h3>
+                        <button onclick="addToCart(113, 'Nombre Fragancia 13', 650
