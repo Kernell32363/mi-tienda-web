@@ -1,0 +1,15 @@
+!Agrego la nueva página de fragancias" o "Link actualizado a fragancias.html-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragancias - Tu Emprendimiento</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <h1>¡Mirá qué perfumes que tenemos!</h1>
+
+    <p>¡Pronto te mostramos todos!</p>
+</body>
+!Cambié el link del Drive al nuevo archivo 'fragancias.html' para mejorar la experiencia del usuario-->
